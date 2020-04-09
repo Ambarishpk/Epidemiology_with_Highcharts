@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Epidemiology Data Analytics</title>
+
+    <!-- bootstrap cdn links -->
+    <link
+      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome icon links -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/mainbody.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="border-right bg-dark text-white" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white">Epidemiology</div>
+        <div class="nav-side-menu">
+          <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+              <li>
+                <a href="Visualize">
+                  <i class="fa fa-line-chart fa-sm"></i> Visualization
+                </a>
+              </li>
+
+              <li class="active">
+                <a href="Explore"
+                  ><i class="fa fa-table fa-sm"></i> Data Exploration
+                </a>
+              </li>
+
+              <li
+                data-toggle="collapse"
+                data-target="#service"
+                class="collapsed"
+              >
+                <a
+                  ><i class="fa fa-edit fa-sm"></i> Handling MV
+                  <span class="arrow"></span
+                ></a>
+              </li>
+              <ul class="sub-menu collapse" id="service">
+                <li><a href="#">Complete Drop NaN</a></li>
+                <li><a href="AttrDropNan">Attribute Wise Drop NaN</a></li>
+                <li><a href="AttrFillNan">Attribute Wise Fill NaN</a></li>
+              </ul>
+
+              <li data-toggle="collapse" data-target="#new" class="collapsed">
+                <a href="#"
+                  ><i class="fa fa-cogs fa-sm"></i> Feature Engineering
+                  <span class="arrow"></span
+                ></a>
+              </li>
+              <ul class="sub-menu collapse" id="new">
+                <li><a href="#">Binning</a></li>
+                <li><a href="#">Label Encoding</a></li>
+                <li><a href="#">One Hot Encoding</a></li>
+              </ul>
+
+              <li>
+                <a href="#"> <i class="fa fa-download fa-sm"></i> Download </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div class="mt-5" id="page-content-wrapper">
+        <div class="container">
+          <h2 class="text-danger text-center mt-10">Exploration Content</h2>
+          <div class="container p-5 shadow-lg">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Consequuntur harum quidem libero dignissimos. Ex perferendis ipsam
+              ducimus. Vel perferendis veniam iusto quibusdam reiciendis
+              officiis a distinctio, ipsam neque fugiat. Illo officia sequi
+              dolorum saepe odit neque incidunt ullam, culpa tempora tempore
+              veritatis enim voluptate, mollitia quidem minus cum sed distinctio
+              consequuntur natus totam possimus. Distinctio placeat blanditiis
+              molestias quasi error numquam praesentium porro ad doloremque cum
+              rem, magnam debitis consequatur accusamus voluptatum labore ex
+              corporis at molestiae, repellendus veniam facere ullam
+              repudiandae. Necessitatibus laboriosam sit exercitationem quos
+              beatae. Quae assumenda est officia possimus doloremque nisi nihil
+              consequuntur repellat quo ex esse molestiae a, voluptates commodi
+              illum suscipit saepe? Amet nobis fugit et corrupti magnam sunt
+              aperiam eligendi at officia minus nulla aut necessitatibus atque
+              mollitia soluta cupiditate sequi velit, alias sapiente recusandae
+              nemo eaque sit sint voluptatem. Quis, dolorem fugit sed dolore
+              laboriosam, minima odio eveniet quia quam repellendus dolorum iure
+              harum temporibus doloribus iste reiciendis. Minus illum vel, quas
+              harum odit maiores qui assumenda! Tempore laborum, neque molestias
+              quam ipsam perspiciatis velit voluptatum tenetur debitis pariatur
+              ad repellat voluptates, aliquam quae consectetur esse explicabo
+              autem nihil corporis accusamus adipisci! Enim, est nemo ex dolore
+              tenetur cupiditate eaque voluptatum eos minus harum iste ipsum
+              labore corporis rem aperiam quidem aspernatur exercitationem illo
+              animi porro sapiente sit quasi? Tenetur sapiente vel aliquid
+              provident architecto atque doloribus, beatae maiores cum et ipsa
+              numquam est a ut, quo minima sequi cumque magni necessitatibus
+              eveniet! Enim dolores explicabo fuga, pariatur eligendi blanditiis
+              natus tenetur cupiditate! Sunt, illo facilis delectus deleniti et
+              dolorum ipsum nostrum sint eligendi temporibus. Quae aut rem id
+              dolor delectus ipsa, voluptas ratione! Magnam hic reiciendis,
+              debitis ullam cupiditate autem quia atque facilis omnis, nostrum,
+              quas fuga sint dolorem? Quisquam quibusdam dicta omnis dolores,
+              obcaecati vitae a natus, hic labore soluta itaque voluptatum
+              aperiam repellat, autem dolorum perferendis impedit odit iure
+              quaerat ut? Veniam, dignissimos molestias? Cupiditate eum omnis ex
+              asperiores quod ad necessitatibus, nam quo? Consequuntur id
+              cumque, est dignissimos at et cum voluptatum quia quo incidunt
+              officia quos laboriosam excepturi, ad suscipit ea dolor hic culpa
+              mollitia perferendis aliquam sint ullam? Aperiam expedita placeat
+              velit sequi esse debitis ex at sit? Nam hic neque quos ex adipisci
+              quae aperiam natus perferendis. Vero quaerat iusto vitae assumenda
+              quibusdam architecto ea laudantium aperiam sunt odit et modi
+              atque, accusantium sed, quas dicta recusandae pariatur facilis
+              illo at, animi alias? Rerum temporibus fuga laudantium dicta
+              architecto, tempore sequi assumenda commodi ex, quam enim
+              voluptatibus neque perspiciatis quo culpa deleniti necessitatibus.
+              Aliquam temporibus porro autem unde doloremque, aperiam ea
+              deserunt quaerat ratione id. Fugit, optio nemo veniam est, velit
+              quis voluptates neque omnis totam illo, quod ipsam sit quasi natus
+              harum! Accusantium reprehenderit quis non magni, dicta odit
+              obcaecati explicabo debitis fuga alias deleniti possimus numquam
+              eveniet. Corporis nam asperiores debitis doloribus itaque
+              excepturi ab ad, adipisci consequuntur tenetur numquam quisquam
+              delectus, nulla consequatur, ut fugiat culpa unde vero voluptate
+              id! Vero dolores perspiciatis voluptatem, perferendis consectetur
+              voluptatibus, eligendi sunt cum culpa nobis temporibus fugit magni
+              facilis dolore? Numquam dolore, dignissimos quis consequatur, eos
+              amet commodi quo qui voluptates cumque nesciunt totam vel fugiat,
+              voluptatibus deleniti vitae aliquid. Ea, obcaecati tempore
+              quibusdam blanditiis, asperiores sed nulla rem corporis ut, nam
+              repellendus maxime incidunt porro iusto quo. Corrupti autem,
+              dolores itaque, eius eos modi eaque dolor error consequatur
+              expedita ipsum, suscipit voluptatum quidem doloremque obcaecati.
+              Doloribus, ab explicabo laudantium unde possimus incidunt
+              reprehenderit veniam quas, magnam ea quod! Qui placeat quo
+              sapiente repellat minus praesentium odit facere, rerum provident
+              similique, sit delectus ipsum non aspernatur illum, quidem
+              mollitia amet. Odit, amet quae cum animi ea illo voluptatibus
+              explicabo pariatur vitae ratione sit modi cumque perferendis quasi
+              quas tempora deserunt sequi libero laboriosam provident soluta
+              eligendi ipsa, necessitatibus corporis! Voluptate illum culpa
+              temporibus maiores libero? Aliquid dolore temporibus
+              necessitatibus molestias dignissimos ab aliquam quidem aut, iste,
+              reiciendis nulla totam pariatur architecto suscipit. Vero dolores
+              ipsa eligendi obcaecati voluptatibus, iusto molestiae, fugiat quos
+              tempora nemo quam, quisquam accusantium ipsum modi asperiores
+              harum. Fugiat magnam deserunt repellat, quia enim molestiae. Error
+              repellendus rerum debitis odit quasi molestias minus commodi et
+              ducimus quia quisquam amet ad cum magni maxime consectetur
+              voluptas consequuntur ipsa explicabo eius asperiores voluptate
+              doloribus, deserunt ab? Provident at eos ratione eligendi aut
+              laboriosam? Eius ipsam recusandae molestias voluptates enim
+              consequatur iure, accusamus minima blanditiis ipsum temporibus
+              similique sequi alias doloribus incidunt voluptas nam culpa ullam
+              et. Aut recusandae laboriosam saepe? Voluptatibus, cumque tempore
+              aliquam reiciendis ab consectetur veniam nemo, facilis beatae
+              expedita accusantium doloremque excepturi earum sed eveniet
+              sapiente ipsa commodi? Eum soluta quidem quibusdam ab voluptatibus
+              cum dignissimos aperiam harum repellendus expedita laudantium,
+              neque molestiae vero deleniti. Nam ducimus sunt voluptatum porro
+              optio id nesciunt vel molestias impedit facere incidunt laudantium
+              autem tempora similique, reiciendis nisi, animi perferendis. Dolor
+              minima sequi corrupti commodi doloribus ipsam cum consequuntur
+              velit voluptatibus quidem dicta explicabo et labore facilis
+              adipisci, obcaecati quasi quo est. Laborum, totam! Aspernatur
+              necessitatibus corporis minus aut delectus quibusdam ipsum iusto
+              earum temporibus repellat deleniti ullam, nobis velit assumenda
+              nam molestiae illo sunt quo, pariatur totam aliquam consectetur
+              voluptas. Rerum iure dicta illum porro dolores et? Quo voluptates
+              architecto tempora consectetur neque suscipit laborum reiciendis
+              quibusdam officia labore dolores a ut deserunt ratione placeat,
+              itaque ab et asperiores ducimus ad. Soluta ab laudantium
+              accusamus, obcaecati unde minus assumenda distinctio quae placeat
+              fugiat error voluptas doloribus. Perspiciatis recusandae,
+              repellendus corporis harum tempore minima ducimus praesentium,
+              vero unde repudiandae beatae debitis reiciendis odio quae mollitia
+              laudantium. Numquam fugit facilis ad fugiat commodi illum
+              praesentium impedit tempore perferendis animi consequuntur
+              corporis odit sunt cumque vitae dolorem reiciendis est officiis
+              adipisci illo enim similique, consequatur ducimus! Amet, quidem!
+              Consequuntur tempora optio labore unde rerum magni aperiam ullam
+              eligendi non voluptate, natus explicabo, beatae et? Vitae eos
+              corporis perferendis. Dicta quam odio, itaque similique tempore
+              rem quisquam. Saepe voluptates inventore, molestiae magnam et
+              sapiente sint optio voluptate. Laborum ullam quisquam esse sed
+              laudantium. Ipsum explicabo, dolore, rerum, amet ex obcaecati
+              autem consequuntur facere saepe suscipit eum atque provident.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content Ends Here... -->
+    </div>
+
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+  </body>
+</html>

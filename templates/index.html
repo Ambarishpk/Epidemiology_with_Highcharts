@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Epidemiology Data Analytics</title>
+
+    <!-- bootstrap cdn links -->
+    <link
+      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome icon links -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/mainbody.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="border-right bg-dark text-white" id="sidebar-wrapper">
+        <div class="sidebar-heading text-white">Epidemiology</div>
+        <div class="nav-side-menu">
+          <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+              <li>
+                <a href="Visualize">
+                  <i class="fa fa-line-chart fa-sm"></i> Visualization
+                </a>
+              </li>
+
+              <li>
+                <a href="Explore"
+                  ><i class="fa fa-table fa-sm"></i> Data Exploration
+                </a>
+              </li>
+
+              <li
+                data-toggle="collapse"
+                data-target="#service"
+                class="collapsed"
+              >
+                <a
+                  ><i class="fa fa-edit fa-sm"></i> Handling MV
+                  <span class="arrow"></span
+                ></a>
+              </li>
+              <ul class="sub-menu collapse" id="service">
+                <li><a href="#">Complete Drop NaN</a></li>
+                <li><a href="AttrDropNan">Attribute Wise Drop NaN</a></li>
+                <li><a href="AttrFillNan">Attribute Wise Fill NaN</a></li>
+              </ul>
+
+              <li data-toggle="collapse" data-target="#new" class="collapsed">
+                <a href="#"
+                  ><i class="fa fa-cogs fa-sm"></i> Feature Engineering
+                  <span class="arrow"></span
+                ></a>
+              </li>
+              <ul class="sub-menu collapse" id="new">
+                <li><a href="#">Binning</a></li>
+                <li><a href="#">Label Encoding</a></li>
+                <li><a href="#">One Hot Encoding</a></li>
+              </ul>
+
+              <li>
+                <a href="#"> <i class="fa fa-download fa-sm"></i> Download </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div class="mt-5" id="page-content-wrapper">
+        <div class="container">
+          <h2 class="text-danger text-center mt-10">Loading Content</h2>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+  </body>
+</html>

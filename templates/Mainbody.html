@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Epidemiology Data Analytics</title>
+
+    <!-- cdn links -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link
+      href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- custom links -->
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/sidebar.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/mainbody.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/contentLoader.css' %}"
+    />
+  </head>
+  <body>
+    <!-- sidebar starts  -->
+    <div class="nav-side-menu">
+      <a href="/" class="brand text-white">Epidemiology Data Analytics</a>
+      <i
+        class="fa fa-bars fa-2x toggle-btn"
+        data-toggle="collapse"
+        data-target="#menu-content"
+      ></i>
+
+      <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+          <li>
+            <a href="Visualize">
+              <i class="fa fa-line-chart fa-lg"></i> Visualization
+            </a>
+          </li>
+
+          <li>
+            <a href="Explore"
+              ><i class="fa fa-table fa-lg"></i> Data Exploration
+            </a>
+          </li>
+          <!-- <ul class="sub-menu collapse" id="products">
+        <li><a href="#">Dataset</a></li>
+        <li><a href="#">Skewness</a></li>
+        <li><a href="#">Correlation</a></li>
+        <li><a href="#">Kurtosis</a></li>
+      </ul> -->
+
+          <li data-toggle="collapse" data-target="#service" class="collapsed">
+            <a
+              ><i class="fa fa-edit fa-lg"></i> Handling MV
+              <span class="arrow"></span
+            ></a>
+          </li>
+          <ul class="sub-menu collapse" id="service">
+            <li><a href="#">Complete Drop NaN</a></li>
+            <li><a href="AttrDropNan">Attribute Wise Drop NaN</a></li>
+            <li><a href="AttrFillNan">Attribute Wise Fill NaN</a></li>
+          </ul>
+
+          <li data-toggle="collapse" data-target="#new" class="collapsed">
+            <a href="#"
+              ><i class="fa fa-cogs fa-lg"></i> Feature Engineering
+              <span class="arrow"></span
+            ></a>
+          </li>
+          <ul class="sub-menu collapse" id="new">
+            <li><a href="#">Binning</a></li>
+            <li><a href="#">Label Encoding</a></li>
+            <li><a href="#">One Hot Encoding</a></li>
+          </ul>
+
+          <li>
+            <a href="#"> <i class="fa fa-download fa-lg"></i> Download </a>
+          </li>
+
+          <li>
+            <a href="#"> <i class="fa fa-upload fa-lg"></i> Upload Dataset </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- sidebar ends  -->
+
+    <!-- main body starts -->
+    <div class="content-loader">
+      {% block content %} {% endblock %}
+    </div>
+    <!-- main body ends -->
+  </body>
+</html>
