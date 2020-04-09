@@ -7,9 +7,24 @@
     <title>Epidemiology Data Analytics</title>
 
     <!-- bootstrap cdn links -->
-    <link
+    <!-- <link
       href="{% static 'bootstrap/css/bootstrap.min.css' %}"
       rel="stylesheet"
+    /> -->
+
+    <!-- cdn links -->
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
     />
 
     <!-- Highcharts links -->
@@ -28,7 +43,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
-    <link rel="stylesheet" href="{% static 'css/mainbody.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
   </head>
 
@@ -40,9 +55,10 @@
         <div class="nav-side-menu">
           <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
-              <li class="active">
-                <a href="Visualize">
-                  <i class="fa fa-line-chart fa-sm"></i> Visualization
+              <li>
+                <a href="/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  Dataset Overview
                 </a>
               </li>
 
@@ -79,6 +95,12 @@
                 <li><a href="#">Label Encoding</a></li>
                 <li><a href="#">One Hot Encoding</a></li>
               </ul>
+
+              <li class="active">
+                <a href="Visualize">
+                  <i class="fa fa-line-chart fa-sm"></i> Visualization
+                </a>
+              </li>
 
               <li>
                 <a href="#"> <i class="fa fa-download fa-sm"></i> Download </a>
@@ -118,9 +140,7 @@
 
     <!-- <script src="{% static 'js/chart.js' %}"></script> -->
 
-    <script>
-     
-    </script>
+    <script></script>
 
     <script></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

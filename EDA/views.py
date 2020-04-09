@@ -5,8 +5,12 @@ from django.shortcuts import redirect
 # Create your views here.
 
 
-def home(request):
-    return render(request, 'index.html')
+def Upload(request):
+    return render(request, 'Upload.html')
+
+
+def Home(request):
+    return render(request, 'Visualize.html')
 
 
 def Visualize(request):
