@@ -107,8 +107,30 @@
       <div class="mt-5" id="page-content-wrapper">
         <div class="container">
           <h2 class="text-danger text-center mt-10">
-            Dataset Overview - {{fName}}
+            Overview of Your Dataset
           </h2>
+          <div class="row">
+            <h4 class="text-dark">Name: {{fName}}</h4>
+          </div>
+          <div class="row">
+            <h4 class="text-dark">Size: {{fSize}} Kb</h4>
+          </div>
+          {% for clm,dtype,nan in zip %}
+          <div class="row">
+            <div class="col">{{clm}}</div>
+            <div class="col">{{dtype}}</div>
+            <div class="col">{{nan}}</div>
+          </div>
+          {% endfor %}
+          <div class="row">
+            <h4 class="text-dark">Total Number of NaN values: {{total_NaN}}</h4>
+          </div>
+          <div class="row">
+            <h4 class="text-dark">Categorical Columns: {{categorical}}</h4>
+          </div>
+          <div class="row">
+            <h4 class="text-dark">Numerical Columns: {{numerical}}</h4>
+          </div>
         </div>
         {% if message %}
         <div
