@@ -9,9 +9,6 @@ import pandas as pd
 import numpy as np
 
 
-# Create your views here.
-
-
 def Overview(fName):
     df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                   fName+'.csv'), encoding='mbcs', error_bad_lines=False)
@@ -19,20 +16,31 @@ def Overview(fName):
     statInfo = os.stat(file_path)
     fileSize = statInfo.st_size
     fileSize = fileSize // 1000
-    temp_clm_list = list(df)
-    clm_list = []
-    for col in temp_clm_list:
-        clm_list.append(col.capitalize())
+    clm_list = list(df)
 
     # datatype
     dataType_list = df.dtypes
+
+    # numerical and categorical
     categorical_clms = 0
     numerical_clms = 0
-    for dt in dataType_list:
+    categorical_clms_lst = []
+    numerical_clms_lst = []
+    for clm in clm_list:
+        dt = df[clm].dtype
         if dt == 'object':
             categorical_clms += 1
+            categorical_clms_lst.append(clm)
         else:
             numerical_clms += 1
+            numerical_clms_lst.append(clm)
+
+    # No of rows and columns
+
+    shape = df.shape
+    df_shape = list(shape)
+    rows = df_shape[0]
+    columns = df_shape[1]
 
     # NaN Values
     featues = []
@@ -55,6 +63,10 @@ def Overview(fName):
         'total_NaN': total_Nan,
         'categorical': categorical_clms,
         'numerical': numerical_clms,
+        'rows': rows,
+        'columns': columns,
+        'cat_list': categorical_clms_lst,
+        'num_list': numerical_clms_lst,
     }
     return context
 
@@ -78,6 +90,7 @@ def Upload(request):
             if os.path.exists(file_path1 and file_path2):
                 context = Overview(fName)
                 return render(request, 'index.html', context)
+
             else:
                 fs.save(fullName, uploaded_file)
                 fs.save(fName+'/'+fullName, uploaded_file)
@@ -96,6 +109,9 @@ def Upload(request):
     return render(request, 'Upload.html')
 
 
+# routes
+
+
 def Home(request, fName):
     context = Overview(fName)
     return render(request, 'index.html',  context)
@@ -109,8 +125,15 @@ def Visualize(request, fName):
 
 
 def Explore(request, fName):
+    kurt_list = kurtosis(fName)
+    skew_list = skewness(fName)
+    corr_list = correlation(fName)
+    print(corr_list)
     context = {
-        'fName': fName
+        'fName': fName,
+        'kurtosis_list': kurt_list,
+        'skewness_list': skew_list,
+        'correlation_list': corr_list,
     }
     return render(request, 'Exploration.html', context)
 
@@ -121,3 +144,53 @@ def AttrDropNan(request):
 
 def AttrFillNan(request):
     return render(request, 'AttrFillNan.html')
+
+
+# Calculations
+
+# Kurtosis
+def kurtosis(fName):
+    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                  fName + '.csv'), encoding='mbcs')
+    df_kurtosis = df.kurt()
+    k_values = list(df_kurtosis)
+    kurt_value = []
+    for i in k_values:
+        kurt_value.append(round(i, 2))
+    column_name = list(df)
+    kurtosis_list = zip(column_name, kurt_value)
+
+    return kurtosis_list
+
+# Skewness
+
+
+def skewness(fName):
+    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                  fName + '.csv'), encoding='mbcs')
+    df_skewness = df.skew()
+    s_values = list(df_skewness)
+    skew_values = []
+    for i in s_values:
+        skew_values.append(round(i, 2))
+    column_name = list(df)
+    skewness_list = zip(column_name, skew_values)
+
+    return skewness_list
+
+
+# Correlation
+
+def correlation(fName):
+    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                  fName+'.csv'), encoding='mbcs')
+    correlation = []
+    corr_values = []
+    correlation = df.corr()
+    values = correlation.values
+    colms = correlation.columns
+    corr_values = []
+    # for i in values:
+    #     corr_values.append(round(i, 2))
+    correlation_list = zip(colms, values)
+    return correlation_list

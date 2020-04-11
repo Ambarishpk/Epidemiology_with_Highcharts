@@ -109,28 +109,6 @@
           <h2 class="text-danger text-center mt-10">
             Overview of Your Dataset
           </h2>
-          <div class="row">
-            <h4 class="text-dark">Name: {{fName}}</h4>
-          </div>
-          <div class="row">
-            <h4 class="text-dark">Size: {{fSize}} Kb</h4>
-          </div>
-          {% for clm,dtype,nan in zip %}
-          <div class="row">
-            <div class="col">{{clm}}</div>
-            <div class="col">{{dtype}}</div>
-            <div class="col">{{nan}}</div>
-          </div>
-          {% endfor %}
-          <div class="row">
-            <h4 class="text-dark">Total Number of NaN values: {{total_NaN}}</h4>
-          </div>
-          <div class="row">
-            <h4 class="text-dark">Categorical Columns: {{categorical}}</h4>
-          </div>
-          <div class="row">
-            <h4 class="text-dark">Numerical Columns: {{numerical}}</h4>
-          </div>
         </div>
         {% if message %}
         <div
@@ -141,6 +119,99 @@
           <span class="font-weight-bold"> {{message}}</span>
         </div>
         {% endif %}
+
+        <div class="container p-5">
+          <div class="row">
+            <div class="col-4">
+              <div class="card p-5 shadow-lg rounded content-box">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Properties
+                </div>
+                <hr />
+                <div>
+                  <h5><span class="content-title">Name:</span> {{fName}}</h5>
+                </div>
+                <div>
+                  <h5><span class="content-title">Size:</span> {{fSize}} Kb</h5>
+                </div>
+                <div>
+                  <h5><span class="content-title">Rows:</span> {{rows}}</h5>
+                </div>
+                <div>
+                  <h5>
+                    <span class="content-title">Columns:</span> {{columns}}
+                  </h5>
+                </div>
+                <div>
+                  <h5>
+                    <span class="content-title">
+                      Total Number of NaN values:</span
+                    >
+                    {{total_NaN}}
+                  </h5>
+                </div>
+                <div>
+                  <h5>
+                    <span class="content-title"> Categorical Columns:</span>
+                    {{categorical}}
+                  </h5>
+                </div>
+                <div>
+                  <h5>
+                    <span class="content-title">Numerical Columns:</span>
+                    {{numerical}}
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card p-5 shadow-lg rounded content-box">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Categorical
+                </div>
+                <hr />
+                {% for cat in cat_list %}
+                <ul>
+                  <li class="text-capitalize">{{cat}}</li>
+                </ul>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="card p-5 shadow-lg rounded content-box">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Numerical
+                </div>
+                <hr />
+                {% for num in num_list %}
+                <ul>
+                  <li class="text-capitalize">{{num}}</li>
+                </ul>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <div class="h4 text-danger font-weight-bold">Suggestions :</div>
+            </div>
+          </div>
+          <div class="row">
+            <ul>
+              <li class="h5">
+                If your dataset contain
+                <span class="text-success">Gender, Marital-Status</span>
+                featues >>> Do
+                <span class="text-success">Binary Encoding</span>
+              </li>
+              <li class="h5">
+                For <span class="text-success">Age, BMI, BP</span> features >>>
+                Do
+                <span class="text-success">Binning </span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <!-- Page Content Ends-->
     </div>
