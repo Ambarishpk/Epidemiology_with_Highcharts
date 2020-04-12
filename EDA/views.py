@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -7,6 +7,7 @@ import os
 import csv
 import pandas as pd
 import numpy as np
+import sklearn
 
 
 def Overview(fName):
@@ -35,6 +36,16 @@ def Overview(fName):
             numerical_clms += 1
             numerical_clms_lst.append(clm)
 
+    if len(categorical_clms_lst) <= 0:
+        categorical_msg = "Categorical Columns Not Exits"
+    else:
+        categorical_msg = ""
+
+    if len(numerical_clms_lst) <= 0:
+        numerical_msg = "Numerical Columns Not Exits"
+    else:
+        numerical_msg = ""
+
     # No of rows and columns
 
     shape = df.shape
@@ -54,7 +65,7 @@ def Overview(fName):
     for Nan in no_of_NaN:
         total_Nan += Nan
 
-    zippend_list = zip(clm_list, dataType_list, no_of_NaN)
+    zippend_list = zip(clm_list, dataType_list)
 
     context = {
         'fName': fName,
@@ -67,6 +78,8 @@ def Overview(fName):
         'columns': columns,
         'cat_list': categorical_clms_lst,
         'num_list': numerical_clms_lst,
+        'cat_msg': categorical_msg,
+        'num_msg': numerical_msg,
     }
     return context
 
@@ -125,15 +138,25 @@ def Visualize(request, fName):
 
 
 def Explore(request, fName):
+    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                  fName+'.csv'), encoding='mbcs', error_bad_lines=False)
+    clm_list = list(df)
+    dataset_values = df.values
+
+    NaN_list = get_NaN(fName)
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
-    corr_list = correlation(fName)
-    print(corr_list)
+    corr = correlation(fName)
+    correlation_list = zip(clm_list, corr)
+
     context = {
         'fName': fName,
         'kurtosis_list': kurt_list,
         'skewness_list': skew_list,
-        'correlation_list': corr_list,
+        'correlation_list': correlation_list,
+        'clm_list': clm_list,
+        'dataset_values': dataset_values,
+        'NaN_list': NaN_list,
     }
     return render(request, 'Exploration.html', context)
 
@@ -148,10 +171,16 @@ def AttrFillNan(request):
 
 # Calculations
 
+def get_df(fName):
+    data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                               fName+'.csv'), encoding='mbcs')
+    return data_frame
+
 # Kurtosis
+
+
 def kurtosis(fName):
-    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                  fName + '.csv'), encoding='mbcs')
+    df = get_df(fName)
     df_kurtosis = df.kurt()
     k_values = list(df_kurtosis)
     kurt_value = []
@@ -166,8 +195,7 @@ def kurtosis(fName):
 
 
 def skewness(fName):
-    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                  fName + '.csv'), encoding='mbcs')
+    df = get_df(fName)
     df_skewness = df.skew()
     s_values = list(df_skewness)
     skew_values = []
@@ -182,15 +210,39 @@ def skewness(fName):
 # Correlation
 
 def correlation(fName):
-    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                  fName+'.csv'), encoding='mbcs')
-    correlation = []
-    corr_values = []
-    correlation = df.corr()
-    values = correlation.values
-    colms = correlation.columns
-    corr_values = []
-    # for i in values:
-    #     corr_values.append(round(i, 2))
-    correlation_list = zip(colms, values)
-    return correlation_list
+    df = get_df(fName)
+    correla = df.corr()
+    values = correla.values
+    main_list = []
+    correlation_list = []
+    for i in range(len(values)):
+        sub_list = []
+        for j in values[i]:
+            sub_list.append(round(j, 2))
+        main_list.append(sub_list)
+    correlation_list.append(main_list)
+    new = correlation_list[0]
+
+    return new
+
+
+def get_NaN(fName):
+    df = get_df(fName)
+    NaN_clm_list = list(df)
+    features = df.columns[0:-1]
+    for feature in features:
+        df[feature] = df[feature].replace(
+            r'\s+', np.nan, regex=True).replace('', np.nan)
+    is_na = df.isna().sum()
+    no_of_NaN = list(is_na)
+
+    # find NaN percentage of each feature
+    percent = []
+    shape = list(df.shape)
+    no_of_rows = shape[0]
+    for i in no_of_NaN:
+        i = (i/no_of_rows)*100
+        percent.append(round(i, 2))
+
+    NaN_list = zip(NaN_clm_list, no_of_NaN, percent)
+    return NaN_list

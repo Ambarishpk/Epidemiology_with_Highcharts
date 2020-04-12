@@ -12,6 +12,19 @@ body {
   border: none;
 }
 
+.corr_card {
+  width: auto;
+  height: auto;
+  border: none;
+}
+
+.dataset_card {
+  width: 90rem;
+  height: 600px;
+  border: none;
+  overflow: auto;
+}
+
 .content-title {
   font-weight: 500;
   font-size: 15px;
@@ -71,10 +84,12 @@ body {
 /* Data Exploration page  */
 
 /* Custom Scrollbar */
+
 /* width */
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 /* Track */

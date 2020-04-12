@@ -105,10 +105,28 @@
       </div>
       <!-- Page Content -->
       <div class="mt-5" id="page-content-wrapper">
-        <div class="container p-5 shadow-lg">
+        <div class="container">
           <div class="row">
+            <div class="col">
+              <div class="card p-5 bg-light shadow-sm rounded corr_card">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Correlation
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col text-capitalize">{{clm_list}}</div>
+                </div>
+                {% for clm,val in correlation_list %}
+                <div class="row">
+                  <div class="col text-capitalize">{{clm}} {{val}}</div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
             <div class="col-4">
-              <div class="card p-5 shadow-lg rounded content-box">
+              <div class="card p-5 bg-light shadow-sm rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Kurtosis
                 </div>
@@ -134,7 +152,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="card p-5 shadow-lg rounded content-box">
+              <div class="card p-5 bg-light shadow-sm rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Skewness
                 </div>
@@ -160,30 +178,70 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="card p-5 shadow-lg rounded content-box">
+              <div class="card p-5 bg-light shadow-sm rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
-                  Correlation
+                  NaN Percentage
                 </div>
                 <hr />
-                <div class="row pb-3">
-                  <div
-                    class="col-8 text-capitalize text-left text-danger font-weight-bold"
-                  >
-                    FEATURE
-                  </div>
-                  <div
-                    class="col-4 text-capitalize text-right text-danger font-weight-bold"
-                  >
-                    VALUE
-                  </div>
+                <div class="row">
+                  <!-- <div class="col text-capitalize h5">
+                    <div class="row pb-3">
+                      <div
+                        class="col-6 text-capitalize text-left text-danger font-weight-bold"
+                      >
+                        FEATURE
+                      </div>
+                      <div
+                        class="col-3 text-capitalize text-right text-danger font-weight-bold"
+                      >
+                        NaN
+                      </div>
+                      <div
+                        class="col-3 text-capitalize text-right text-danger font-weight-bold"
+                      >
+                        %
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 text-capitalize">clm_value</div>
+                      <div class="col-3 text-capitalize">Nan</div>
+                      <div class="col-3 text-capitalize">%</div>
+                    </div>
+                  </div> -->
                 </div>
                 <div class="row">
-                  <!-- {% for clm,corr_val in correlation_list %}
-                  <div class="col-9 text-capitalize">{{clm}}</div>
-                  <div class="col-3 text-capitalize">{{corr_val}}</div>
-                  {% endfor %} -->
+                  {% for nan_clm,nan_val,percent in NaN_list %}
+                  <div class="col-6 text-capitalize">{{nan_clm}}</div>
+                  <div class="col-2 text-capitalize">{{nan_val}}</div>
+                  <div class="col-4 text-capitalize">{{percent}} %</div>
+                  {% endfor %}
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="row text-primary h3 mt-5">Dataset</div>
+          <div class="row mt-3">
+            <div class="card bg-light p-5 shadow-lg rounded dataset_card">
+              <table class="table">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    {% for clm in clm_list %}
+                    <th scope="col">{{clm}}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for value in dataset_values %}
+                  <tr>
+                    {% for ele in value %}
+                    <td>
+                      {{ele}}
+                    </td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

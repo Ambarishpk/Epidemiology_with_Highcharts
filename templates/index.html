@@ -170,11 +170,16 @@
                   Categorical
                 </div>
                 <hr />
-                {% for cat in cat_list %}
+                {% if cat_msg == "" %} {% for cat in cat_list %}
                 <ul>
                   <li class="text-capitalize">{{cat}}</li>
                 </ul>
-                {% endfor %}
+                {% endfor %} {% else %}
+                <div class="text-capitalize text-center text-secondary">
+                  {{cat_msg}}
+                </div>
+
+                {% endif %}
               </div>
             </div>
             <div class="col-4">
@@ -183,11 +188,15 @@
                   Numerical
                 </div>
                 <hr />
-                {% for num in num_list %}
+                {% if num_msg == "" %} {% for num in num_list %}
                 <ul>
                   <li class="text-capitalize">{{num}}</li>
                 </ul>
-                {% endfor %}
+                {% endfor %} {% else %}
+                <div class="text-capitalize text-center text-secondary">
+                  {{num_msg}}
+                </div>
+                {% endif %}
               </div>
             </div>
           </div>
