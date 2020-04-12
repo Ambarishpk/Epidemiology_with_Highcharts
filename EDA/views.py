@@ -143,11 +143,12 @@ def Explore(request, fName):
     clm_list = list(df)
     dataset_values = df.values
 
-    NaN_list = get_NaN(fName)
-    kurt_list = kurtosis(fName)
-    skew_list = skewness(fName)
     corr = correlation(fName)
     correlation_list = zip(clm_list, corr)
+    kurt_list = kurtosis(fName)
+    skew_list = skewness(fName)
+    NaN_list = get_NaN(fName)
+    mean_list = get_mean(fName)
 
     context = {
         'fName': fName,
@@ -157,6 +158,7 @@ def Explore(request, fName):
         'clm_list': clm_list,
         'dataset_values': dataset_values,
         'NaN_list': NaN_list,
+        'mean_list': mean_list,
     }
     return render(request, 'Exploration.html', context)
 
@@ -246,3 +248,22 @@ def get_NaN(fName):
 
     NaN_list = zip(NaN_clm_list, no_of_NaN, percent)
     return NaN_list
+
+
+def get_mean(fName):
+    df = get_df(fName)
+    df_mean = df.mean()
+    clm_list = list(df)
+    mean_lst = []
+    for mean_val in df_mean:
+        mean_lst.append(round(mean_val, 2))
+
+    # percentage
+    percent = []
+    shape = list(df.shape)
+    no_of_rows = shape[0]
+    for i in df_mean:
+        i = (i/no_of_rows)*100
+        percent.append(round(i, 2))
+    mean_list = zip(clm_list, mean_lst, percent)
+    return mean_list

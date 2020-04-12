@@ -219,6 +219,38 @@
               </div>
             </div>
           </div>
+          <div class="row mt-4">
+            <div class="col-4">
+              <div class="card p-5 bg-light shadow-sm rounded mean_card">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Mean
+                </div>
+                <hr />
+                <div class="row pb-3">
+                  <div class="col text-capitalize text-danger font-weight-bold">
+                    FEATURE
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    Mean
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    %
+                  </div>
+                </div>
+                <div class="row">
+                  {% for clm,mean_val,mean_percent in mean_list %}
+                  <div class="col-6 text-capitalize">{{clm}}</div>
+                  <div class="col-3 text-capitalize">{{mean_val}}</div>
+                  <div class="col-3 text-capitalize">{{mean_percent}} %</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row text-primary h3 mt-5">Dataset</div>
           <div class="row mt-3">
             <div class="card bg-light p-5 shadow-lg rounded dataset_card">

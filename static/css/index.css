@@ -9,19 +9,25 @@ body {
   color: black;
   width: 30rem;
   height: auto;
-  border: none;
+  /* border: none; */
 }
 
 .corr_card {
   width: auto;
   height: auto;
-  border: none;
+  /* border: none; */
+}
+
+.mean_card {
+  width: 50rem;
+  height: auto;
+  /* border: none; */
 }
 
 .dataset_card {
   width: 90rem;
   height: 600px;
-  border: none;
+  /* border: none; */
   overflow: auto;
 }
 
