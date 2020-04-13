@@ -64,6 +64,18 @@ def Overview(fName):
     total_Nan = 0
     for Nan in no_of_NaN:
         total_Nan += Nan
+    percent = []
+    shape = list(df.shape)
+    no_of_rows = shape[0]
+    no_of_columns = shape[1]
+    for i in no_of_NaN:
+        i = (i/no_of_rows)*100
+        percent.append(round(i, 2))
+    total_NaN_percentage = 0
+    for i in percent:
+        total_NaN_percentage += i
+    NaN_percent = (total_NaN_percentage/no_of_columns)
+    NaN_percent = round(NaN_percent, 2)
 
     zippend_list = zip(clm_list, dataType_list)
 
@@ -72,6 +84,7 @@ def Overview(fName):
         'fSize': fileSize,
         'zip': zippend_list,
         'total_NaN': total_Nan,
+        'NaN_percent': NaN_percent,
         'categorical': categorical_clms,
         'numerical': numerical_clms,
         'rows': rows,
@@ -140,15 +153,18 @@ def Visualize(request, fName):
 def Explore(request, fName):
     df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                   fName+'.csv'), encoding='mbcs', error_bad_lines=False)
+    # dataset
     clm_list = list(df)
     dataset_values = df.values
 
+    # explore
     corr = correlation(fName)
     correlation_list = zip(clm_list, corr)
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
     NaN_list = get_NaN(fName)
     mean_list = get_mean(fName)
+    median_list = get_median(fName)
 
     context = {
         'fName': fName,
@@ -159,28 +175,44 @@ def Explore(request, fName):
         'dataset_values': dataset_values,
         'NaN_list': NaN_list,
         'mean_list': mean_list,
+        'median_list': median_list,
     }
     return render(request, 'Exploration.html', context)
 
 
-def AttrDropNan(request):
+def AttrDropNan(request, fName):
     return render(request, 'AttrDropNan.html')
 
 
-def AttrFillNan(request):
+def CompleteDropNaN(request, fName):
+    return render(request, 'CompleteDropNaN.html')
+
+
+def AttrFillNan(request, fName):
     return render(request, 'AttrFillNan.html')
 
 
-# Calculations
-
+# getting dataframe
 def get_df(fName):
     data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                                fName+'.csv'), encoding='mbcs')
     return data_frame
 
+
+# percentage calculation
+def get_percent(fName, lst):
+    lst_val = lst
+    df = get_df(fName)
+    percent = []
+    shape = list(df.shape)
+    no_of_rows = shape[0]
+    for i in lst_val:
+        i = (i/no_of_rows)*100
+        percent.append(round(i, 2))
+    return percent
+
+
 # Kurtosis
-
-
 def kurtosis(fName):
     df = get_df(fName)
     df_kurtosis = df.kurt()
@@ -210,7 +242,6 @@ def skewness(fName):
 
 
 # Correlation
-
 def correlation(fName):
     df = get_df(fName)
     correla = df.corr()
@@ -228,6 +259,7 @@ def correlation(fName):
     return new
 
 
+# NaN Percentage
 def get_NaN(fName):
     df = get_df(fName)
     NaN_clm_list = list(df)
@@ -238,18 +270,19 @@ def get_NaN(fName):
     is_na = df.isna().sum()
     no_of_NaN = list(is_na)
 
-    # find NaN percentage of each feature
-    percent = []
+    percent = get_percent(fName, no_of_NaN)
+
+    total_percent = 0
+    for i in percent:
+        total_percent += i
     shape = list(df.shape)
-    no_of_rows = shape[0]
-    for i in no_of_NaN:
-        i = (i/no_of_rows)*100
-        percent.append(round(i, 2))
+    no_of_columns = shape[1]
 
     NaN_list = zip(NaN_clm_list, no_of_NaN, percent)
     return NaN_list
 
 
+# Mean
 def get_mean(fName):
     df = get_df(fName)
     df_mean = df.mean()
@@ -257,13 +290,20 @@ def get_mean(fName):
     mean_lst = []
     for mean_val in df_mean:
         mean_lst.append(round(mean_val, 2))
-
-    # percentage
-    percent = []
-    shape = list(df.shape)
-    no_of_rows = shape[0]
-    for i in df_mean:
-        i = (i/no_of_rows)*100
-        percent.append(round(i, 2))
+    percent = get_percent(fName, df_mean)
     mean_list = zip(clm_list, mean_lst, percent)
     return mean_list
+
+
+# Median
+def get_median(fName):
+    df = get_df(fName)
+    df_median = df.median()
+    median_values = list(df_median)
+    column_name = list(df)
+    median_list = []
+    for med_val in median_values:
+        median_list.append(round(med_val, 2))
+    percent = get_percent(fName, median_values)
+    med_list = zip(column_name, median_list, percent)
+    return med_list

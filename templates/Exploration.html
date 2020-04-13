@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-4">
+            <div class="col-3">
               <div class="card p-5 bg-light shadow-sm rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Kurtosis
@@ -177,50 +177,46 @@
                 </div>
               </div>
             </div>
-            <div class="col-4">
-              <div class="card p-5 bg-light shadow-sm rounded content-box">
+            <div class="col-5">
+              <div class="card p-5 bg-light shadow-sm rounded NaN_card">
                 <div class="text-center text-primary font-weight-bold h4">
                   NaN Percentage
                 </div>
                 <hr />
                 <div class="row">
-                  <!-- <div class="col text-capitalize h5">
+                  <div class="col text-capitalize h5">
                     <div class="row pb-3">
                       <div
-                        class="col-6 text-capitalize text-left text-danger font-weight-bold"
+                        class="col text-capitalize text-danger font-weight-bold"
                       >
                         FEATURE
                       </div>
                       <div
-                        class="col-3 text-capitalize text-right text-danger font-weight-bold"
+                        class="col-3 text-capitalize text-danger font-weight-bold"
                       >
                         NaN
                       </div>
                       <div
-                        class="col-3 text-capitalize text-right text-danger font-weight-bold"
+                        class="col-3 text-capitalize text-danger font-weight-bold"
                       >
                         %
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-6 text-capitalize">clm_value</div>
-                      <div class="col-3 text-capitalize">Nan</div>
-                      <div class="col-3 text-capitalize">%</div>
-                    </div>
-                  </div> -->
+                  </div>
                 </div>
                 <div class="row">
                   {% for nan_clm,nan_val,percent in NaN_list %}
                   <div class="col-6 text-capitalize">{{nan_clm}}</div>
-                  <div class="col-2 text-capitalize">{{nan_val}}</div>
-                  <div class="col-4 text-capitalize">{{percent}} %</div>
+                  <div class="col-3 text-capitalize">{{nan_val}}</div>
+                  <div class="col-3 text-capitalize">{{percent}} %</div>
                   {% endfor %}
                 </div>
               </div>
             </div>
           </div>
+          <div class="row mt-4"></div>
           <div class="row mt-4">
-            <div class="col-4">
+            <div class="col-6">
               <div class="card p-5 bg-light shadow-sm rounded mean_card">
                 <div class="text-center text-primary font-weight-bold h4">
                   Mean
@@ -233,7 +229,7 @@
                   <div
                     class="col-3 text-capitalize text-danger font-weight-bold"
                   >
-                    Mean
+                    MEAN
                   </div>
                   <div
                     class="col-3 text-capitalize text-danger font-weight-bold"
@@ -250,10 +246,40 @@
                 </div>
               </div>
             </div>
+            <div class="col-6">
+              <div class="card p-5 bg-light shadow-sm rounded median_card">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Median
+                </div>
+                <hr />
+                <div class="row pb-3">
+                  <div class="col text-capitalize text-danger font-weight-bold">
+                    FEATURE
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    MEDIAN
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    %
+                  </div>
+                </div>
+                <div class="row">
+                  {% for clm,median_val,median_percent in median_list %}
+                  <div class="col-6 text-capitalize">{{clm}}</div>
+                  <div class="col-3 text-capitalize">{{median_val}}</div>
+                  <div class="col-3 text-capitalize">{{median_percent}} %</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row text-primary h3 mt-5">Dataset</div>
           <div class="row mt-3">
-            <div class="card bg-light p-5 shadow-lg rounded dataset_card">
+            <div class="card bg-light p-3 rounded dataset_card">
               <table class="table">
                 <thead class="bg-dark text-white">
                   <tr>
