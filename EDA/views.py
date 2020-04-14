@@ -10,10 +10,36 @@ import numpy as np
 import sklearn
 
 
+def get_NaN_percent(fName):
+    df = get_df(fName)
+    featues = []
+    features = df.columns[0:-1]
+    for feature in featues:
+        df[feature] = df[feature].replace(
+            r'\s+', np.nan, regex=True).replace('', np.nan)
+    is_na = df.isna().sum()
+    no_of_NaN = list(is_na)
+    total_Nan = 0
+    for Nan in no_of_NaN:
+        total_Nan += Nan
+    percent = []
+    shape = list(df.shape)
+    no_of_rows = shape[0]
+    no_of_columns = shape[1]
+    for i in no_of_NaN:
+        i = (i/no_of_rows)*100
+        percent.append(round(i, 2))
+    total_NaN_percentage = 0
+    for i in percent:
+        total_NaN_percentage += i
+    NaN_percent = (total_NaN_percentage/no_of_columns)
+    NaN_percent = round(NaN_percent, 2)
+    return NaN_percent
+
+
 def Overview(fName):
-    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                  fName+'.csv'), encoding='mbcs', error_bad_lines=False)
-    file_path = os.path.join(settings.MEDIA_ROOT, fName+'.csv')
+    df = get_df(fName)
+    file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     statInfo = os.stat(file_path)
     fileSize = statInfo.st_size
     fileSize = fileSize // 1000
@@ -111,15 +137,15 @@ def Upload(request):
             fs = FileSystemStorage()
             file_path1 = os.path.join(
                 settings.MEDIA_ROOT, 'original/'+fullName)
-            file_path2 = os.path.join(settings.MEDIA_ROOT, fName+'/'+fullName)
+            file_path2 = os.path.join(
+                settings.MEDIA_ROOT, 'processed/'+fullName)
 
             if os.path.exists(file_path1 and file_path2):
                 context = Overview(fName)
                 return render(request, 'index.html', context)
 
             else:
-                fs.save(fullName, uploaded_file)
-                fs.save(fName+'/'+fullName, uploaded_file)
+                fs.save('processed/'+fullName, uploaded_file)
                 fs.save('original/'+fullName, uploaded_file)
 
                 context = Overview(fName)
@@ -144,15 +170,20 @@ def Home(request, fName):
 
 
 def Visualize(request, fName):
+    nan_percent = get_NaN_percent(fName)
     context = {
-        'fName': fName
+        'fName': fName,
+        'NaN_percent': nan_percent,
     }
     return render(request, 'Visualize.html', context)
 
 
 def Explore(request, fName):
-    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                  fName+'.csv'), encoding='mbcs', error_bad_lines=False)
+    df = get_df(fName)
+
+    # NaN percent
+    nan_percent = get_NaN_percent(fName)
+
     # dataset
     clm_list = list(df)
     dataset_values = df.values
@@ -174,6 +205,7 @@ def Explore(request, fName):
         'clm_list': clm_list,
         'dataset_values': dataset_values,
         'NaN_list': NaN_list,
+        'NaN_percent': nan_percent,
         'mean_list': mean_list,
         'median_list': median_list,
     }
@@ -184,8 +216,17 @@ def AttrDropNan(request, fName):
     return render(request, 'AttrDropNan.html')
 
 
-def CompleteDropNaN(request, fName):
-    return render(request, 'CompleteDropNaN.html')
+def CompleteDropNan(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    for col in clm_list:
+        df[col] = df[col].replace('-', np.nan)
+        df = df.dropna(axis=0, subset=[col])
+    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                           'processed/'+fName+'.csv'), index=False)
+
+    context = Overview(fName)
+    return render(request, 'index.html', context)
 
 
 def AttrFillNan(request, fName):
@@ -195,7 +236,7 @@ def AttrFillNan(request, fName):
 # getting dataframe
 def get_df(fName):
     data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                               fName+'.csv'), encoding='mbcs')
+                                               'processed/'+fName+'.csv'), encoding='mbcs')
     return data_frame
 
 

@@ -67,7 +67,11 @@
                 ></a>
               </li>
               <ul class="sub-menu collapse" id="service">
-                <li><a href="#">Complete Drop NaN</a></li>
+                 <li>
+                  <a data-toggle="modal" data-target="#myModal"
+                    >Complete Drop NaN</a
+                  >
+                </li>
                 <li><a href="AttrDropNan">Attribute Wise Drop NaN</a></li>
                 <li><a href="AttrFillNan">Attribute Wise Fill NaN</a></li>
               </ul>
@@ -306,6 +310,83 @@
       </div>
       <!-- Page Content Ends Here... -->
     </div>
+
+    <!-- getting permission here to drop the columns -->
+
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Read Carefully
+              </h4>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="drop-rules mt-1">
+               {% if NaN_percent != 0 %}
+              <p>
+                Your dataset having
+                <span class="font-weight-bold">{{NaN_percent}}%</span> of NaN
+                values.
+              </p>
+             
+              <p>
+                <span class=" font-weight-bold">As per the Rule</span>
+                <ul>
+                  <li>The NaN values of your dataset should be <span class="font-weight-bold"> <= 35%</span> then only your
+                  dataset is eligible to drop the NaN.</li>
+                </ul>
+              </p>
+              {% else %}
+              <p>
+                Your dataset having
+                <span class="font-weight-bold">0</span> NaN
+                values.
+              </p>
+               <p>
+                <span class=" font-weight-bold">You need not to do this operation.</span>
+              </p>
+              {% endif %}
+              {% if NaN_percent != 0 %}
+              <p class="font-weight-bold mt-5">Note:</p>
+              <p>You lose your data while dropping all the NaN values, If your dataset contains >= 35% NaN values.</p>
+              {% endif %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+            {% if NaN_percent != 0 and NaN_percent <= 35 %}
+            <a
+              type="button"
+              style="margin-top: 0%;"
+              href="/CompleteDropNan/{{fName}}/"
+              class="btn btn-success"
+              >Proceed</a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
