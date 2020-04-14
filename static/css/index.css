@@ -31,6 +31,7 @@ body {
   margin-left: 3%;
   /* border: none; */
 }
+
 .NaN_card {
   width: 45rem;
   height: auto;
@@ -42,6 +43,13 @@ body {
   height: 600px;
   margin-bottom: 10px;
   overflow: auto;
+  border: 1px solid block;
+}
+
+.attrDropCard {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
   border: 1px solid block;
 }
 

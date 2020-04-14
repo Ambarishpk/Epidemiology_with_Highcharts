@@ -213,7 +213,18 @@ def Explore(request, fName):
 
 
 def AttrDropNan(request, fName):
-    return render(request, 'AttrDropNan.html')
+    df = get_df(fName)
+    clm_list = list(df)
+    context = {
+        'fName': fName,
+        'clm_list': clm_list,
+    }
+    return render(request, 'AttrDropNan.html', context)
+
+
+def AttrDropNanCalc(request, fName):
+
+    return HttpResponse("Hey Its Working !")
 
 
 def CompleteDropNan(request, fName):
