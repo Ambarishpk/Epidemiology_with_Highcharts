@@ -126,7 +126,7 @@
                     data-toggle="tooltip"
                     data-placement="top"
                     id="tooltip"
-                    title=""
+                    title="Inelligible features are disabled"
                     ><i
                       class="fa fa-info-circle text-info"
                       aria-hidden="true"
@@ -139,6 +139,7 @@
             class="form-group mt-5"
             action="/AttrFillNanCalc/{{fName}}/"
             method="POST"
+            id="attrFillNaNForm"
             enctype="multipart/form-data"
           >
           {% csrf_token %}
@@ -148,6 +149,9 @@
               <div class="form-check col-6">
                 {% if percent != 0 %}
                 <input type="checkbox" name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
+                {% else %}
+                <input type="checkbox" disabled name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
                 <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
                 {% endif %}
               </div>

@@ -120,6 +120,7 @@ def Overview(fName):
         'cat_msg': categorical_msg,
         'num_msg': numerical_msg,
     }
+
     return context
 
 
@@ -213,11 +214,16 @@ def Explore(request, fName):
 
 
 def AttrDropNan(request, fName):
-    attr_drop = get_NaN(fName)
+    attr_drop1 = get_NaN(fName)
+    attr_drop2 = get_NaN(fName)
+
+    nan_percent = get_NaN_percent(fName)
 
     context = {
         'fName': fName,
-        'attr_drop_list': attr_drop,
+        'attr_drop_list': attr_drop1,
+        'attr_drop_col_list': attr_drop2,
+        'NaN_percent': nan_percent,
     }
     return render(request, 'AttrDropNan.html', context)
 
@@ -225,6 +231,7 @@ def AttrDropNan(request, fName):
 def AttrDropNanCalc(request, fName):
     df = get_df(fName)
     attr_drop = get_NaN(fName)
+    nan_percent = get_NaN_percent(fName)
 
     if request.method == 'POST':
         selected_col = request.POST.getlist('attrDropCols')
@@ -236,8 +243,39 @@ def AttrDropNanCalc(request, fName):
         context = {
             'fName': fName,
             'attr_drop_list': attr_drop,
+            'NaN_percent': nan_percent,
             'status': 'Success',
             'message': "NaN values are dropped."
+        }
+        return render(request, 'AttrDropNan.html', context)
+
+    return HttpResponse("Error ! Please go back.")
+
+
+def AttrDropColCalc(request, fName):
+    df = get_df(fName)
+
+    if request.method == 'POST':
+        selected_col = request.POST.getlist('attrDropCompleteCols')
+        for single_col in selected_col:
+            print(single_col)
+        df.drop(selected_col, axis=1, inplace=True)
+
+        df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                               'processed/'+fName+'.csv'), index=False)
+
+        attr_drop = get_NaN(fName)
+        attr_drop_col = get_NaN(fName)
+
+        nan_percent = get_NaN_percent(fName)
+
+        context = {
+            'fName': fName,
+            'attr_drop_list': attr_drop,
+            'attr_drop_col_list': attr_drop_col,
+            'NaN_percent': nan_percent,
+            'status': 'Success',
+            'message': "Selected columns are dropped."
         }
         return render(request, 'AttrDropNan.html', context)
 
@@ -254,14 +292,20 @@ def CompleteDropNan(request, fName):
                            'processed/'+fName+'.csv'), index=False)
 
     context = Overview(fName)
+    context['status'] = 'Success !'
+    context['message'] = 'All the NaN values are dropped'
+
     return render(request, 'index.html', context)
 
 
 def AttrFillNan(request, fName):
     attr_fill = get_NaN(fName)
 
+    nan_percent = get_NaN_percent(fName)
+
     context = {
         'fName': fName,
+        'NaN_percent': nan_percent,
         'attr_fill_list': attr_fill,
     }
     return render(request, 'AttrFillNan.html', context)
