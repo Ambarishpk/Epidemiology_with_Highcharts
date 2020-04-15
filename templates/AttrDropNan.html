@@ -16,7 +16,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <link
-      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      href="//netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       rel="stylesheet"
       id="bootstrap-css"
     />
@@ -73,7 +73,7 @@
                   >
                 </li>
                 <li class="active"><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
-                <li><a href="AttrFillNan"> Attribute Wise Fill NaN</a></li>
+                <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
               </ul>
 
               <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -115,14 +115,25 @@
           id="msg"
           style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
         >
-          <span class="font-weight-bold"> {{message}}</span>
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
         </div>
         {% endif %}
 
         <div class="container p-3">
-          <div class="card attrDropCard p-5 bg-light">
-            <div class="text-center text-primary font-weight-bold h4">
-                  Select Columns for Drop NaN
+          
+          <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
+             <span 
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    id="tooltip"
+                    title="Disabled features are inelligible"
+                    ><i
+                      class="fa fa-info-circle text-info"
+                      aria-hidden="true"
+                    ></i
+                  ></span>
+            <div class="mr-5 text-center text-primary font-weight-bold h4">
+                  Select Features for Drop NaN
                 </div>
          <form
             class="form-group mt-5"
@@ -133,26 +144,34 @@
           {% csrf_token %}
           <div class="row">
 
-              {% for i in clm_list %}
-              <div class="form-check col-4">
-                <input type="checkbox" name="attrDropCol" class="form-check-input col">
-                <label class="form-check-label ml-2 col-6 text-capitalize" for="attrDropCol">{{i}}</>
+              {% for clm,val,percent in attr_drop_list %}
+              <div class="form-check col-6">
+                {% if percent != 0 %}
+                {% if percent <= 35 %}
+                <input type="checkbox" name="attrDropCols" value="{{clm}}" class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" for="attrDropCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
+                {% else %}
+                <input type="checkbox" disabled  class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" >{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
+                {% endif %}
+                {% endif %}
+
               </div>
               {% endfor %}
           </div>
           <div class="row mt-5">
-            <div class="col-md-8"></div>
-            <div class="col-md-1">
-              <a href="/AttrDropNanCalc/{{fName}}/" class="btn btn-sm btn-primary ml-5"
-                >Drop</a
-              >
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-9"></div>
+            <!-- <div class="col-md-1">
               <a
-                class="btn btn-sm btn-primary text-white ml-5"
+                class="btn btn-primary text-white ml-5"
                 data-toggle="modal"
                 data-target="#attrDrop"
                 >Preview</a
+              >
+            </div> -->
+             <div class="col-md-1">
+              <button  class="btn btn-primary"
+                >Drop</button
               >
             </div>
           </div>
@@ -253,6 +272,12 @@
 
     <!-- Menu Toggle Script -->
     <script>
+
+      // tooltip
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+
       // For toggling the dropdowns
       $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -265,7 +290,7 @@
         if ($("#msg").length > 0) {
           $("#msg").remove();
         }
-      }, 4000);
+      }, 3000);
     </script>
   </body>
 </html>

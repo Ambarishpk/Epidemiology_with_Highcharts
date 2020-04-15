@@ -213,18 +213,35 @@ def Explore(request, fName):
 
 
 def AttrDropNan(request, fName):
-    df = get_df(fName)
-    clm_list = list(df)
+    attr_drop = get_NaN(fName)
+
     context = {
         'fName': fName,
-        'clm_list': clm_list,
+        'attr_drop_list': attr_drop,
     }
     return render(request, 'AttrDropNan.html', context)
 
 
 def AttrDropNanCalc(request, fName):
+    df = get_df(fName)
+    attr_drop = get_NaN(fName)
 
-    return HttpResponse("Hey Its Working !")
+    if request.method == 'POST':
+        selected_col = request.POST.getlist('attrDropCols')
+        for single_col in selected_col:
+            df = df.dropna(subset=[single_col])
+
+        df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                               'processed/'+fName+'.csv'), index=False)
+        context = {
+            'fName': fName,
+            'attr_drop_list': attr_drop,
+            'status': 'Success',
+            'message': "NaN values are dropped."
+        }
+        return render(request, 'AttrDropNan.html', context)
+
+    return HttpResponse("Error ! Please go back.")
 
 
 def CompleteDropNan(request, fName):
@@ -241,10 +258,22 @@ def CompleteDropNan(request, fName):
 
 
 def AttrFillNan(request, fName):
-    return render(request, 'AttrFillNan.html')
+    attr_fill = get_NaN(fName)
 
+    context = {
+        'fName': fName,
+        'attr_fill_list': attr_fill,
+    }
+    return render(request, 'AttrFillNan.html', context)
+
+
+def AttrFillNanCalc(request, fName):
+    # return render(request, 'AttrFillNanCalc.html')
+    return HttpResponse("Attribute wise fill NaN calculation called")
 
 # getting dataframe
+
+
 def get_df(fName):
     data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                                'processed/'+fName+'.csv'), encoding='mbcs')

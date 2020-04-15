@@ -53,6 +53,10 @@ body {
   border: 1px solid block;
 }
 
+#tooltip {
+  cursor: pointer;
+}
+
 .content-title {
   font-weight: 500;
   font-size: 15px;

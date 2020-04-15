@@ -25,4 +25,8 @@ urlpatterns = [
         views.AttrDropNan, name='AttrDropNan'),
     url(r'^AttrDropNanCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.AttrDropNanCalc, name='AttrDropNanCalc'),
+    url(r'^AttrFillNan/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.AttrFillNan, name='AttrFillNan'),
+    url(r'^AttrFillNanCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.AttrFillNanCalc, name='AttrFillNanCalc'),
 ]
