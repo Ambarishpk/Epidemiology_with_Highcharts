@@ -312,13 +312,53 @@ def AttrFillNan(request, fName):
 
 
 def AttrFillNanCalc(request, fName):
-    df = get_df(fName)
 
     if request.method == "POST":
-        selectOption = request.POST.get('fillnaMethod')
+        df = get_df(fName)
 
-    # return render(request, 'AttrFillNanCalc.html')
-    return HttpResponse(selectOption)
+        selectOption = request.POST.get('fillnaMethods')
+
+        selectedCols = request.POST.getlist('attrFillCols')
+
+        if selectOption == "fill":
+            fillType = request.POST.get('fillType')
+            # forward fill
+            if fillType == 'ffill':
+                for col in selectedCols:
+                    df[col].fillna(method=fillType, inplace=True)
+                status = 'Success'
+                message = 'NaN values of selected columns are filled by Forward method.'
+            # backward fill
+            elif fillType == 'bfill':
+                for col in selectedCols:
+                    df[col].fillna(method=fillType, inplace=True)
+                status = 'Success'
+                message = 'NaN values of selected columns are filled bt Backward method.'
+
+            else:
+                pass
+
+        elif selectOption == "replace":
+            pass
+        elif selectOption == "interpolate":
+            pass
+
+        df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                               'processed/'+fName+'.csv'), index=False)
+
+        attr_fill = get_NaN(fName)
+        nan_percent = get_NaN_percent(fName)
+        context = {
+            'fName': fName,
+            'NaN_percent': nan_percent,
+            'attr_fill_list': attr_fill,
+            'status': status,
+            'message': message,
+        }
+
+        return render(request, 'AttrFillNan.html', context)
+
+    return HttpResponse("Error ! Go back.")
 
 # getting dataframe
 

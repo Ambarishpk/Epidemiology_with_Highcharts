@@ -146,7 +146,7 @@
           <div class="row mb-5">
             <div class="col-3">
               <div class="form-group">
-                <select class="form-control form-control-lg" name="fillnaMethods" required onchange="myFunction()" id="mySelect">
+                <select class="form-control form-control-lg" name="fillnaMethods" onchange="myFunction()" id="mySelect">
                   <option selected disabled>Choose</option>
                   <option value="fill">Fill</option>
                   <option value="interpolate">Interpolate</option>
@@ -156,22 +156,22 @@
             </div>
             <div class="col-3" style="display:none;" id="fill">
               <div class="form-group">
-                <select class="form-control form-control-lg" name="fillType" required onchange="myFunction()" id="mySelect">
+                <select class="form-control form-control-lg" name="fillType"  onchange="myFunction()" id="mySelect">
                   <option selected disabled>Choose</option>
-                  <option value="option1">forword fill</option>
-                  <option value="option2">backword fill</option>
-                  <option value="option3">pad</option>
+                  <option value="ffill">forword fill</option>
+                  <option value="bfill">backword fill</option>
+                  <option value="pad">pad</option>
                 </select>
               </div>
             </div>
             <div class="col-3" style="display:none;"  id="replace_by">
               <div class="form-group">
-                <input type="text" name="replaceBy" required placeholder="Find" class="form-control form-control-lg">
+                <input type="text" name="replaceBy"  placeholder="Find" class="form-control form-control-lg">
               </div>
             </div>
             <div class="col-3" style="display:none;"  id="to_replace">
               <div class="form-group">
-                <input type="text" name="replaceTo" required placeholder="Replace" class="form-control form-control-lg">
+                <input type="text" name="replaceTo" placeholder="Replace" class="form-control form-control-lg">
               </div>
             </div>
           </div>
