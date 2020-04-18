@@ -143,8 +143,39 @@
             enctype="multipart/form-data"
           >
           {% csrf_token %}
+          <div class="row mb-5">
+            <div class="col-3">
+              <div class="form-group">
+                <select class="form-control form-control-lg" name="fillnaMethods" required onchange="myFunction()" id="mySelect">
+                  <option selected disabled>Choose</option>
+                  <option value="fill">Fill</option>
+                  <option value="interpolate">Interpolate</option>
+                  <option value="replace">Replace</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3" style="display:none;" id="fill">
+              <div class="form-group">
+                <select class="form-control form-control-lg" name="fillType" required onchange="myFunction()" id="mySelect">
+                  <option selected disabled>Choose</option>
+                  <option value="option1">forword fill</option>
+                  <option value="option2">backword fill</option>
+                  <option value="option3">pad</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3" style="display:none;"  id="replace_by">
+              <div class="form-group">
+                <input type="text" name="replaceBy" required placeholder="Find" class="form-control form-control-lg">
+              </div>
+            </div>
+            <div class="col-3" style="display:none;"  id="to_replace">
+              <div class="form-group">
+                <input type="text" name="replaceTo" required placeholder="Replace" class="form-control form-control-lg">
+              </div>
+            </div>
+          </div>
           <div class="row">
-
               {% for clm,val,percent in attr_fill_list %}
               <div class="form-check col-6">
                 {% if percent != 0 %}
@@ -159,14 +190,7 @@
           </div>
           <div class="row mt-5">
             <div class="col-md-9"></div>
-            <!-- <div class="col-md-1">
-              <a
-                class="btn btn-primary text-white ml-5"
-                data-toggle="modal"
-                data-target="#attrDrop"
-                >Preview</a
-              >
-            </div> -->
+            
              <div class="col-md-1">
               <button  class="btn btn-primary"
                 >Fill</button
@@ -289,6 +313,35 @@
           $("#msg").remove();
         }
       }, 3000);
+    </script>
+
+    <!-- Attrwise Fill NaN Scripts -->
+
+    <script>
+      function myFunction() {
+        var x = document.getElementById("mySelect").value;
+        if (x == "fill") {
+          document.getElementById("fill").style.display = "block";
+          document.getElementById("replace_by").style.display = "none";
+          document.getElementById("to_replace").style.display = "none";
+          
+        } else if (x == "interpolate") {
+          document.getElementById("fill").style.display = "none";
+          document.getElementById("replace_by").style.display = "none";
+          document.getElementById("to_replace").style.display = "none";
+          
+        } else if (x == "replace") {
+          document.getElementById("fill").style.display = "none";
+          document.getElementById("replace_by").style.display = "block";
+          document.getElementById("to_replace").style.display = "block";
+          
+        } else {
+          document.getElementById("fill").style.display = "none";
+          document.getElementById("replace_by").style.display = "none";
+          document.getElementById("to_replace").style.display = "none";
+         
+        }
+      }
     </script>
   </body>
 </html>

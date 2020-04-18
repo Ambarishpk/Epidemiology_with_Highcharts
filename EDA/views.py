@@ -312,8 +312,13 @@ def AttrFillNan(request, fName):
 
 
 def AttrFillNanCalc(request, fName):
+    df = get_df(fName)
+
+    if request.method == "POST":
+        selectOption = request.POST.get('fillnaMethod')
+
     # return render(request, 'AttrFillNanCalc.html')
-    return HttpResponse("Attribute wise fill NaN calculation called")
+    return HttpResponse(selectOption)
 
 # getting dataframe
 
