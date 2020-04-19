@@ -187,7 +187,7 @@ def Explore(request, fName):
 
     # dataset
     clm_list = list(df)
-    dataset_values = df.values
+    dataset_values = df.head(500).values
 
     # explore
     corr = correlation(fName)
@@ -365,6 +365,93 @@ def AttrFillNanCalc(request, fName):
         return render(request, 'AttrFillNan.html', context)
 
     return HttpResponse("Error ! Go back.")
+
+
+def Binning(request, fName):
+
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    numerical_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            numerical_list.append(clm)
+        else:
+            pass
+    context = {
+        'fName': fName,
+        'binning_list': numerical_list,
+        'percent': NaN_percent,
+
+    }
+
+    return render(request, 'Binning.html', context)
+
+
+def BinningCalc(request, fName):
+    df = get_df(fName)
+
+    if request.method == "POST":
+
+        selectedCols = request.POST.getlist('binCol')
+        binRange = request.POST.get('rangeVal')
+
+        if binRange != '':
+            pass
+        else:
+            binRange = 10
+
+        for col in selectedCols:
+            dt = df[col].dtype
+            if dt == 'float64':
+                df[col] = df[col].round()
+                df[col] = df[col].astype(int)
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       fName+'.csv'), index=False, inplace=True)
+            else:
+                pass
+
+        for selected_col in selectedCols:
+            # binning starts
+            bins = []
+            labels = []
+            Min = min(df[selected_col])
+            Max = max(df[selected_col])
+            for i in range(Min, Max, int(binRange)):
+                bins.append(i)
+            l1 = len(bins)
+            for i in range(1, l1):
+                labels.append(i)
+            new_col = selected_col+' bins'
+            df[new_col] = pd.cut(df[selected_col], bins=bins,
+                                 labels=labels, include_lowest=True)
+            # binning ends
+
+        df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                               'processed/'+fName+'.csv'), index=False)
+
+        df_new = get_df(fName)
+        clm_list = list(df_new)
+        NaN_percent = get_NaN_percent(fName)
+        numerical_list = []
+        for clm in clm_list:
+            dt = df_new[clm].dtype
+            if dt == 'int64' or dt == 'float64':
+                numerical_list.append(clm)
+            else:
+                pass
+        context = {
+            'fName': fName,
+            'binning_list': numerical_list,
+            'percent': NaN_percent,
+            'status': 'Success',
+            'message': 'Binning was done on selected features.'
+        }
+
+        return render(request, 'Binning.html', context)
+
+    return HttpResponse("Error ! Please go back.")
 
 # getting dataframe
 

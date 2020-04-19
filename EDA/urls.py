@@ -31,4 +31,12 @@ urlpatterns = [
         views.AttrFillNan, name='AttrFillNan'),
     url(r'^AttrFillNanCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.AttrFillNanCalc, name='AttrFillNanCalc'),
+
+
+
+    # Feature Engineering
+    url(r'^Binning/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.Binning, name="Binning"),
+    url(r'^BinningCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.BinningCalc, name="BinningCalc"),
 ]
