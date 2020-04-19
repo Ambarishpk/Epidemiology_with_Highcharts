@@ -319,6 +319,7 @@ def AttrFillNanCalc(request, fName):
         selectOption = request.POST.get('fillnaMethods')
 
         selectedCols = request.POST.getlist('attrFillCols')
+        print(selectedCols)
 
         if selectOption == "fill":
             fillType = request.POST.get('fillType')
@@ -339,7 +340,12 @@ def AttrFillNanCalc(request, fName):
                 pass
 
         elif selectOption == "replace":
-            pass
+            replaceWord = request.POST.get('replaceBy')
+            for col in selectedCols:
+                df[col].fillna(replaceWord, inplace=True)
+            status = 'Success'
+            message = 'NaN values of selected columns are replaced by '+replaceWord
+
         elif selectOption == "interpolate":
             pass
 

@@ -147,7 +147,7 @@
                   {% for clm,val,percent in attr_drop_list %}
                   <div class="form-check col-6">
                     {% if percent <= 90 %}
-                    {% if percent != 0 and5 percent <= 35 %}
+                    {% if percent != 0 and percent <= 35 %}
                     <input type="checkbox" name="attrDropCols" value="{{clm}}" class="form-check-input ml-5 col">
                     <label class="form-check-label col-6 text-capitalize" for="attrDropCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
                     {% else %}

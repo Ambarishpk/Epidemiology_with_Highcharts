@@ -169,11 +169,7 @@
                 <input type="text" name="replaceBy"  placeholder="Find" class="form-control form-control-lg">
               </div>
             </div>
-            <div class="col-3" style="display:none;"  id="to_replace">
-              <div class="form-group">
-                <input type="text" name="replaceTo" placeholder="Replace" class="form-control form-control-lg">
-              </div>
-            </div>
+            
           </div>
           <div class="row">
               {% for clm,val,percent in attr_fill_list %}
@@ -323,22 +319,18 @@
         if (x == "fill") {
           document.getElementById("fill").style.display = "block";
           document.getElementById("replace_by").style.display = "none";
-          document.getElementById("to_replace").style.display = "none";
           
         } else if (x == "interpolate") {
           document.getElementById("fill").style.display = "none";
           document.getElementById("replace_by").style.display = "none";
-          document.getElementById("to_replace").style.display = "none";
           
         } else if (x == "replace") {
           document.getElementById("fill").style.display = "none";
           document.getElementById("replace_by").style.display = "block";
-          document.getElementById("to_replace").style.display = "block";
           
         } else {
           document.getElementById("fill").style.display = "none";
           document.getElementById("replace_by").style.display = "none";
-          document.getElementById("to_replace").style.display = "none";
          
         }
       }
