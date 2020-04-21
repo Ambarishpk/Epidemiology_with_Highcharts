@@ -148,7 +148,6 @@ def Upload(request):
             else:
                 fs.save('processed/'+fullName, uploaded_file)
                 fs.save('original/'+fullName, uploaded_file)
-
                 context = Overview(fName)
                 return render(request, 'index.html', context)
         else:
@@ -257,8 +256,8 @@ def AttrDropColCalc(request, fName):
 
     if request.method == 'POST':
         selected_col = request.POST.getlist('attrDropCompleteCols')
-        for single_col in selected_col:
-            print(single_col)
+        # for single_col in selected_col:
+        #     print(single_col)
         df.drop(selected_col, axis=1, inplace=True)
 
         df.to_csv(os.path.join(settings.MEDIA_ROOT,
@@ -408,7 +407,7 @@ def BinningCalc(request, fName):
                 df[col] = df[col].round()
                 df[col] = df[col].astype(int)
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                       fName+'.csv'), index=False, inplace=True)
+                                       'processed/'+fName+'.csv'), index=False)
             else:
                 pass
 
@@ -420,30 +419,45 @@ def BinningCalc(request, fName):
             Max = max(df[selected_col])
             for i in range(Min, Max, int(binRange)):
                 bins.append(i)
+            # print(bins)
             l1 = len(bins)
-            for i in range(1, l1):
-                labels.append(i)
+            for j in range(1, l1):
+                labels.append(j)
+            # print(labels)
             new_col = selected_col+' bins'
             df[new_col] = pd.cut(df[selected_col], bins=bins,
                                  labels=labels, include_lowest=True)
+            df[new_col].fillna(method='bfill', inplace=True)
+
             # binning ends
 
         df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                'processed/'+fName+'.csv'), index=False)
 
+        # print(df[new_col].dtype)
+
         df_new = get_df(fName)
         clm_list = list(df_new)
         NaN_percent = get_NaN_percent(fName)
-        numerical_list = []
+        bin_list = []
         for clm in clm_list:
             dt = df_new[clm].dtype
             if dt == 'int64' or dt == 'float64':
-                numerical_list.append(clm)
+                bin_list.append(clm)
             else:
                 pass
+        binning_list = []
+        binned_list = []
+        for col_name in bin_list:
+            if 'bins' in col_name:
+                binned_list.append(col_name)
+            else:
+                binning_list.append(col_name)
+        # print(binning_list)
         context = {
             'fName': fName,
-            'binning_list': numerical_list,
+            'binning_list': binning_list,
+            'binned_list': binned_list,
             'percent': NaN_percent,
             'status': 'Success',
             'message': 'Binning was done on selected features.'
