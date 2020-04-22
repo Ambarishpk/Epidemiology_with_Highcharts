@@ -12,6 +12,8 @@ urlpatterns = [
         views.Home, name='Home'),
     url(r'^Explore/(?P<fName>[-\w.]+\w{0,50})/$',
         views.Explore, name='Explore'),
+    url(r'^Dataset/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.Dataset, name='Dataset'),
 
     # Visualization
     url(r'^Visualize/(?P<fName>[-\w.]+\w{0,50})/$',

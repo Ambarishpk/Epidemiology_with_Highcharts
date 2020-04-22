@@ -179,19 +179,23 @@ def Visualize(request, fName):
     return render(request, 'Visualize.html', context)
 
 
+def Dataset(request, fName):
+    return render(request, 'Dataset.html')
+
+
 def Explore(request, fName):
     df = get_df(fName)
 
     # NaN percent
     nan_percent = get_NaN_percent(fName)
 
-    # dataset
+    # # dataset
     clm_list = list(df)
     dataset_values = df.head(500).values
 
     # explore
-    corr = correlation(fName)
-    correlation_list = zip(clm_list, corr)
+    # corr = correlation(fName)
+    # correlation_list = zip(clm_list, corr)
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
     NaN_list = get_NaN(fName)
@@ -202,7 +206,7 @@ def Explore(request, fName):
         'fName': fName,
         'kurtosis_list': kurt_list,
         'skewness_list': skew_list,
-        'correlation_list': correlation_list,
+        # 'correlation_list': correlation_list,
         'clm_list': clm_list,
         'dataset_values': dataset_values,
         'NaN_list': NaN_list,
@@ -564,6 +568,7 @@ def LabelEncodingCalc(request, fName):
 def get_df(fName):
     data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                                'processed/'+fName+'.csv'), encoding='mbcs')
+
     return data_frame
 
 
@@ -610,21 +615,21 @@ def skewness(fName):
 
 
 # Correlation
-def correlation(fName):
-    df = get_df(fName)
-    correla = df.corr()
-    values = correla.values
-    main_list = []
-    correlation_list = []
-    for i in range(len(values)):
-        sub_list = []
-        for j in values[i]:
-            sub_list.append(round(j, 2))
-        main_list.append(sub_list)
-    correlation_list.append(main_list)
-    new = correlation_list[0]
+# def correlation(fName):
+#     df = get_df(fName)
+#     correla = df.corr()
+#     values = correla.values
+#     main_list = []
+#     correlation_list = []
+#     for i in range(len(values)):
+#         sub_list = []
+#         for j in values[i]:
+#             sub_list.append(round(j, 2))
+#         main_list.append(sub_list)
+#     correlation_list.append(main_list)
+#     new = correlation_list[0]
 
-    return new
+#     return new
 
 
 # NaN Percentage
