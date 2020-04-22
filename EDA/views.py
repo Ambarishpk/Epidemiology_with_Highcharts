@@ -8,6 +8,7 @@ import csv
 import pandas as pd
 import numpy as np
 import sklearn
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 
 def get_NaN_percent(fName):
@@ -63,7 +64,7 @@ def Overview(fName):
             numerical_clms_lst.append(clm)
 
     if len(categorical_clms_lst) <= 0:
-        categorical_msg = "Categorical Columns Not Exits"
+        categorical_msg = "Categorical Features Does Not Exits"
     else:
         categorical_msg = ""
 
@@ -371,17 +372,25 @@ def Binning(request, fName):
     df = get_df(fName)
     clm_list = list(df)
     NaN_percent = get_NaN_percent(fName)
-    numerical_list = []
+    bin_list = []
     for clm in clm_list:
         dt = df[clm].dtype
         if dt == 'int64' or dt == 'float64':
-            numerical_list.append(clm)
+            bin_list.append(clm)
         else:
             pass
+    binning_list = []
+    binned_list = []
+    for col_name in bin_list:
+        if 'bins' in col_name:
+            binned_list.append(col_name)
+        else:
+            binning_list.append(col_name)
     context = {
         'fName': fName,
-        'binning_list': numerical_list,
-        'percent': NaN_percent,
+        'binning_list': binning_list,
+        'binned_list': binned_list,
+        'NaN_percent': NaN_percent,
 
     }
 
@@ -396,6 +405,7 @@ def BinningCalc(request, fName):
         selectedCols = request.POST.getlist('binCol')
         binRange = request.POST.get('rangeVal')
 
+        # check bin range
         if binRange != '':
             pass
         else:
@@ -412,18 +422,22 @@ def BinningCalc(request, fName):
                 pass
 
         for selected_col in selectedCols:
-            # binning starts
             bins = []
             labels = []
-            Min = min(df[selected_col])
-            Max = max(df[selected_col])
+            Min = int(min(df[selected_col]))
+            Max = int(max(df[selected_col]))
+
+            # binning starts
+
             for i in range(Min, Max, int(binRange)):
                 bins.append(i)
-            # print(bins)
+            if Max not in bins:
+                bins.append(Max)
+            print(bins)
             l1 = len(bins)
             for j in range(1, l1):
                 labels.append(j)
-            # print(labels)
+            print(labels)
             new_col = selected_col+' bins'
             df[new_col] = pd.cut(df[selected_col], bins=bins,
                                  labels=labels, include_lowest=True)
@@ -458,7 +472,7 @@ def BinningCalc(request, fName):
             'fName': fName,
             'binning_list': binning_list,
             'binned_list': binned_list,
-            'percent': NaN_percent,
+            'NaN_percent': NaN_percent,
             'status': 'Success',
             'message': 'Binning was done on selected features.'
         }
@@ -466,6 +480,83 @@ def BinningCalc(request, fName):
         return render(request, 'Binning.html', context)
 
     return HttpResponse("Error ! Please go back.")
+
+
+def LabelEncoding(request, fName):
+
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    label_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            pass
+        else:
+            label_list.append(clm)
+    labelling_list = []
+    labelled_list = []
+    for col_name in clm_list:
+        if 'label' in col_name:
+            labelled_list.append(col_name)
+        else:
+            labelling_list.append(col_name)
+    context = {
+        'fName': fName,
+        'labelling_list': labelling_list,
+        'labelled_list': labelled_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'LabelEncoding.html', context)
+
+
+def LabelEncodingCalc(request, fName):
+
+    df = get_df(fName)
+
+    label_encoder = LabelEncoder()
+    if request.method == 'POST':
+        selected_cols = request.POST.getlist('labelCol')
+        for selected_col in selected_cols:
+            new_col = selected_col+' label'
+            df[new_col] = label_encoder.fit_transform(
+                df[selected_col].astype(str))
+        df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                               'processed/'+fName+'.csv'), index=False)
+
+        df_new = get_df(fName)
+        clm_list = list(df_new)
+        NaN_percent = get_NaN_percent(fName)
+        label_list = []
+        for clm in clm_list:
+            dt = df_new[clm].dtype
+            if dt == 'int64' or dt == 'float64':
+                pass
+            else:
+                label_list.append(clm)
+        labelling_list = []
+        labelled_list = []
+        for col_name in clm_list:
+            if 'label' in col_name:
+                labelled_list.append(col_name)
+            else:
+                labelling_list.append(col_name)
+
+        context = {
+            'fName': fName,
+            'labelling_list': labelling_list,
+            'labelled_list': labelled_list,
+            'NaN_percent': NaN_percent,
+            'status': 'Success',
+            'message': 'Label Encoding was done on selected features.'
+        }
+
+        return render(request, 'LabelEncoding.html', context)
+
+    return HttpResponse("Error ! Please go back.")
+
 
 # getting dataframe
 

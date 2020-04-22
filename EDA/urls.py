@@ -35,8 +35,14 @@ urlpatterns = [
 
 
     # Feature Engineering
+    # Binning
     url(r'^Binning/(?P<fName>[-\w.]+\w{0,50})/$',
         views.Binning, name="Binning"),
     url(r'^BinningCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.BinningCalc, name="BinningCalc"),
+    # Label Encoding
+    url(r'^LabelEncoding/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.LabelEncoding, name="LabelEncoding"),
+    url(r'^LabelEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.LabelEncodingCalc, name="LabelEncodingCalc"),
 ]

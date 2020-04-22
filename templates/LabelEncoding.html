@@ -66,13 +66,13 @@
                   <span class="arrow"></span
                 ></a>
               </li>
-              <ul class="sub-menu " id="service">
+              <ul class="sub-menu collapse" id="service">
                 <li>
                   <a data-toggle="modal" data-target="#myModal"
                     >Complete Drop NaN</a
                   >
                 </li>
-                <li class="active"><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
+                <li><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
                 <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
               </ul>
 
@@ -82,9 +82,9 @@
                   <span class="arrow"></span
                 ></a>
               </li>
-              <ul class="sub-menu collapse" id="new">
+              <ul class="sub-menu ">
                 <li><a href="/Binning/{{fName}}/">Binning</a></li>
-                <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
+                <li class="active"><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
                 <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
               </ul>
 
@@ -120,117 +120,85 @@
         {% endif %}
 
         <div class="container p-3">
+          
           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
-            <span 
+             <span 
                     data-toggle="tooltip"
                     data-placement="top"
                     id="tooltip"
-                    title="Disabled features are inelligible"
+                    title="Label-Encoding performs only on Categorical Features"
                     ><i
                       class="fa fa-info-circle text-info"
                       aria-hidden="true"
                     ></i
-            ></span>
+                  ></span>
             <div class="mr-5 text-center text-primary font-weight-bold h4">
-                  Select Features for Drop NaN
-            </div>
+                  Select Features for Fill NaN
+                </div>
+            {% if NaN_percent == 0 %}
             <form
                 class="form-group mt-5"
-                action="/AttrDropNanCalc/{{fName}}/"
+                action="/LabelEncodingCalc/{{fName}}/"
                 method="POST"
-                id="form1"
+                id="labelencodingForm"
                 enctype="multipart/form-data"
-              >
-              {% csrf_token %}
-              <div class="row">
-
-                  {% for clm,val,percent in attr_drop_list %}
-                  <div class="form-check col-6">
-                    {% if percent <= 90 %}
-                    {% if percent != 0 and percent <= 35 %}
-                    <input type="checkbox" name="attrDropCols" value="{{clm}}" class="form-check-input ml-5 col">
-                    <label class="form-check-label col-6 text-capitalize" for="attrDropCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
-                    {% else %}
-                    <input type="checkbox" disabled  class="form-check-input ml-5 col">
-                    <label class="form-check-label col-6 text-capitalize" >{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
-                    {% endif %}
-                    {% endif %}
-
-                  </div>
-                  {% endfor %}
+            >
+            {% csrf_token %}
+            {% if labelling_list %}
+            <div class="row">
+            {% for clm in labelling_list %}
+              <div class="form-check col-6">
+                {% if NaN_percent == 0 %}
+                <input type="checkbox" name="labelCol" value="{{clm}}" class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" for="binCol">{{clm}}</>
+                {% else %}
+                <input hidden type="checkbox" disabled name="attrFillCols" value="" class="form-check-input ml-5 col">
+                <label hidden class="form-check-label col-6 text-capitalize" for="attrFillCol"></>
+                {% endif %}
               </div>
-            
-              <div class="row mt-5">
-                <div class="col-md-9"></div>
-                <!-- <div class="col-md-1">
-                  <a
-                    class="btn btn-primary text-white ml-5"
-                    data-toggle="modal"
-                    data-target="#attrDrop"
-                    >Preview</a
-                  >
-                </div> -->
-                <div class="col-md-1">
-                  <button  class="btn btn-primary"
-                    >Drop</button
-                  >
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="container p-3">
-           <div class="card attrDropCompleteCard pt-3 pb-3 pl-5 bg-light">
-            <span 
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    id="tooltip"
-                    title="Drop the entire column"
-                    ><i
-                      class="fa fa-info-circle text-info"
-                      aria-hidden="true"
-                    ></i
-            ></span>
-            <div class="mr-5 text-center text-primary font-weight-bold h4">
-                  Select Dropping Feature 
+            {% endfor %}
             </div>
-           <form
-                class="form-group mt-5"
-                action="/AttrDropColCalc/{{fName}}/"
-                method="POST"
-                id="form2"
-                enctype="multipart/form-data"
-              >
-              {% csrf_token %}
-              <div class="row">
-                {% for clm,val,percent in attr_drop_col_list %}
-                  <div class="form-check col-6">
-                    {% if percent >= 85 %}
-                    <input type="checkbox" name="attrDropCompleteCols" value="{{clm}}" class="form-check-input ml-5 col">
-                    <label class="form-check-label col-6 text-capitalize" for="attrDropCompleteCols">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
-                    {% else %}
-                    <input type="checkbox" disabled  class="form-check-input ml-5 col">
-                    <label class="form-check-label col-6 text-capitalize" >{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
-                    {% endif %}
-
-                  </div>
-                  {% endfor %}
-              </div>
-            
-              <div class="row mt-5">
+            <div class="row mt-5">
                 <div class="col-md-9"></div>
-               
+                
                 <div class="col-md-1">
-                  <button id="dropColumn" class="btn btn-primary"
-                    >Drop</button
-                  >
+                <button  class="btn btn-primary"
+                    >Go</button
+                >
                 </div>
-              </div>
-            <!-- </form> -->
+            </div>
+            {% else %}
+            <div class="row mt-5">
+              <div class="col mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">Categorical Features Does Not Exits</h5>
+            </div>
+            </div>
+            {% endif %}
+            
+            </form>
+            {% else%}
+            <div class="mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">Your Dataset Have NaN Values</h5>
+            </div>
+            {% endif %}
           </div>
         </div>
-        
+        {% if labelled_list %}
+        <div class="container p-3">
+           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
+          <div class="row">
+            <h5 class="text-primary font-weight-bold">Labelled Features:</h5>
+          </div>
+          <div class="row">
+            {% for col in labelled_list %}
+            <div class="col-3 mt-2">
+              <label class="form-check-label text-capitalize">{{col}}</>
+            </div>
+              {% endfor %}
+            </div>
+        </div>
+        </div>
+        {% endif %}
         <div class="container p-3 mt-4">
           <div class="row">
             <h5 class="text-danger font-weight-bold">Suggesstions:</h5>
@@ -344,6 +312,19 @@
           $("#msg").remove();
         }
       }, 3000);
+
+    </script>
+
+    <!-- Attrwise Fill NaN Scripts -->
+
+    <script>
+      function myFunction() {
+        if (document.getElementById("rangeChoice").checked == true) {
+          document.getElementById("range").style.display = "block";
+        } else {
+          document.getElementById("range").style.display = "none";
+        }
+      }
     </script>
   </body>
 </html>

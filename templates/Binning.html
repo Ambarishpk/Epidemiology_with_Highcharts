@@ -84,8 +84,8 @@
               </li>
               <ul class="sub-menu ">
                 <li class="active"><a href="/Binning/{{fName}}/">Binning</a></li>
-                <li><a href="#">Label Encoding</a></li>
-                <li><a href="#">One Hot Encoding</a></li>
+                <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
+                <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
               </ul>
 
               <li>
@@ -135,7 +135,7 @@
             <div class="mr-5 text-center text-primary font-weight-bold h4">
                   Select Features for Fill NaN
                 </div>
-            {% if percent == 0 %}
+            {% if NaN_percent == 0 %}
             <form
                 class="form-group mt-5"
                 action="/BinningCalc/{{fName}}/"
@@ -161,7 +161,7 @@
             <div class="row">
             {% for clm in binning_list %}
               <div class="form-check col-6">
-                {% if percent == 0 %}
+                {% if NaN_percent == 0 %}
                 <input type="checkbox" name="binCol" value="{{clm}}" class="form-check-input ml-5 col">
                 <label class="form-check-label col-6 text-capitalize" for="binCol">{{clm}}</>
                 {% else %}

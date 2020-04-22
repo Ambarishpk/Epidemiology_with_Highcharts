@@ -83,8 +83,8 @@
               </li>
               <ul class="sub-menu collapse" id="new">
                 <li><a href="/Binning/{{fName}}/">Binning</a></li>
-                <li><a href="#">Label Encoding</a></li>
-                <li><a href="#">One Hot Encoding</a></li>
+                <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
+                <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
               </ul>
 
               <li>
@@ -184,7 +184,7 @@
                   <li class="text-capitalize">{{cat}}</li>
                 </ul>
                 {% endfor %} {% else %}
-                <div class="text-capitalize text-center text-secondary">
+                <div class="text-capitalize text-center mt-5 text-justify text-secondary">
                   {{cat_msg}}
                 </div>
 
@@ -209,7 +209,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-2">
+          <div class="row mt-5">
             <div class="col">
               <div class="h4 text-danger font-weight-bold">Suggestions :</div>
             </div>

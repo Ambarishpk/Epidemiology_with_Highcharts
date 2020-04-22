@@ -8,7 +8,9 @@ body {
 .content-box {
   color: black;
   width: 30rem;
-  height: auto;
+  height: 50rem;
+  overflow-y: auto;
+  overflow-x: hidden;
   margin-right: 2%;
   /* border: none; */
 }
@@ -21,20 +23,28 @@ body {
 
 .mean_card {
   width: 50rem;
-  height: auto;
+  height: 40rem;
+  padding-bottom: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
   /* border: none; */
 }
 
 .median_card {
   width: 50rem;
-  height: auto;
-  margin-left: 3%;
+  height: 40rem;
+  padding-bottom: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* margin-left: 3%; */
   /* border: none; */
 }
 
 .NaN_card {
   width: 45rem;
-  height: auto;
+  height: 50rem;
+  overflow-y: auto;
+  overflow-x: hidden
   /* border: none; */
 }
 
