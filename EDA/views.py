@@ -180,7 +180,15 @@ def Visualize(request, fName):
 
 
 def Dataset(request, fName):
-    return render(request, 'Dataset.html')
+    df = get_df(fName)
+    clm_list = list(df)
+    values = df.head(2000).values
+    context = {
+        'fName': fName,
+        'clm_list': clm_list,
+        'values': values,
+    }
+    return render(request, 'Dataset.html', context)
 
 
 def Explore(request, fName):
@@ -189,9 +197,7 @@ def Explore(request, fName):
     # NaN percent
     nan_percent = get_NaN_percent(fName)
 
-    # # dataset
     clm_list = list(df)
-    dataset_values = df.head(500).values
 
     # explore
     # corr = correlation(fName)
@@ -208,7 +214,6 @@ def Explore(request, fName):
         'skewness_list': skew_list,
         # 'correlation_list': correlation_list,
         'clm_list': clm_list,
-        'dataset_values': dataset_values,
         'NaN_list': NaN_list,
         'NaN_percent': nan_percent,
         'mean_list': mean_list,
@@ -590,11 +595,12 @@ def kurtosis(fName):
     df = get_df(fName)
     df_kurtosis = df.kurt()
     k_values = list(df_kurtosis)
-    kurt_value = []
-    for i in k_values:
-        kurt_value.append(round(i, 2))
+    # round_off
+    # kurt_value = []
+    # for i in k_values:
+    #     kurt_value.append(round(i, 2))
     column_name = list(df)
-    kurtosis_list = zip(column_name, kurt_value)
+    kurtosis_list = zip(column_name, k_values)
 
     return kurtosis_list
 
@@ -605,11 +611,12 @@ def skewness(fName):
     df = get_df(fName)
     df_skewness = df.skew()
     s_values = list(df_skewness)
-    skew_values = []
-    for i in s_values:
-        skew_values.append(round(i, 2))
+    # round_off
+    # skew_values = []
+    # for i in s_values:
+    #     skew_values.append(round(i, 2))
     column_name = list(df)
-    skewness_list = zip(column_name, skew_values)
+    skewness_list = zip(column_name, s_values)
 
     return skewness_list
 
@@ -660,11 +667,12 @@ def get_mean(fName):
     df = get_df(fName)
     df_mean = df.mean()
     clm_list = list(df)
-    mean_lst = []
-    for mean_val in df_mean:
-        mean_lst.append(round(mean_val, 2))
+    # round_off
+    # mean_lst = []
+    # for mean_val in df_mean:
+    #     mean_lst.append(round(mean_val, 2))
     percent = get_percent(fName, df_mean)
-    mean_list = zip(clm_list, mean_lst, percent)
+    mean_list = zip(clm_list, df_mean, percent)
     return mean_list
 
 
@@ -674,9 +682,10 @@ def get_median(fName):
     df_median = df.median()
     median_values = list(df_median)
     column_name = list(df)
-    median_list = []
-    for med_val in median_values:
-        median_list.append(round(med_val, 2))
+    # round_off
+    # median_list = []
+    # for med_val in median_values:
+    #     median_list.append(round(med_val, 2))
     percent = get_percent(fName, median_values)
-    med_list = zip(column_name, median_list, percent)
+    med_list = zip(column_name, median_values, percent)
     return med_list

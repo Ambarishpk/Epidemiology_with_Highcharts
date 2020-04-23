@@ -110,7 +110,7 @@
       <!-- Page Content -->
       <div class="mt-5" id="page-content-wrapper">
         <div class="container">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col">
               <div class="card p-5 bg-light shadow-sm rounded corr_card">
                 <div class="text-center text-primary font-weight-bold h4">
@@ -127,7 +127,7 @@
                 {% endfor %}
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="row mt-4">
             <div class="col-3">
               <div class="card p-5 bg-light shadow-sm rounded content-box">
@@ -281,31 +281,7 @@
               </div>
             </div>
           </div>
-          <div class="row text-primary h3 mt-5">Dataset</div>
-          <div class="row mt-3">
-            <div class="card bg-light p-3 rounded dataset_card">
-              <table class="table">
-                <thead class="bg-dark text-white">
-                  <tr>
-                    {% for clm in clm_list %}
-                    <th scope="col">{{clm}}</th>
-                    {% endfor %}
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for value in dataset_values %}
-                  <tr>
-                    {% for ele in value %}
-                    <td>
-                      {{ele}}
-                    </td>
-                    {% endfor %}
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
+         
         </div>
       </div>
       <!-- Page Content Ends Here... -->
