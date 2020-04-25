@@ -110,6 +110,7 @@
       <!-- Page Content Starts-->
       <div class="mt-5" id="page-content-wrapper">
         {% if message %}
+        {% if status == 'Success' %}
         <div
           class="alert alert-success text-center"
           id="msg"
@@ -117,6 +118,15 @@
         >
           <span class="font-weight-bold"> {{status}} ! </span> {{message}}
         </div>
+        {% else %}
+         <div
+          class="alert alert-danger text-center"
+          id="msg"
+          style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
+        >
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
+        </div>
+        {% endif %}
         {% endif %}
 
         <div class="container p-3">
@@ -175,10 +185,10 @@
               {% for clm,val,percent in attr_fill_list %}
               <div class="form-check col-6">
                 {% if percent != 0 %}
-                <input type="checkbox" name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
+                <input type="checkbox"  name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
                 <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
                 {% else %}
-                <input type="checkbox" disabled name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
+                <input type="checkbox"  disabled name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
                 <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
                 {% endif %}
               </div>

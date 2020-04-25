@@ -328,38 +328,47 @@ def AttrFillNanCalc(request, fName):
         selectOption = request.POST.get('fillnaMethods')
 
         selectedCols = request.POST.getlist('attrFillCols')
-        print(selectedCols)
+        print(selectedCols, selectOption)
+        if selectedCols:
+            if selectOption == "fill":
+                fillType = request.POST.get('fillType')
+                print(fillType)
+                # forward fill
+                if fillType == 'ffill':
+                    for col in selectedCols:
+                        df[col].fillna(method=fillType, inplace=True)
+                    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                           'processed/'+fName+'.csv'), index=False)
+                    status = 'Success'
+                    message = 'NaN values of selected columns are filled by Forward method.'
+                # backward fill
+                elif fillType == 'bfill':
+                    for col in selectedCols:
+                        df[col].fillna(method=fillType, inplace=True)
+                    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                           'processed/'+fName+'.csv'), index=False)
+                    status = 'Success'
+                    message = 'NaN values of selected columns are filled bt Backward method.'
 
-        if selectOption == "fill":
-            fillType = request.POST.get('fillType')
-            # forward fill
-            if fillType == 'ffill':
-                for col in selectedCols:
-                    df[col].fillna(method=fillType, inplace=True)
-                status = 'Success'
-                message = 'NaN values of selected columns are filled by Forward method.'
-            # backward fill
-            elif fillType == 'bfill':
-                for col in selectedCols:
-                    df[col].fillna(method=fillType, inplace=True)
-                status = 'Success'
-                message = 'NaN values of selected columns are filled bt Backward method.'
+                else:
+                    pass
 
-            else:
+            elif selectOption == "replace":
+                replaceWord = request.POST.get('replaceBy')
+                print(replaceWord)
+                for col in selectedCols:
+                    df[col].fillna(replaceWord, inplace=True)
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
+                status = 'Success'
+                message = 'NaN values of selected columns are replaced by '+replaceWord
+
+            elif selectOption == "interpolate":
                 pass
 
-        elif selectOption == "replace":
-            replaceWord = request.POST.get('replaceBy')
-            for col in selectedCols:
-                df[col].fillna(replaceWord, inplace=True)
-            status = 'Success'
-            message = 'NaN values of selected columns are replaced by '+replaceWord
-
-        elif selectOption == "interpolate":
-            pass
-
-        df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                               'processed/'+fName+'.csv'), index=False)
+        else:
+            status = 'Alert'
+            message = 'Please Choose atleast one feature for Fill NaN.'
 
         attr_fill = get_NaN(fName)
         nan_percent = get_NaN_percent(fName)
@@ -496,20 +505,20 @@ def LabelEncoding(request, fName):
     df = get_df(fName)
     clm_list = list(df)
     NaN_percent = get_NaN_percent(fName)
-    label_list = []
+    labelling_list = []
     for clm in clm_list:
         dt = df[clm].dtype
         if dt == 'int64' or dt == 'float64':
             pass
         else:
-            label_list.append(clm)
-    labelling_list = []
+            labelling_list.append(clm)
+
     labelled_list = []
     for col_name in clm_list:
         if 'label' in col_name:
             labelled_list.append(col_name)
         else:
-            labelling_list.append(col_name)
+            pass
     context = {
         'fName': fName,
         'labelling_list': labelling_list,
@@ -571,8 +580,8 @@ def LabelEncodingCalc(request, fName):
 
 
 def get_df(fName):
-    data_frame = df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                               'processed/'+fName+'.csv'), encoding='mbcs')
+    data_frame = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                          'processed/'+fName+'.csv'), encoding='mbcs')
 
     return data_frame
 
@@ -596,11 +605,11 @@ def kurtosis(fName):
     df_kurtosis = df.kurt()
     k_values = list(df_kurtosis)
     # round_off
-    # kurt_value = []
-    # for i in k_values:
-    #     kurt_value.append(round(i, 2))
+    kurt_value = []
+    for i in k_values:
+        kurt_value.append(round(i, 2))
     column_name = list(df)
-    kurtosis_list = zip(column_name, k_values)
+    kurtosis_list = zip(column_name, kurt_value)
 
     return kurtosis_list
 
@@ -612,11 +621,11 @@ def skewness(fName):
     df_skewness = df.skew()
     s_values = list(df_skewness)
     # round_off
-    # skew_values = []
-    # for i in s_values:
-    #     skew_values.append(round(i, 2))
+    skew_values = []
+    for i in s_values:
+        skew_values.append(round(i, 2))
     column_name = list(df)
-    skewness_list = zip(column_name, s_values)
+    skewness_list = zip(column_name, skew_values)
 
     return skewness_list
 
@@ -668,11 +677,11 @@ def get_mean(fName):
     df_mean = df.mean()
     clm_list = list(df)
     # round_off
-    # mean_lst = []
-    # for mean_val in df_mean:
-    #     mean_lst.append(round(mean_val, 2))
+    mean_lst = []
+    for mean_val in df_mean:
+        mean_lst.append(round(mean_val, 2))
     percent = get_percent(fName, df_mean)
-    mean_list = zip(clm_list, df_mean, percent)
+    mean_list = zip(clm_list, mean_lst, percent)
     return mean_list
 
 
@@ -683,9 +692,9 @@ def get_median(fName):
     median_values = list(df_median)
     column_name = list(df)
     # round_off
-    # median_list = []
-    # for med_val in median_values:
-    #     median_list.append(round(med_val, 2))
+    median_list = []
+    for med_val in median_values:
+        median_list.append(round(med_val, 2))
     percent = get_percent(fName, median_values)
-    med_list = zip(column_name, median_values, percent)
+    med_list = zip(column_name, median_list, percent)
     return med_list
