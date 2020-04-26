@@ -576,6 +576,65 @@ def LabelEncodingCalc(request, fName):
     return HttpResponse("Error ! Please go back.")
 
 
+def OneHotEncoding(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    oneHot_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            pass
+        else:
+            oneHot_list.append(clm)
+
+    oneHotProcessed_list = []
+    for col_name in clm_list:
+        if 'onehot' in col_name:
+            oneHotProcessed_list.append(col_name)
+        else:
+            pass
+    context = {
+        'fName': fName,
+        'processing_list': oneHot_list,
+        'processed_list': oneHotProcessed_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'OneHotEncoding.html', context)
+
+
+def OneHotEncodingCalc(request, fName):
+    status = request.POST.get('status')
+    df = get_df(fName)
+    clm_list = []
+    all_clm_list = list(df)
+    for single_col in all_clm_list:
+        if df.dtypes[single_col] == 'int64' or df.dtypes[single_col] == 'float64':
+            pass
+        else:
+            clm_list.append(single_col)
+    if request.method == 'POST':
+        selected_col = request.POST.get('one_hot_encoding')
+        drop_column = request.POST.get('drop-column')
+        dummies = pd.get_dummies(df[selected_col])
+        df = pd.concat([df, dummies], axis='columns')
+        if drop_column == 'on':
+            del df[selected_col]
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   fName+'.csv'), index=False)
+        else:
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   fName+'.csv'), index=False)
+    context = {
+        'clm_list': clm_list,
+        'fName': fName,
+        'status': status
+    }
+    return render(request, 'One_Hot_Encoding.html', context)
+
+
 # getting dataframe
 
 
