@@ -47,6 +47,7 @@ urlpatterns = [
         views.LabelEncoding, name="LabelEncoding"),
     url(r'^LabelEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.LabelEncodingCalc, name="LabelEncodingCalc"),
+    # One Hot Encoding
     url(r'^OneHotEncoding/(?P<fName>[-\w.]+\w{0,50})/$',
         views.OneHotEncoding, name="OneHotEncoding"),
     url(r'^OneHotEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',

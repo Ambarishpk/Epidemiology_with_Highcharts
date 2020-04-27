@@ -55,7 +55,11 @@
                   ><i class="fa fa-table fa-sm"></i> Data Exploration
                 </a>
               </li>
-
+              <li>
+                <a href="/Dataset/{{fName}}/" target="_blank"
+                  ><i class="fa fa-table fa-sm"></i> Dataset
+                </a>
+              </li>
               <li
                 data-toggle="collapse"
                 data-target="#service"
@@ -133,17 +137,25 @@
                     ></i
                   ></span>
             <div class="mr-5 text-center text-primary font-weight-bold h4">
-                  Select Features for Fill NaN
+                  Select Features for One-Hot Encode
                 </div>
             {% if NaN_percent == 0 %}
             <form
                 class="form-group mt-5"
-                action="/LabelEncodingCalc/{{fName}}/"
+                action="/OneHotEncodingCalc/{{fName}}/"
                 method="POST"
-                id="labelencodingForm"
+                id="onehotencodingForm"
                 enctype="multipart/form-data"
             >
             {% csrf_token %}
+            <div class="row mb-5">
+                <div class="col-3">
+                    <div class="form-check mt-3">
+                        <input type="checkbox" name="drop-column"  class="form-check-input">
+                        <label class="form-check-label text-capitalize ml-4 small">I agree to delete the column.</>
+                    </div>
+                </div>
+            </div>
             {% if processing_list %}
             <div class="row">
             {% for clm in processing_list %}
@@ -163,7 +175,7 @@
                 
                 <div class="col-md-1">
                 <button  class="btn btn-primary"
-                    >Go</button
+                    >Proceed</button
                 >
                 </div>
             </div>

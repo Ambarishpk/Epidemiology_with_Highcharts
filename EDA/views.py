@@ -204,7 +204,7 @@ def Explore(request, fName):
     # correlation_list = zip(clm_list, corr)
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
-    NaN_list = get_NaN(fName)
+    # NaN_list = get_NaN(fName)
     mean_list = get_mean(fName)
     median_list = get_median(fName)
 
@@ -214,8 +214,8 @@ def Explore(request, fName):
         'skewness_list': skew_list,
         # 'correlation_list': correlation_list,
         'clm_list': clm_list,
-        'NaN_list': NaN_list,
-        'NaN_percent': nan_percent,
+        # 'NaN_list': NaN_list,
+        # 'NaN_percent': nan_percent,
         'mean_list': mean_list,
         'median_list': median_list,
     }
@@ -606,33 +606,43 @@ def OneHotEncoding(request, fName):
 
 
 def OneHotEncodingCalc(request, fName):
-    status = request.POST.get('status')
     df = get_df(fName)
-    clm_list = []
-    all_clm_list = list(df)
-    for single_col in all_clm_list:
-        if df.dtypes[single_col] == 'int64' or df.dtypes[single_col] == 'float64':
-            pass
-        else:
-            clm_list.append(single_col)
     if request.method == 'POST':
-        selected_col = request.POST.get('one_hot_encoding')
+        selected_cols = request.POST.getlist('oneHotCol')
         drop_column = request.POST.get('drop-column')
-        dummies = pd.get_dummies(df[selected_col])
-        df = pd.concat([df, dummies], axis='columns')
-        if drop_column == 'on':
-            del df[selected_col]
-            df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                   fName+'.csv'), index=False)
-        else:
-            df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                   fName+'.csv'), index=False)
-    context = {
-        'clm_list': clm_list,
-        'fName': fName,
-        'status': status
-    }
-    return render(request, 'One_Hot_Encoding.html', context)
+        for selected_col in selected_cols:
+            dummies = pd.get_dummies(df[selected_col], prefix=selected_col)
+            df = pd.concat([df, dummies], axis='columns')
+            if drop_column == 'on':
+                del df[selected_col]
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
+            else:
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
+
+        df_new = get_df(fName)
+        clm_list = list(df_new)
+        NaN_percent = get_NaN_percent(fName)
+        oneHot_list = []
+        for clm in clm_list:
+            dt = df_new[clm].dtype
+            if dt == 'int64' or dt == 'float64':
+                pass
+            else:
+                oneHot_list.append(clm)
+
+        oneHotProcessed_list = selected_cols
+        context = {
+            'fName': fName,
+            'processing_list': oneHot_list,
+            'processed_list': oneHotProcessed_list,
+            'NaN_percent': NaN_percent,
+            'status': 'Success',
+            'message': 'One-Hot Encoding was done on selected features.'
+
+        }
+        return render(request, 'OneHotEncoding.html', context)
 
 
 # getting dataframe
