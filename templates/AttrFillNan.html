@@ -186,7 +186,7 @@
             
           </div>
           <div class="row">
-              {% for clm,val,percent in attr_fill_list %}
+              {% for clm,percent in attr_fill_list %}
               <div class="form-check col-6">
                 {% if percent != 0 %}
                 <input type="checkbox"  name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
@@ -246,7 +246,7 @@
           </div>
           <div class="modal-body">
             <div class="drop-rules mt-1">
-               {% if NaN_percent != 0 %}
+               {% if NaN_percent != 0 and NaN_percent > 0 %}
               <p>
                 Your dataset having
                 <span class="font-weight-bold">{{NaN_percent}}%</span> of NaN
@@ -270,7 +270,7 @@
                 <span class=" font-weight-bold">You need not to do this operation.</span>
               </p>
               {% endif %}
-              {% if NaN_percent != 0 %}
+              {% if NaN_percent != 0 and NaN_percent > 0 %}
               <p class="font-weight-bold mt-5">Note:</p>
               <p>You lose your data while dropping all the NaN values, If your dataset contains >= 35% NaN values.</p>
               {% endif %}

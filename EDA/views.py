@@ -13,28 +13,10 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 def get_NaN_percent(fName):
     df = get_df(fName)
-    featues = []
-    features = df.columns[0:-1]
-    for feature in featues:
-        df[feature] = df[feature].replace(
-            r'\s+', np.nan, regex=True).replace('', np.nan)
-    is_na = df.isna().sum()
-    no_of_NaN = list(is_na)
-    total_Nan = 0
-    for Nan in no_of_NaN:
-        total_Nan += Nan
-    percent = []
-    shape = list(df.shape)
-    no_of_rows = shape[0]
-    no_of_columns = shape[1]
-    for i in no_of_NaN:
-        i = (i/no_of_rows)*100
-        percent.append(round(i, 2))
-    total_NaN_percentage = 0
-    for i in percent:
-        total_NaN_percentage += i
-    NaN_percent = (total_NaN_percentage/no_of_columns)
-    NaN_percent = round(NaN_percent, 2)
+    clm_list = list(df)
+    NaN_percent = (df.isnull().sum() * 100 / len(df)
+                   ).sum() / len(clm_list)
+    NaN_percent = NaN_percent.round(2)
     return NaN_percent
 
 
@@ -81,28 +63,8 @@ def Overview(fName):
     columns = df_shape[1]
 
     # NaN Values
-    featues = []
-    features = df.columns[0:-1]
-    for feature in featues:
-        df[feature] = df[feature].replace(
-            r'\s+', np.nan, regex=True).replace('', np.nan)
-    is_na = df.isna().sum()
-    no_of_NaN = list(is_na)
-    total_Nan = 0
-    for Nan in no_of_NaN:
-        total_Nan += Nan
-    percent = []
-    shape = list(df.shape)
-    no_of_rows = shape[0]
-    no_of_columns = shape[1]
-    for i in no_of_NaN:
-        i = (i/no_of_rows)*100
-        percent.append(round(i, 2))
-    total_NaN_percentage = 0
-    for i in percent:
-        total_NaN_percentage += i
-    NaN_percent = (total_NaN_percentage/no_of_columns)
-    NaN_percent = round(NaN_percent, 2)
+    NaN_percent = get_NaN_percent(fName)
+    total_Nan = (df.isnull().sum(axis=0)).sum()
 
     zippend_list = zip(clm_list, dataType_list)
 
@@ -200,38 +162,50 @@ def Explore(request, fName):
     clm_list = list(df)
 
     # explore
+
     # corr = correlation(fName)
     # correlation_list = zip(clm_list, corr)
+
+    # mean_list = get_mean(fName)
+    # median_list = get_median(fName)
+
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
-    # NaN_list = get_NaN(fName)
-    mean_list = get_mean(fName)
-    median_list = get_median(fName)
+
+    # NaN_Percentage
+    NaN_values = df.isnull().sum(axis=0)
+    NaN_list = get_NaN(fName)
+    NaN_list = NaN_list.round(2)
+    NaN_list_zip = zip(clm_list, NaN_values, NaN_list)
 
     context = {
         'fName': fName,
         'kurtosis_list': kurt_list,
         'skewness_list': skew_list,
-        # 'correlation_list': correlation_list,
         'clm_list': clm_list,
-        # 'NaN_list': NaN_list,
-        # 'NaN_percent': nan_percent,
-        'mean_list': mean_list,
-        'median_list': median_list,
+        'NaN_list': NaN_list_zip,
+        'NaN_percent': nan_percent,
+        # 'correlation_list': correlation_list,
+        # 'mean_list': mean_list,
+        # 'median_list': median_list,
     }
     return render(request, 'Exploration.html', context)
 
 
 def AttrDropNan(request, fName):
-    attr_drop1 = get_NaN(fName)
-    attr_drop2 = get_NaN(fName)
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN(fName)
+
+    drop_nan = zip(clm_list, NaN_percent)
+    drop_col = zip(clm_list, NaN_percent)
 
     nan_percent = get_NaN_percent(fName)
 
     context = {
         'fName': fName,
-        'attr_drop_list': attr_drop1,
-        'attr_drop_col_list': attr_drop2,
+        'attr_drop_list': drop_nan,
+        'attr_drop_col_list': drop_col,
         'NaN_percent': nan_percent,
     }
     return render(request, 'AttrDropNan.html', context)
@@ -239,7 +213,12 @@ def AttrDropNan(request, fName):
 
 def AttrDropNanCalc(request, fName):
     df = get_df(fName)
-    attr_drop = get_NaN(fName)
+
+    clm_list = list(df)
+    NaN_percent = get_NaN(fName)
+    drop_nan = zip(clm_list, NaN_percent)
+    drop_col = zip(clm_list, NaN_percent)
+
     nan_percent = get_NaN_percent(fName)
 
     if request.method == 'POST':
@@ -251,7 +230,8 @@ def AttrDropNanCalc(request, fName):
                                'processed/'+fName+'.csv'), index=False)
         context = {
             'fName': fName,
-            'attr_drop_list': attr_drop,
+            'attr_drop_list': drop_nan,
+            'attr_drop_col_list': drop_col,
             'NaN_percent': nan_percent,
             'status': 'Success',
             'message': "NaN values are dropped."
@@ -266,22 +246,22 @@ def AttrDropColCalc(request, fName):
 
     if request.method == 'POST':
         selected_col = request.POST.getlist('attrDropCompleteCols')
-        # for single_col in selected_col:
-        #     print(single_col)
         df.drop(selected_col, axis=1, inplace=True)
 
         df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                'processed/'+fName+'.csv'), index=False)
 
-        attr_drop = get_NaN(fName)
-        attr_drop_col = get_NaN(fName)
+        clm_list = list(df)
+        NaN_percent = get_NaN(fName)
+        drop_nan = zip(clm_list, NaN_percent)
+        drop_col = zip(clm_list, NaN_percent)
 
         nan_percent = get_NaN_percent(fName)
 
         context = {
             'fName': fName,
-            'attr_drop_list': attr_drop,
-            'attr_drop_col_list': attr_drop_col,
+            'attr_drop_list': drop_nan,
+            'attr_drop_col_list': drop_col,
             'NaN_percent': nan_percent,
             'status': 'Success',
             'message': "Selected columns are dropped."
@@ -308,7 +288,10 @@ def CompleteDropNan(request, fName):
 
 
 def AttrFillNan(request, fName):
-    attr_fill = get_NaN(fName)
+    df = get_df(fName)
+    NaN_percent = get_NaN(fName)
+    clm_list = list(df)
+    attr_fill = zip(clm_list, NaN_percent)
 
     nan_percent = get_NaN_percent(fName)
 
@@ -370,7 +353,10 @@ def AttrFillNanCalc(request, fName):
             status = 'Alert'
             message = 'Please Choose atleast one feature for Fill NaN.'
 
-        attr_fill = get_NaN(fName)
+        NaN_percent = get_NaN(fName)
+        nan_percent = get_NaN_percent(fName)
+        clm_list = list(df)
+        attr_fill = zip(clm_list, NaN_percent)
         nan_percent = get_NaN_percent(fName)
         context = {
             'fName': fName,
@@ -618,8 +604,10 @@ def OneHotEncodingCalc(request, fName):
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                        'processed/'+fName+'.csv'), index=False)
             else:
-                df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                       'processed/'+fName+'.csv'), index=False)
+                # df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                #                        'processed/'+fName+'.csv'), index=False)
+                ans = df[selected_col].value_counts(normalize=True) * 100
+                print(ans.sum())
 
         df_new = get_df(fName)
         clm_list = list(df_new)
@@ -655,28 +643,11 @@ def get_df(fName):
     return data_frame
 
 
-# percentage calculation
-def get_percent(fName, lst):
-    lst_val = lst
-    df = get_df(fName)
-    percent = []
-    shape = list(df.shape)
-    no_of_rows = shape[0]
-    for i in lst_val:
-        i = (i/no_of_rows)*100
-        percent.append(round(i, 2))
-    return percent
-
-
 # Kurtosis
 def kurtosis(fName):
     df = get_df(fName)
-    df_kurtosis = df.kurt()
-    k_values = list(df_kurtosis)
-    # round_off
-    kurt_value = []
-    for i in k_values:
-        kurt_value.append(round(i, 2))
+    df_kurtosis = df.kurt().round(2)
+    kurt_value = list(df_kurtosis)
     column_name = list(df)
     kurtosis_list = zip(column_name, kurt_value)
 
@@ -687,12 +658,8 @@ def kurtosis(fName):
 
 def skewness(fName):
     df = get_df(fName)
-    df_skewness = df.skew()
-    s_values = list(df_skewness)
-    # round_off
-    skew_values = []
-    for i in s_values:
-        skew_values.append(round(i, 2))
+    df_skewness = df.skew().round(2)
+    skew_values = list(df_skewness)
     column_name = list(df)
     skewness_list = zip(column_name, skew_values)
 
@@ -720,50 +687,25 @@ def skewness(fName):
 # NaN Percentage
 def get_NaN(fName):
     df = get_df(fName)
-    NaN_clm_list = list(df)
-    features = df.columns[0:-1]
-    for feature in features:
-        df[feature] = df[feature].replace(
-            r'\s+', np.nan, regex=True).replace('', np.nan)
-    is_na = df.isna().sum()
-    no_of_NaN = list(is_na)
-
-    percent = get_percent(fName, no_of_NaN)
-
-    total_percent = 0
-    for i in percent:
-        total_percent += i
-    shape = list(df.shape)
-    no_of_columns = shape[1]
-
-    NaN_list = zip(NaN_clm_list, no_of_NaN, percent)
+    NaN_list = (df.isnull().sum() * 100 / len(df)).round(2)
     return NaN_list
 
 
 # Mean
 def get_mean(fName):
     df = get_df(fName)
-    df_mean = df.mean()
+    df_mean = df.mean().round(2)
     clm_list = list(df)
-    # round_off
-    mean_lst = []
-    for mean_val in df_mean:
-        mean_lst.append(round(mean_val, 2))
-    percent = get_percent(fName, df_mean)
-    mean_list = zip(clm_list, mean_lst, percent)
+    percent = (df_mean * 100 / len(df)).round(2)
+    mean_list = zip(clm_list, df_mean, percent)
     return mean_list
 
 
 # Median
 def get_median(fName):
     df = get_df(fName)
-    df_median = df.median()
-    median_values = list(df_median)
-    column_name = list(df)
-    # round_off
-    median_list = []
-    for med_val in median_values:
-        median_list.append(round(med_val, 2))
-    percent = get_percent(fName, median_values)
-    med_list = zip(column_name, median_list, percent)
-    return med_list
+    df_median = df.median().round(2)
+    clm_list = list(df)
+    percent = (df_median * 100 / len(df)).round(2)
+    median_list = zip(clm_list, df_median, percent)
+    return median_list
