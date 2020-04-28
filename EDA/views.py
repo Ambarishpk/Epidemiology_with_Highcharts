@@ -32,35 +32,22 @@ def Overview(fName):
     dataType_list = df.dtypes
 
     # numerical and categorical
-    categorical_clms = 0
-    numerical_clms = 0
-    categorical_clms_lst = []
-    numerical_clms_lst = []
-    for clm in clm_list:
-        dt = df[clm].dtype
-        if dt == 'object':
-            categorical_clms += 1
-            categorical_clms_lst.append(clm)
-        else:
-            numerical_clms += 1
-            numerical_clms_lst.append(clm)
-
-    if len(categorical_clms_lst) <= 0:
+    numerical_clms_lst = df._get_numeric_data().columns
+    numerical_clms = len(numerical_clms_lst)
+    categorical_clms_lst = list(set(list(df)) - set(numerical_clms_lst))
+    categorical_clms = len(categorical_clms_lst)
+    if categorical_clms <= 0:
         categorical_msg = "Categorical Features Does Not Exits"
     else:
         categorical_msg = ""
-
-    if len(numerical_clms_lst) <= 0:
-        numerical_msg = "Numerical Columns Not Exits"
+    if numerical_clms <= 0:
+        numerical_msg = "Numerical Features Does Not Exits"
     else:
         numerical_msg = ""
 
     # No of rows and columns
-
-    shape = df.shape
-    df_shape = list(shape)
-    rows = df_shape[0]
-    columns = df_shape[1]
+    rows = len(df.index)
+    columns = len(list(df))
 
     # NaN Values
     NaN_percent = get_NaN_percent(fName)
@@ -71,13 +58,13 @@ def Overview(fName):
     context = {
         'fName': fName,
         'fSize': fileSize,
+        'rows': rows,
+        'columns': columns,
         'zip': zippend_list,
         'total_NaN': total_Nan,
         'NaN_percent': NaN_percent,
         'categorical': categorical_clms,
         'numerical': numerical_clms,
-        'rows': rows,
-        'columns': columns,
         'cat_list': categorical_clms_lst,
         'num_list': numerical_clms_lst,
         'cat_msg': categorical_msg,
@@ -647,10 +634,9 @@ def get_df(fName):
 def kurtosis(fName):
     df = get_df(fName)
     df_kurtosis = df.kurt().round(2)
-    kurt_value = list(df_kurtosis)
     column_name = list(df)
-    kurtosis_list = zip(column_name, kurt_value)
-
+    kurtosis_list = zip(column_name, df_kurtosis)
+    print(df_kurtosis)
     return kurtosis_list
 
 # Skewness
@@ -659,9 +645,8 @@ def kurtosis(fName):
 def skewness(fName):
     df = get_df(fName)
     df_skewness = df.skew().round(2)
-    skew_values = list(df_skewness)
     column_name = list(df)
-    skewness_list = zip(column_name, skew_values)
+    skewness_list = zip(column_name, df_skewness)
 
     return skewness_list
 
