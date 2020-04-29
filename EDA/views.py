@@ -98,6 +98,12 @@ def Upload(request):
             else:
                 fs.save('processed/'+fullName, uploaded_file)
                 fs.save('original/'+fullName, uploaded_file)
+                df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                              'processed/'+fName+'.csv'), encoding='mbcs')
+                df = df.replace(to_replace="?",
+                                value="nan")
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
                 context = Overview(fName)
                 return render(request, 'index.html', context)
         else:
@@ -298,11 +304,11 @@ def AttrFillNanCalc(request, fName):
         selectOption = request.POST.get('fillnaMethods')
 
         selectedCols = request.POST.getlist('attrFillCols')
-        print(selectedCols, selectOption)
+        # print(selectedCols, selectOption)
         if selectedCols:
             if selectOption == "fill":
                 fillType = request.POST.get('fillType')
-                print(fillType)
+                # print(fillType)
                 # forward fill
                 if fillType == 'ffill':
                     for col in selectedCols:
@@ -325,7 +331,7 @@ def AttrFillNanCalc(request, fName):
 
             elif selectOption == "replace":
                 replaceWord = request.POST.get('replaceBy')
-                print(replaceWord)
+                # print(replaceWord)
                 for col in selectedCols:
                     df[col].fillna(replaceWord, inplace=True)
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
@@ -424,11 +430,11 @@ def BinningCalc(request, fName):
                 bins.append(i)
             if Max not in bins:
                 bins.append(Max)
-            print(bins)
+            # print(bins)
             l1 = len(bins)
             for j in range(1, l1):
                 labels.append(j)
-            print(labels)
+            # print(labels)
             new_col = selected_col+' bins'
             df[new_col] = pd.cut(df[selected_col], bins=bins,
                                  labels=labels, include_lowest=True)
@@ -595,7 +601,7 @@ def OneHotEncodingCalc(request, fName):
                 # df.to_csv(os.path.join(settings.MEDIA_ROOT,
                 #                        'processed/'+fName+'.csv'), index=False)
                 ans = df[selected_col].value_counts(normalize=True) * 100
-                print(ans.sum())
+                # print(ans.sum())
 
         df_new = get_df(fName)
         clm_list = list(df_new)
