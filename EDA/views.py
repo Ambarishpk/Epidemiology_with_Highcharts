@@ -567,6 +567,7 @@ def OneHotEncoding(request, fName):
             oneHotProcessed_list.append(col_name)
         else:
             pass
+
     context = {
         'fName': fName,
         'processing_list': oneHot_list,
@@ -619,6 +620,60 @@ def OneHotEncodingCalc(request, fName):
         }
         return render(request, 'OneHotEncoding.html', context)
 
+
+def CountFrequencyEncoding(request, fName):
+    df = get_df(fName)
+    NaN_percent = get_NaN_percent(fName)
+    clm_list = list(df)
+
+    CF_Processed_list = []
+    for col_name in clm_list:
+        if 'cf' in col_name:
+            CF_Processed_list.append(col_name)
+        else:
+            pass
+    CF_list = list(set(clm_list) - set(CF_Processed_list))
+    context = {
+        'fName': fName,
+        'cf_processing_list': CF_list,
+        'cf_processed_list': CF_Processed_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'CountFrequencyEncoding.html', context)
+
+
+def CountFrequencyEncodingCalc(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    if request.method == 'POST':
+        selected_cols = request.POST.getlist('CFCol')
+        for selected_col in selected_cols:
+            df_frequency_map = df[selected_col].value_counts().to_dict()
+            df[selected_col+' cf'] = df[selected_col].map(df_frequency_map)
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
+        df_new = get_df(fName)
+        NaN_percent = get_NaN_percent(fName)
+        clm_list_2 = list(df_new)
+        NaN_percent = get_NaN_percent(fName)
+        CF_Processed_list = []
+        for col_name in clm_list_2:
+            if 'cf' in col_name:
+                CF_Processed_list.append(col_name)
+            else:
+                pass
+        CF_list = list(set(clm_list_2) - set(CF_Processed_list))
+        context = {
+            'fName': fName,
+            'cf_processing_list': CF_list,
+            'cf_processed_list': CF_Processed_list,
+            'NaN_percent': NaN_percent,
+            'status': 'Success',
+            'message': 'Count Frequency Encoding was done on selected features.'
+        }
+        return render(request, 'CountFrequencyEncoding.html', context)
 
 # getting dataframe
 

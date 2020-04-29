@@ -52,4 +52,9 @@ urlpatterns = [
         views.OneHotEncoding, name="OneHotEncoding"),
     url(r'^OneHotEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.OneHotEncodingCalc, name="OneHotEncodingCalc"),
+    # Count Frequency Encoding
+    url(r'^CountFrequencyEncoding/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.CountFrequencyEncoding, name="CountFrequencyEncoding"),
+    url(r'^CountFrequencyEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.CountFrequencyEncodingCalc, name="CountFrequencyEncodingCalc"),
 ]

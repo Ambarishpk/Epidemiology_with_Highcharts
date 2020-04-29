@@ -70,14 +70,14 @@
                   <span class="arrow"></span
                 ></a>
               </li>
-              <ul class="sub-menu " id="service">
+              <ul class="sub-menu collapse" id="service">
                 <li>
                   <a data-toggle="modal" data-target="#myModal"
                     >Complete Drop NaN</a
                   >
                 </li>
                 <li><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
-                <li class="active"><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
+                <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
               </ul>
 
               <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -86,11 +86,11 @@
                   <span class="arrow"></span
                 ></a>
               </li>
-              <ul class="sub-menu collapse" id="new">
+              <ul class="sub-menu ">
                 <li><a href="/Binning/{{fName}}/">Binning</a></li>
                 <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
                 <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
-                <li><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
+                <li class="active"><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
 
               </ul>
 
@@ -116,7 +116,6 @@
       <!-- Page Content Starts-->
       <div class="mt-5" id="page-content-wrapper">
         {% if message %}
-        {% if status == 'Success' %}
         <div
           class="alert alert-success text-center"
           id="msg"
@@ -124,15 +123,6 @@
         >
           <span class="font-weight-bold"> {{status}} ! </span> {{message}}
         </div>
-        {% else %}
-         <div
-          class="alert alert-danger text-center"
-          id="msg"
-          style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
-        >
-          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
-        </div>
-        {% endif %}
         {% endif %}
 
         <div class="container p-3">
@@ -142,76 +132,80 @@
                     data-toggle="tooltip"
                     data-placement="top"
                     id="tooltip"
-                    title="Inelligible features are disabled"
+                    title="Count Frequency Encoding performs on all Features"
                     ><i
                       class="fa fa-info-circle text-info"
                       aria-hidden="true"
                     ></i
                   ></span>
             <div class="mr-5 text-center text-primary font-weight-bold h4">
-                  Select Features for Fill NaN
+                  Select Features for Count Frequency Encode
                 </div>
-         <form
-            class="form-group mt-5"
-            action="/AttrFillNanCalc/{{fName}}/"
-            method="POST"
-            id="attrFillNaNForm"
-            enctype="multipart/form-data"
-          >
-          {% csrf_token %}
-          <div class="row mb-5">
-            <div class="col-3">
-              <div class="form-group">
-                <select class="form-control form-control-lg" name="fillnaMethods" onchange="myFunction()" id="mySelect">
-                  <option selected disabled>Choose</option>
-                  <option value="fill">Fill</option>
-                  <option value="interpolate">Interpolate</option>
-                  <option value="replace">Replace</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-3" style="display:none;" id="fill">
-              <div class="form-group">
-                <select class="form-control form-control-lg" name="fillType"  onchange="myFunction()" id="mySelect">
-                  <option selected disabled>Choose</option>
-                  <option value="ffill">forword fill</option>
-                  <option value="bfill">backword fill</option>
-                  <option value="pad">pad</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-3" style="display:none;"  id="replace_by">
-              <div class="form-group">
-                <input type="text" name="replaceBy"  placeholder="Find" class="form-control form-control-lg">
-              </div>
-            </div>
+            {% if NaN_percent == 0 %}
+            <form
+                class="form-group mt-5"
+                action="/CountFrequencyEncodingCalc/{{fName}}/"
+                method="POST"
+                id="cfencodingForm"
+                enctype="multipart/form-data"
+            >
+            {% csrf_token %}
             
-          </div>
-          <div class="row">
-              {% for clm,percent in attr_fill_list %}
+            {% if cf_processing_list %}
+            <div class="row">
+            {% for clm in cf_processing_list %}
               <div class="form-check col-6">
-                {% if percent != 0 %}
-                <input type="checkbox"  name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
-                <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
+                {% if NaN_percent == 0 %}
+                <input type="checkbox" name="CFCol" value="{{clm}}" class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" for="CFCol">{{clm}}</>
                 {% else %}
-                <input type="checkbox"  disabled name="attrFillCols" value="{{clm}}" class="form-check-input ml-5 col">
-                <label class="form-check-label col-6 text-capitalize" for="attrFillCol">{{clm}} (<span class="text-danger"> {{percent}} %</span> )</>
+                <input hidden type="checkbox" disabled value="" class="form-check-input ml-5 col">
+                <label hidden class="form-check-label col-6 text-capitalize"></>
                 {% endif %}
               </div>
-              {% endfor %}
-          </div>
-          <div class="row mt-5">
-            <div class="col-md-9"></div>
-            
-             <div class="col-md-1">
-              <button  class="btn btn-primary"
-                >Fill</button
-              >
+            {% endfor %}
             </div>
-          </div>
-          </form>
+            <div class="row mt-5">
+                <div class="col-md-9"></div>
+                
+                <div class="col-md-1">
+                <button  class="btn btn-primary"
+                    >Proceed</button
+                >
+                </div>
+            </div>
+            {% else %}
+            <div class="row mt-5">
+              <div class="col mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">No Features Are Exits</h5>
+            </div>
+            </div>
+            {% endif %}
+            
+            </form>
+            {% else%}
+            <div class="mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">Your Dataset Have NaN Values</h5>
+            </div>
+            {% endif %}
           </div>
         </div>
+        {% if cf_processed_list %}
+        <div class="container p-3">
+           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
+          <div class="row">
+            <h5 class="text-primary font-weight-bold">Count Frequency Encoded Features:</h5>
+          </div>
+          <div class="row">
+            {% for col in cf_processed_list %}
+            <div class="col-3 mt-2">
+              <label class="form-check-label text-capitalize">{{col}}</>
+            </div>
+              {% endfor %}
+            </div>
+        </div>
+        </div>
+        {% endif %}
         <div class="container p-3 mt-4">
           <div class="row">
             <h5 class="text-danger font-weight-bold">Suggesstions:</h5>
@@ -248,7 +242,7 @@
           </div>
           <div class="modal-body">
             <div class="drop-rules mt-1">
-               {% if NaN_percent != 0 and NaN_percent > 0 %}
+               {% if NaN_percent != 0 %}
               <p>
                 Your dataset having
                 <span class="font-weight-bold">{{NaN_percent}}%</span> of NaN
@@ -272,7 +266,7 @@
                 <span class=" font-weight-bold">You need not to do this operation.</span>
               </p>
               {% endif %}
-              {% if NaN_percent != 0 and NaN_percent > 0 %}
+              {% if NaN_percent != 0 %}
               <p class="font-weight-bold mt-5">Note:</p>
               <p>You lose your data while dropping all the NaN values, If your dataset contains >= 35% NaN values.</p>
               {% endif %}
@@ -325,29 +319,17 @@
           $("#msg").remove();
         }
       }, 3000);
+
     </script>
 
     <!-- Attrwise Fill NaN Scripts -->
 
     <script>
       function myFunction() {
-        var x = document.getElementById("mySelect").value;
-        if (x == "fill") {
-          document.getElementById("fill").style.display = "block";
-          document.getElementById("replace_by").style.display = "none";
-          
-        } else if (x == "interpolate") {
-          document.getElementById("fill").style.display = "none";
-          document.getElementById("replace_by").style.display = "none";
-          
-        } else if (x == "replace") {
-          document.getElementById("fill").style.display = "none";
-          document.getElementById("replace_by").style.display = "block";
-          
+        if (document.getElementById("rangeChoice").checked == true) {
+          document.getElementById("range").style.display = "block";
         } else {
-          document.getElementById("fill").style.display = "none";
-          document.getElementById("replace_by").style.display = "none";
-         
+          document.getElementById("range").style.display = "none";
         }
       }
     </script>
