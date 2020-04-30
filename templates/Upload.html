@@ -71,10 +71,24 @@
             Epidemiology Data Analytics
           </h3>
         </div>
-        {% if message %}
-        <div class="alert alert-danger text-center" id="msg" style="margin-left:10%;margin-top:2%;margin-right:5%;">
-             <span class="font-weight-bold"> {{message}}</span>
+         {% if message %}
+        {% if status == 'Success' %}
+        <div
+          class="alert alert-success text-center"
+          id="msg"
+          style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
+        >
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
         </div>
+        {% else %}
+         <div
+          class="alert alert-danger text-center"
+          id="msg"
+          style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
+        >
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
+        </div>
+        {% endif %}
         {% endif %}
         <div class="container p-3 mt-3">
           <div class="row mt-3">

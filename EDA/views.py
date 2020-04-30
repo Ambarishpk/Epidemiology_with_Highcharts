@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
@@ -109,7 +109,7 @@ def Upload(request):
         else:
             context = {
                 'fName': fName,
-                'status': 'Error !',
+                'status': 'Error',
                 'message': 'Please upload .csv files'
             }
             return render(request, 'Upload.html', context)
@@ -274,7 +274,7 @@ def CompleteDropNan(request, fName):
                            'processed/'+fName+'.csv'), index=False)
 
     context = Overview(fName)
-    context['status'] = 'Success !'
+    context['status'] = 'Success'
     context['message'] = 'All the NaN values are dropped'
 
     return render(request, 'index.html', context)
@@ -757,3 +757,34 @@ def get_median(fName):
     percent = (df_median * 100 / len(df)).round(2)
     median_list = zip(clm_list, df_median, percent)
     return median_list
+
+
+# Download Processed Dataset
+def DownloadProcessed(request, fName):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(
+                fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + \
+                os.path.basename(file_path)
+            return response
+    raise Http404
+
+# Remove Dataset
+
+
+def RemoveDataset(request, fName):
+    original_file_path = os.path.join(
+        settings.MEDIA_ROOT, 'original/'+fName+'.csv')
+    processed_file_path = os.path.join(
+        settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
+    if os.path.exists(original_file_path and processed_file_path):
+        os.remove(original_file_path)
+        os.remove(processed_file_path)
+    context = {
+        'status': 'Success',
+        'message': 'Dataset Removed Successfully.'
+    }
+
+    return render(request, 'Upload.html', context)

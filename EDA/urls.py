@@ -57,4 +57,16 @@ urlpatterns = [
         views.CountFrequencyEncoding, name="CountFrequencyEncoding"),
     url(r'^CountFrequencyEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.CountFrequencyEncodingCalc, name="CountFrequencyEncodingCalc"),
+
+
+
+
+    # Download Processed
+    url(r'^DownloadProcessed/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.DownloadProcessed, name="DownloadProcessed"),
+
+    # Remove Processed
+    url(r'^RemoveDataset/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.RemoveDataset, name="RemoveDataset"),
+
 ]

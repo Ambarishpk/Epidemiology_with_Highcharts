@@ -100,12 +100,17 @@
               </li>
 
               <li>
-                <a href="#"> <i class="fa fa-download fa-sm"></i> Download </a>
+                <a href="/DownloadProcessed/{{fName}}/"> <i class="fa fa-download fa-sm"></i> Download </a>
               </li>
 
               <li>
                 <a href="/">
                   <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                </a>
+              </li>
+              <li>
+                <a href="/RemoveDataset/{{fName}}/">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i> Remove Your Dataset
                 </a>
               </li>
             </ul>
@@ -119,14 +124,24 @@
             Overview of Your Dataset{{test}}
           </h2>
         </div>
-        {% if message %}
+         {% if message %}
+        {% if status == 'Success' %}
         <div
           class="alert alert-success text-center"
           id="msg"
           style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
         >
-          <span class="font-weight-bold"> {{message}}</span>
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
         </div>
+        {% else %}
+         <div
+          class="alert alert-danger text-center"
+          id="msg"
+          style="margin-left: 10%; margin-top: 2%; margin-right: 5%;"
+        >
+          <span class="font-weight-bold"> {{status}} ! </span> {{message}}
+        </div>
+        {% endif %}
         {% endif %}
 
         <div class="container p-5">
