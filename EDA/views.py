@@ -694,20 +694,22 @@ def get_df(fName):
 # Kurtosis
 def kurtosis(fName):
     df = get_df(fName)
-    df_kurtosis = df.kurt().round(2)
-    column_name = list(df)
-    kurtosis_list = zip(column_name, df_kurtosis)
-    print(df_kurtosis)
+    df_kurtosis = df.kurt(axis=None, skipna=True).round(2)
+    df_kurtosis_dict = df_kurtosis.to_dict()
+    col = df_kurtosis_dict.keys()
+    val = df_kurtosis_dict.values()
+    kurtosis_list = zip(col, val)
     return kurtosis_list
-
 # Skewness
 
 
 def skewness(fName):
     df = get_df(fName)
     df_skewness = df.skew().round(2)
-    column_name = list(df)
-    skewness_list = zip(column_name, df_skewness)
+    df_skewness_dict = df_skewness.to_dict()
+    col = df_skewness_dict.keys()
+    val = df_skewness_dict.values()
+    skewness_list = zip(col, val)
 
     return skewness_list
 
