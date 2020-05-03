@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,8 +25,77 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="{% static 'css/dataset.css' %}" />
   </head>
   <body class="p-5" style="overflow: auto; width: 100vw; height: 100vh;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <a
+        class="navbar-brand font-weight-bold font-italic text-monospace"
+        href="#"
+        >Epidemiology</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="dropdown">
+          <button
+            type="button"
+            class="btn btn-sm btn-info dropdown-toggle text-dark"
+            data-toggle="dropdown"
+          >
+            Columns
+          </button>
+          <div class="dropdown-menu">
+            <div
+              class="card shadow-none bg-white"
+              style="
+                width: 20rem;
+                height: 20rem;
+                overflow-y: auto;
+                overflow-x: hidden;
+              "
+            ><form class="form-group ml-3" name="column_form" id="dataset_colm" action="/Dataset/{{fName}}/" method="POST">
+              {% csrf_token %}
+              <div class="card-body">
+                {% for col in clm_list %}
+                <div class="col-list row">
+                  <div class="col-8 checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-custom"
+                      name=""
+                      id=""
+                    /><span
+                      class="form-check-label text-capitalize text-primary"
+                    >
+                      {{col}}</span
+                    >
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="card p-2 ml-3 mr-3 shadow-none">
+              <div class="row">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col"><button class="btn btn-sm btn-success rounder">Apply</button></div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div class="table-responsive text-nowrap">
       <!--Table-->
       <table class="table table-striped">

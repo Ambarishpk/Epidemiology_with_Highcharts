@@ -137,12 +137,14 @@ def Visualize(request, fName):
 def Dataset(request, fName):
     df = get_df(fName)
     clm_list = list(df)
-    values = df.head(2000).values
+    values = df.head(5).values
     context = {
         'fName': fName,
         'clm_list': clm_list,
         'values': values,
     }
+    if request.method == "POST":
+        return HttpResponse("Wooo Hooo its workind...")
     return render(request, 'Dataset.html', context)
 
 
@@ -598,8 +600,8 @@ def OneHotEncodingCalc(request, fName):
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                        'processed/'+fName+'.csv'), index=False)
             else:
-                # df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                #                        'processed/'+fName+'.csv'), index=False)
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
                 ans = df[selected_col].value_counts(normalize=True) * 100
                 # print(ans.sum())
 
