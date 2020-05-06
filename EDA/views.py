@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import redirect
 from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
 import os
 import csv
@@ -105,6 +106,8 @@ def Upload(request):
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                        'processed/'+fName+'.csv'), index=False)
                 context = Overview(fName)
+                context['status'] = 'Success'
+                context['message'] = 'Dataset Uploaded Successfully'
                 return render(request, 'index.html', context)
         else:
             context = {
@@ -137,14 +140,25 @@ def Visualize(request, fName):
 def Dataset(request, fName):
     df = get_df(fName)
     clm_list = list(df)
-    values = df.head(5).values
+    values = df.values
+    print(len(values))
+    paginator = Paginator(values, 200)
+    page = request.GET.get('page', 1)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+
     context = {
         'fName': fName,
         'clm_list': clm_list,
-        'values': values,
+        'values': data,
     }
     if request.method == "POST":
-        return HttpResponse("Wooo Hooo its workind...")
+        selected_cols = request.POST.getlist("table-cols")
+        return HttpResponse(len(selected_cols))
     return render(request, 'Dataset.html', context)
 
 
