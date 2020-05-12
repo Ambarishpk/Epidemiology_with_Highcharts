@@ -60,6 +60,7 @@ urlpatterns = [
 
 
 
+
     # Download Processed
     url(r'^DownloadProcessed/(?P<fName>[-\w.]+\w{0,50})/$',
         views.DownloadProcessed, name="DownloadProcessed"),
@@ -67,5 +68,12 @@ urlpatterns = [
     # Remove Processed
     url(r'^RemoveDataset/(?P<fName>[-\w.]+\w{0,50})/$',
         views.RemoveDataset, name="RemoveDataset"),
+
+
+    url(r'^api/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.fetchDataset, name="fetchDataset"),
+
+
+
 
 ]

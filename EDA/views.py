@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import redirect
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.core.files.storage import FileSystemStorage
 import os
 import csv
 import pandas as pd
+from pandas import DataFrame
 import numpy as np
 import sklearn
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -133,6 +135,7 @@ def Visualize(request, fName):
     context = {
         'fName': fName,
         'NaN_percent': nan_percent,
+        'data': [10, 20, 30, 40, 50, 60],
     }
     return render(request, 'Visualize.html', context)
 
@@ -141,7 +144,7 @@ def Dataset(request, fName):
     df = get_df(fName)
     clm_list = list(df)
     values = df.values
-    print(len(values))
+
     paginator = Paginator(values, 200)
     page = request.GET.get('page', 1)
     try:
@@ -154,11 +157,10 @@ def Dataset(request, fName):
     context = {
         'fName': fName,
         'clm_list': clm_list,
+        'for_filter': list(df),
         'values': data,
     }
-    if request.method == "POST":
-        selected_cols = request.POST.getlist("table-cols")
-        return HttpResponse(len(selected_cols))
+
     return render(request, 'Dataset.html', context)
 
 
@@ -804,3 +806,18 @@ def RemoveDataset(request, fName):
     }
 
     return render(request, 'Upload.html', context)
+
+
+def fetchDataset(request, fName):
+    df = get_df(fName)
+    labels = list(df)
+    chartLabel = fName
+    skew_chartdata = list(df.skew().round(2))
+    kurt_chartdata = list(df.kurt().round(2))
+    data = {
+        "labels": labels,
+        "chartLabel": chartLabel,
+        "skew_chartdata": skew_chartdata,
+        "kurt_chartdata": kurt_chartdata,
+    }
+    return JsonResponse(data)

@@ -52,7 +52,7 @@
                 overflow-y: auto;
                 overflow-x: hidden;
               "
-            ><form class="form-group ml-3" name="column_form" id="dataset_colm" action="/Dataset/{{fName}}/" method="POST">
+            ><form class="form-group ml-3" name="column_form" id="dataset_colm" action="/Filtered_Dataset/{{fName}}/" method="POST">
               {% csrf_token %}
               <div class="card-body">
                 {% for col in clm_list %}
@@ -62,7 +62,7 @@
                       type="checkbox"
                       class="checkbox-custom"
                       name="table-cols"
-                      id=""
+                      value="{{col}}"
                     /><span
                       class="form-check-label text-capitalize text-primary"
                     >
@@ -99,7 +99,7 @@
             {% for i in values.paginator.page_range %}
               {% if values.number == i %}
                 <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a><span class="sr-only">(current)</span></li>
-              {% elif i > values.number|add:-3 and i < values.number|add:3 %}
+              {% elif i > values.number|add:-5 and i < values.number|add:5 %}
                 <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
               {% endif %}
             {% endfor %}
@@ -108,13 +108,13 @@
             {% else %}
               <li class="page-item disabled"><a class="page-link">Next</a></li>
             {% endif %}
-            <li class="page-item" style="margin-left:70%;">
+            <li class="page-item" style="margin-left:50%;">
               <a class="page-link disabled">Page {{ values.number }} of {{ values.paginator.num_pages }}</a>
             </li>
           </ul>
         {% else %}
           <ul class="pagination justify-content-start">
-            <li class="page-item" style="margin-left:90%;">
+            <li class="page-item" style="margin-left:70%;">
               <a class="page-link disabled">Page {{ values.number }} of {{ values.paginator.num_pages }}</a>
             </li>
           </ul>

@@ -1,0 +1,6 @@
+.visual_card {
+    margin: 5px;
+    width: 60rem;
+    height: 50rem;
+    overflow: auto;
+}

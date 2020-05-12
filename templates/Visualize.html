@@ -20,6 +20,8 @@
     />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
@@ -27,11 +29,15 @@
       id="bootstrap-css"
     />
 
-    <!-- Highcharts links -->
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/data.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- D3 and chart.js -->
+   <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 
     <!-- font awesome icon links -->
     <link
@@ -45,9 +51,11 @@
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/visualization.css' %}" />
   </head>
 
   <body>
+    <input type="text" id="fileName" value={{fName}} hidden>
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <div class="border-right bg-dark text-white" id="sidebar-wrapper">
@@ -146,13 +154,32 @@
         {% endif %}
         <div class="container p-5">
           <!-- data exploration starts -->
-          <h1 class="text-success">Data Features..</h1>
+          <!-- <h1 class="text-success">Data Features..</h1>
+          <form action="/api/{{fName}}/" method="POST">
+            {%  csrf_token %}
+            <input type="text" name="myName"/>
+            <input type="number" name="myAge"/>
+            <button>Go</button>
+          </form> -->
 
-          <div
-            class="container"
-            id="mainChart"
-            style="height: 400px; width: 600px;"
-          ></div>
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="card">
+                  <div class="p-5">Skewness</div>  
+                  <canvas id="skewnessChart" class="visual_card"></canvas>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="card">
+                  <div class="p-5">Kurtosis</div>  
+                  <canvas id="kurtosisChart" class="visual_card"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
           <!-- data exploration ends -->
         </div>
@@ -242,13 +269,101 @@
       id="bootstrap-css"
     />
 
-    <!-- <script src="{% static 'js/chart.js' %}"></script> -->
 
-    <script></script>
+    <script>
+      var fname = "{{fName}}";
 
-    <script></script>
+      var endpoint = '/api/'+fname+'/';
+
+      $.ajax({ 
+        method: "GET",
+        url: endpoint, 
+        success: function(data) { 
+          drawSkewChart(data, 'skewnessChart');
+          drawKurtChart(data, 'kurtosisChart');
+        }, 
+        error: function(error_data) { 
+          console.log("Error"); 
+        } 
+      })
+
+      function drawSkewChart(data, id) { 
+        var labels = data.labels; 
+        var chartLabel = data.chartLabel; 
+        var chartdata = data.skew_chartdata; 
+
+        var ctx = document.getElementById(id).getContext('2d'); 
+        var chart = new Chart(ctx, { 
+          type: 'line', 
+  
+          data: { 
+            labels: labels, 
+            datasets: [{ 
+              label: chartLabel, 
+              data: chartdata, 
+              backgroundColor : '#636EFA',
+              borderColor: '#636EFA',
+            }] 
+          },
+          //options: {
+          //  scales: {
+          //    yAxes: [{
+          //        ticks: {
+          //            fontSize: 10
+          //        }
+          //    }],
+          //    xAxes: [{
+          //        ticks: {
+          //            fontSize: 8
+          //        }
+          //    }]
+          //  }
+          //}
+  
+        }); 
+      } 
+
+      function drawKurtChart(data, id) { 
+        var labels = data.labels; 
+        var chartLabel = data.chartLabel; 
+        var chartdata = data.kurt_chartdata; 
+
+        var ctx = document.getElementById(id).getContext('2d'); 
+        var chart = new Chart(ctx, { 
+          type: 'line', 
+  
+          data: { 
+            labels: labels, 
+            datasets: [{ 
+              label: chartLabel, 
+              data: chartdata, 
+              backgroundColor : '#636EFA',
+              borderColor: '#636EFA',
+            }] 
+          },
+          //options: {
+          //  scales: {
+          //    yAxes: [{
+          //        ticks: {
+          //            fontSize: 10
+          //        }
+          //    }],
+          //    xAxes: [{
+          //        ticks: {
+          //            fontSize: 8
+          //        }
+          //    }]
+          //  }
+          //}
+        }); 
+      }
+
+    </script>
+
+
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
 
     <!-- Menu Toggle Script -->
     <script>
