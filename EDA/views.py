@@ -37,8 +37,19 @@ def Overview(fName):
     # numerical and categorical
     numerical_clms_lst = df._get_numeric_data().columns
     numerical_clms = len(numerical_clms_lst)
-    categorical_clms_lst = list(set(list(df)) - set(numerical_clms_lst))
+    remaining_clms_lst = list(set(list(df)) - set(numerical_clms_lst))
+
+    categorical_clms_lst = []
+    date_time_clms_lst = []
+    for i in remaining_clms_lst:
+        if df[i].dtypes == 'object':
+            categorical_clms_lst.append(i)
+        else:
+            date_time_clms_lst.append(i)
+
     categorical_clms = len(categorical_clms_lst)
+    date_time_clms = len(date_time_clms_lst)
+
     if categorical_clms <= 0:
         categorical_msg = "Categorical Features Does Not Exits"
     else:
@@ -47,6 +58,10 @@ def Overview(fName):
         numerical_msg = "Numerical Features Does Not Exits"
     else:
         numerical_msg = ""
+    if date_time_clms <= 0:
+        date_time_msg = "Date-Time Features Does Not Exits"
+    else:
+        date_time_msg = ""
 
     # No of rows and columns
     rows = len(df.index)
@@ -68,10 +83,13 @@ def Overview(fName):
         'NaN_percent': NaN_percent,
         'categorical': categorical_clms,
         'numerical': numerical_clms,
+        'datetime': date_time_clms,
         'cat_list': categorical_clms_lst,
         'num_list': numerical_clms_lst,
+        'date_time_list': date_time_clms_lst,
         'cat_msg': categorical_msg,
         'num_msg': numerical_msg,
+        'date_time_msg': date_time_msg,
     }
 
     return context
@@ -810,6 +828,7 @@ def RemoveDataset(request, fName):
 
 def fetchDataset(request, fName):
     df = get_df(fName)
+    df.info()
     labels = list(df)
     chartLabel = fName
     skew_chartdata = list(df.skew().round(2))

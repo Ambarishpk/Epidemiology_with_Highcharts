@@ -146,7 +146,7 @@
 
         <div class="container p-5">
           <div class="row">
-            <div class="col-4">
+            <div class="col-3">
               <div class="card p-5 shadow-lg rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Properties
@@ -182,19 +182,25 @@
                 </div>
                 <div>
                   <h5>
-                    <span class="content-title"> Categorical Columns:</span>
+                    <span class="content-title"> Categorical :</span>
                     {{categorical}}
                   </h5>
                 </div>
                 <div>
                   <h5>
-                    <span class="content-title">Numerical Columns:</span>
+                    <span class="content-title">Numerical :</span>
                     {{numerical}}
+                  </h5>
+                </div>
+                <div>
+                  <h5>
+                    <span class="content-title">Date-time :</span>
+                    {{datetime}}
                   </h5>
                 </div>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <div class="card p-5 shadow-lg rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Categorical
@@ -212,7 +218,7 @@
                 {% endif %}
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <div class="card p-5 shadow-lg rounded content-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Numerical
@@ -225,6 +231,23 @@
                 {% endfor %} {% else %}
                 <div class="text-capitalize text-center text-secondary">
                   {{num_msg}}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="card p-5 shadow-lg rounded content-box">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Date-Time
+                </div>
+                <hr />
+                {% if date_time_msg == "" %} {% for date_time_data in date_time_list %}
+                <ul>
+                  <li class="text-capitalize">{{ date_time_data }}</li>
+                </ul>
+                {% endfor %} {% else %}
+                <div class="text-capitalize text-center text-secondary">
+                  {{date_time_msg}}
                 </div>
                 {% endif %}
               </div>
