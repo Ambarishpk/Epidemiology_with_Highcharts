@@ -75,5 +75,10 @@ urlpatterns = [
 
 
 
+    url(r'^ChangeDtypeColumn/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.ChangeDtype, name="ChangeDtype"),
+
+
+
 
 ]

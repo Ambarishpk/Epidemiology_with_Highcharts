@@ -24,31 +24,35 @@ def get_NaN_percent(fName):
 
 
 def Overview(fName):
+
     df = get_df(fName)
+
     file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     statInfo = os.stat(file_path)
     fileSize = statInfo.st_size
     fileSize = fileSize // 1000
     clm_list = list(df)
 
+    df.info()
+
     # datatype
     dataType_list = df.dtypes
 
-    # numerical and categorical
-    numerical_clms_lst = df._get_numeric_data().columns
-    numerical_clms = len(numerical_clms_lst)
-    remaining_clms_lst = list(set(list(df)) - set(numerical_clms_lst))
-
     categorical_clms_lst = []
     date_time_clms_lst = []
-    for i in remaining_clms_lst:
-        if df[i].dtypes == 'object':
-            categorical_clms_lst.append(i)
-        else:
+    numerical_clms_lst = []
+
+    for i in clm_list:
+        if df[i].dtypes == 'datetime64[ns]':
             date_time_clms_lst.append(i)
+        elif df[i].dtypes == 'int64' or df[i].dtypes == 'float64':
+            numerical_clms_lst.append(i)
+        else:
+            categorical_clms_lst.append(i)
 
     categorical_clms = len(categorical_clms_lst)
     date_time_clms = len(date_time_clms_lst)
+    numerical_clms = len(numerical_clms_lst)
 
     if categorical_clms <= 0:
         categorical_msg = "Categorical Features Does Not Exits"
@@ -77,6 +81,7 @@ def Overview(fName):
         'fName': fName,
         'fSize': fileSize,
         'rows': rows,
+        'clm_list': clm_list,
         'columns': columns,
         'zip': zippend_list,
         'total_NaN': total_Nan,
@@ -113,22 +118,21 @@ def Upload(request):
                 settings.MEDIA_ROOT, 'processed/'+fullName)
 
             if os.path.exists(file_path1 and file_path2):
-                context = Overview(fName)
-                return render(request, 'index.html', context)
+                os.remove(file_path1)
+                os.remove(file_path2)
 
-            else:
-                fs.save('processed/'+fullName, uploaded_file)
-                fs.save('original/'+fullName, uploaded_file)
-                df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
-                                              'processed/'+fName+'.csv'), encoding='mbcs')
-                df = df.replace(to_replace="?",
-                                value="nan")
-                df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                       'processed/'+fName+'.csv'), index=False)
-                context = Overview(fName)
-                context['status'] = 'Success'
-                context['message'] = 'Dataset Uploaded Successfully'
-                return render(request, 'index.html', context)
+            fs.save('processed/'+fullName, uploaded_file)
+            fs.save('original/'+fullName, uploaded_file)
+            df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                          'processed/'+fName+'.csv'), encoding='mbcs')
+            df = df.replace(to_replace="?",
+                            value="nan")
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
+            context = Overview(fName)
+            context['status'] = 'Success'
+            context['message'] = 'Dataset Uploaded Successfully'
+            return render(request, 'index.html', context)
         else:
             context = {
                 'fName': fName,
@@ -828,7 +832,6 @@ def RemoveDataset(request, fName):
 
 def fetchDataset(request, fName):
     df = get_df(fName)
-    df.info()
     labels = list(df)
     chartLabel = fName
     skew_chartdata = list(df.skew().round(2))
@@ -840,3 +843,46 @@ def fetchDataset(request, fName):
         "kurt_chartdata": kurt_chartdata,
     }
     return JsonResponse(data)
+
+
+def ChangeDtype(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    dtype_list = df.dtypes
+    changeDt_list = zip(clm_list, dtype_list)
+    # Datatype Conversions
+    if request.method == 'POST':
+        customDataType = request.POST.get('datatype')
+        selectedColumns = request.POST.getlist('selectedColumnsDt')
+
+        if customDataType == 'datetime':
+            for col in selectedColumns:
+                df[col] = df[col].astype('datetime64[ns]')
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
+        elif customDataType == 'int':
+            pass
+        elif customDataType == 'float':
+            pass
+        elif customDataType == 'category':
+            pass
+        else:
+            pass
+
+        clm_list = list(df)
+        dtype_list = df.dtypes
+        changeDt_list = zip(clm_list, dtype_list)
+
+        context = {
+            'fName': fName,
+            'changeDt_list': changeDt_list,
+            'status': "Success",
+            'message': "Dataset Changed Successfully.",
+        }
+        return render(request, 'ChangeDtype.html', context)
+
+    context = {
+        'fName': fName,
+        'changeDt_list': changeDt_list,
+    }
+    return render(request, 'ChangeDtype.html', context)

@@ -113,15 +113,17 @@
                   <i class="fa fa-trash-o" aria-hidden="true"></i> Remove Your Dataset
                 </a>
               </li>
+              
             </ul>
           </div>
         </div>
       </div>
       <!-- Page Content Starts-->
       <div class="mt-5" id="page-content-wrapper">
+        <a data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-sm ml-5 text-white">Change Datatype</a>
         <div class="container">
           <h2 class="text-danger text-center mt-10">
-            Overview of Your Dataset{{test}}
+            Overview of Your Dataset
           </h2>
         </div>
          {% if message %}
@@ -349,6 +351,70 @@
             >
             {% endif %}
           </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- getting permission to change data type of the columns -->
+
+    <div
+      class="modal fade"
+      id="myModal2"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModal2Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Change Datatype Here...
+              </h4>
+            </div>
+          </div>
+          <form action="/ChangeDtypeColumn/{{fName}}/" method='POST' class="form-group" id="columnDtChange">
+            {% csrf_token %}
+          <div class="modal-body">
+                <div class="col form-group p-3">
+                  <select class="form-control form-control-lg" name="datatype" id="chngDtype" required>
+                  <option disabled selected>Choose Datatype ...</option>
+                  <option value="int">Integer</option>
+                  <option value="float">Float</option>
+                  <option value="category">Category</option>
+                  <option value="datetime">Date-Time</option>
+                  <option value="object">Object</option>
+                </select>
+                </div>
+
+             <div class="container" style="height:45rem; overflow-y: auto;">
+              {% for clm in clm_list %}
+              <div class="row text-capitalize">
+                <div class="col">
+                <input type="checkbox" name="selectedColumnsDt" class="mr-5" value="{{clm}}">{{clm}}
+                </div>
+              </div>
+              {% endfor %}
+             </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              style="margin-top: 0%;"
+              class="btn btn-success"
+              >Change</button
+            >
+          </div>
+          </form>
         </div>
       </div>
     </div>
