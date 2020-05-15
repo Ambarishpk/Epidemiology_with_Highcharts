@@ -33,8 +33,6 @@ def Overview(fName):
     fileSize = fileSize // 1000
     clm_list = list(df)
 
-    df.info()
-
     # datatype
     dataType_list = df.dtypes
 
@@ -721,6 +719,97 @@ def CountFrequencyEncodingCalc(request, fName):
         }
         return render(request, 'CountFrequencyEncoding.html', context)
 
+
+def Normalization(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    normalization_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            normalization_list.append(clm)
+        else:
+            pass
+
+    # labelled_list = []
+    # for col_name in clm_list:
+    #     if 'label' in col_name:
+    #         labelled_list.append(col_name)
+    #     else:
+    #         pass
+    context = {
+        'fName': fName,
+        'normalization_list': normalization_list,
+        # 'labelled_list': labelled_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'Normalization.html', context)
+
+
+def NormalizationCalc(request, fName):
+    df = get_df(fName)
+
+    if request.method == 'POST':
+        normMethod = request.POST.get('normMethod')
+        selectedCols = request.POST.getlist('normCols')
+
+        if normMethod == 'min-max':
+            for featureName in selectedCols:
+                mini = min(df[featureName])
+                maxx = max(df[featureName])
+                df[featureName] = (df[featureName] - mini) / (maxx - mini)
+            message = 'Normalization done using Min: ' + \
+                str(mini)+' and Max: '+str(maxx)+' for range (0,1)'
+            status = 'Success'
+        elif normMethod == 'z-score':
+            for featureName in selectedCols:
+                mean = df[featureName].mean()
+                df1 = abs(df[featureName] - mean)
+                mad = sum(df1) / len(df1)
+                df[featureName] = (df[featureName] - mean) / mad
+            message = 'Normalization done using Mean: ' + \
+                str(mean)+' and Mean Absolute deviation: '+str(mad)
+            status = 'Success'
+        elif normMethod == 'decimal-scaling':
+            for featureName in selectedCols:
+                maxx = max(df[featureName])
+                j = 1
+                while maxx/j > 1:
+                    j = j * 10
+                df[featureName] = df[featureName] / j
+            message = 'Normalization done using Decimal Scaling with value of ' + \
+                str(j)
+            status = 'Success'
+        else:
+            message = '*Please Select Atleast One Method for Normalization'
+            status = 'Error'
+    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                           'processed/'+fName+'.csv'), index=False)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    normalization_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            normalization_list.append(clm)
+        else:
+            pass
+
+    context = {
+        'fName': fName,
+        'normalization_list': normalization_list,
+        # 'labelled_list': labelled_list,
+        'NaN_percent': NaN_percent,
+        'message': message,
+        'status': status,
+    }
+
+    return render(request, 'Normalization.html', context)
+
+
 # getting dataframe
 
 
@@ -873,16 +962,11 @@ def ChangeDtype(request, fName):
         dtype_list = df.dtypes
         changeDt_list = zip(clm_list, dtype_list)
 
-        context = {
-            'fName': fName,
-            'changeDt_list': changeDt_list,
-            'status': "Success",
-            'message': "Dataset Changed Successfully.",
-        }
-        return render(request, 'ChangeDtype.html', context)
+        context = Overview(fName)
+        context['status'] = 'Success'
+        context['message'] = 'Datatype Changed Succesfully.'
 
-    context = {
-        'fName': fName,
-        'changeDt_list': changeDt_list,
-    }
-    return render(request, 'ChangeDtype.html', context)
+        return render(request, 'index.html', context)
+
+    context = Overview(fName)
+    return render(request, 'index.html', context)

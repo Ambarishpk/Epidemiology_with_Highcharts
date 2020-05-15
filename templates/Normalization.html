@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Epidemiology Data Analytics</title>
 
-    <!-- bootstrap cdn links -->
-    <!-- <link
-      href="{% static 'bootstrap/css/bootstrap.min.css' %}"
-      rel="stylesheet"
-    /> -->
-
     <!-- cdn links -->
     <link
       href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -20,24 +14,12 @@
     />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
 
     <link
-      href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+      href="//netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       rel="stylesheet"
       id="bootstrap-css"
     />
-
-    <!-- D3 and chart.js -->
-   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
-  
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-  
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 
     <!-- font awesome icon links -->
     <link
@@ -51,11 +33,9 @@
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/visualization.css' %}" />
   </head>
 
   <body>
-    <input type="text" id="fileName" value={{fName}} hidden>
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <div class="border-right bg-dark text-white" id="sidebar-wrapper">
@@ -63,7 +43,7 @@
         <div class="nav-side-menu">
           <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
-              <li>
+              <li >
                 <a href="/Home/{{fName}}/">
                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
                   Dataset Overview
@@ -91,7 +71,7 @@
                 ></a>
               </li>
               <ul class="sub-menu collapse" id="service">
-                 <li>
+                <li>
                   <a data-toggle="modal" data-target="#myModal"
                     >Complete Drop NaN</a
                   >
@@ -106,15 +86,16 @@
                   <span class="arrow"></span
                 ></a>
               </li>
-              <ul class="sub-menu collapse" id="new">
+              <ul class="sub-menu ">
                 <li><a href="/Binning/{{fName}}/">Binning</a></li>
                 <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
                 <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
                 <li><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
-                <li><a href="/Normalization/{{fName}}/">Normalization</a></li>
+                <li class="active"><a href="/Normalization/{{fName}}/">Normalization</a></li>
+
               </ul>
 
-              <li class="active">
+              <li>
                 <a href="/Visualize/{{fName}}/">
                   <i class="fa fa-line-chart fa-sm"></i> Visualization
                 </a>
@@ -133,8 +114,8 @@
           </div>
         </div>
       </div>
-      <!-- Page Content -->
-      <div class="mt-3" id="page-content-wrapper">
+      <!-- Page Content Starts-->
+      <div class="mt-5" id="page-content-wrapper">
         {% if message %}
         {% if status == 'Success' %}
         <div
@@ -154,39 +135,103 @@
         </div>
         {% endif %}
         {% endif %}
-        <div class="container p-5">
-          <!-- data exploration starts -->
-          <!-- <h1 class="text-success">Data Features..</h1>
-          <form action="/api/{{fName}}/" method="POST">
-            {%  csrf_token %}
-            <input type="text" name="myName"/>
-            <input type="number" name="myAge"/>
-            <button>Go</button>
-          </form> -->
 
-          <div class="container">
-            <div class="row">
-              <div class="col-6">
-                <div class="card">
-                  <div class="p-5">Skewness</div>  
-                  <canvas id="skewnessChart" class="visual_card"></canvas>
+        <div class="container p-3">
+          
+          <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
+             <span 
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    id="tooltip"
+                    title="Normalization Definitions"
+                    ><i
+                      class="fa fa-info-circle text-info"
+                      aria-hidden="true"
+                    ></i
+                  ></span>
+            <div class="mr-5 text-center text-primary font-weight-bold h4">
+                  Select Features for Label Encode
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="card">
-                  <div class="p-5">Kurtosis</div>  
-                  <canvas id="kurtosisChart" class="visual_card"></canvas>
-                </div>
+            {% if NaN_percent == 0 %}
+            <form
+                class="form-group mt-5"
+                action="/NormalizationCalc/{{fName}}/"
+                method="POST"
+                id="normalizationForm"
+                enctype="multipart/form-data"
+            >
+            {% csrf_token %}
+             <div class="row mb-5">
+            <div class="col-3">
+              <div class="form-group">
+                <select class="form-control form-control-lg" name="normMethod">
+                  <option selected disabled>Choose</option>
+                  <option value="min-max">Min-Max</option>
+                  <option value="z-score">Z-Score</option>
+                  <option value="decimal-scaling">Decimal-Scaling</option>
+                </select>
               </div>
             </div>
+            {% if normalization_list %}
+            <div class="row">
+            {% for clm in normalization_list %}
+              <div class="form-check col-6">
+                {% if NaN_percent == 0 %}
+                <input type="checkbox" name="normCols" value="{{clm}}" class="form-check-input ml-5 col">
+                <label class="form-check-label col-6 text-capitalize" for="normCols">{{clm}}</>
+                {% else %}
+                <input hidden type="checkbox" disabled value="" class="form-check-input ml-5 col">
+                <label hidden class="form-check-label col-6 text-capitalize"></>
+                {% endif %}
+              </div>
+            {% endfor %}
+            </div>
+            <div class="row mt-5">
+                <div style="margin-left: 83rem;">
+                <button  class="btn btn-primary"
+                    >Proceed</button
+                >
+                </div>
+            </div>
+            {% else %}
+            <div class="row mt-5">
+              <div class="col mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">Numberical Features Does Not Exits</h5>
+            </div>
+            </div>
+            {% endif %}
+            
+            </form>
+            {% else%}
+            <div class="mr-5 mt-5">
+                <h5 class="alert alert-danger text-center">Your Dataset Have NaN Values</h5>
+            </div>
+            {% endif %}
           </div>
-
-
-
-          <!-- data exploration ends -->
+        </div>
+        <!-- {% if labelled_list %}
+        <div class="container p-3">
+           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
+          <div class="row">
+            <h5 class="text-primary font-weight-bold">Labelled Features:</h5>
+          </div>
+          <div class="row">
+            {% for col in labelled_list %}
+            <div class="col-3 mt-2">
+              <label class="form-check-label text-capitalize">{{col}}</>
+            </div>
+              {% endfor %}
+            </div>
+        </div>
+        </div>
+        {% endif %} -->
+        <div class="container p-3 mt-4">
+          <div class="row">
+            <h5 class="text-danger font-weight-bold">Suggesstions:</h5>
+          </div>
         </div>
       </div>
-      <!-- Page Content Ends Here... -->
+      <!-- Page Content Ends-->
     </div>
 
     <!-- getting permission here to drop the columns -->
@@ -264,115 +309,48 @@
       </div>
     </div>
 
-
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
       rel="stylesheet"
       id="bootstrap-css"
     />
-
-
-    <script>
-      var fname = "{{fName}}";
-
-      var endpoint = '/api/'+fname+'/';
-
-      $.ajax({ 
-        method: "GET",
-        url: endpoint, 
-        success: function(data) { 
-          drawSkewChart(data, 'skewnessChart');
-          drawKurtChart(data, 'kurtosisChart');
-        }, 
-        error: function(error_data) { 
-          console.log("Error"); 
-        } 
-      })
-
-      function drawSkewChart(data, id) { 
-        var labels = data.labels; 
-        var chartLabel = data.chartLabel; 
-        var chartdata = data.skew_chartdata; 
-
-        var ctx = document.getElementById(id).getContext('2d'); 
-        var chart = new Chart(ctx, { 
-          type: 'line', 
-  
-          data: { 
-            labels: labels, 
-            datasets: [{ 
-              label: chartLabel, 
-              data: chartdata, 
-              backgroundColor : '#636EFA',
-              borderColor: '#636EFA',
-            }] 
-          },
-          //options: {
-          //  scales: {
-          //    yAxes: [{
-          //        ticks: {
-          //            fontSize: 10
-          //        }
-          //    }],
-          //    xAxes: [{
-          //        ticks: {
-          //            fontSize: 8
-          //        }
-          //    }]
-          //  }
-          //}
-  
-        }); 
-      } 
-
-      function drawKurtChart(data, id) { 
-        var labels = data.labels; 
-        var chartLabel = data.chartLabel; 
-        var chartdata = data.kurt_chartdata; 
-
-        var ctx = document.getElementById(id).getContext('2d'); 
-        var chart = new Chart(ctx, { 
-          type: 'line', 
-  
-          data: { 
-            labels: labels, 
-            datasets: [{ 
-              label: chartLabel, 
-              data: chartdata, 
-              backgroundColor : '#636EFA',
-              borderColor: '#636EFA',
-            }] 
-          },
-          //options: {
-          //  scales: {
-          //    yAxes: [{
-          //        ticks: {
-          //            fontSize: 10
-          //        }
-          //    }],
-          //    xAxes: [{
-          //        ticks: {
-          //            fontSize: 8
-          //        }
-          //    }]
-          //  }
-          //}
-        }); 
-      }
-
-    </script>
-
-
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
 
     <!-- Menu Toggle Script -->
     <script>
+
+      // tooltip
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+
+      // For toggling the dropdowns
       $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
+
+      // to displaying alert messages
+
+      setTimeout(function () {
+        if ($("#msg").length > 0) {
+          $("#msg").remove();
+        }
+      }, 3000);
+
+    </script>
+
+    <!-- Attrwise Fill NaN Scripts -->
+
+    <script>
+      function myFunction() {
+        if (document.getElementById("rangeChoice").checked == true) {
+          document.getElementById("range").style.display = "block";
+        } else {
+          document.getElementById("range").style.display = "none";
+        }
+      }
     </script>
   </body>
 </html>

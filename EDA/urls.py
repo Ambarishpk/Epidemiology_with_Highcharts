@@ -36,6 +36,7 @@ urlpatterns = [
 
 
     # Feature Engineering
+
     # Binning
     url(r'^Binning/(?P<fName>[-\w.]+\w{0,50})/$',
         views.Binning, name="Binning"),
@@ -56,6 +57,11 @@ urlpatterns = [
         views.CountFrequencyEncoding, name="CountFrequencyEncoding"),
     url(r'^CountFrequencyEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.CountFrequencyEncodingCalc, name="CountFrequencyEncodingCalc"),
+    # Normalization
+    url(r'^Normalization/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.Normalization, name="Normalization"),
+    url(r'^NormalizationCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.NormalizationCalc, name="NormalizationCalc"),
 
 
 
