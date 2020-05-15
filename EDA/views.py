@@ -921,15 +921,26 @@ def RemoveDataset(request, fName):
 
 def fetchDataset(request, fName):
     df = get_df(fName)
-    labels = list(df)
     chartLabel = fName
-    skew_chartdata = list(df.skew().round(2))
-    kurt_chartdata = list(df.kurt().round(2))
+
+    # skewness
+    df_skewness = df.skew().round(2)
+    df_skewness_dict = df_skewness.to_dict()
+    skew_col = list(df_skewness_dict.keys())
+    skew_val = list(df_skewness_dict.values())
+
+    # kurtosis
+    df_kurtosis = df.kurt().round(2)
+    df_kurtosis_dict = df_kurtosis.to_dict()
+    kurt_col = list(df_kurtosis_dict.keys())
+    kurt_val = list(df_kurtosis_dict.values())
+
     data = {
-        "labels": labels,
-        "chartLabel": chartLabel,
-        "skew_chartdata": skew_chartdata,
-        "kurt_chartdata": kurt_chartdata,
+        "label": chartLabel,
+        "skew_chartdata": skew_val,
+        "kurt_chartdata": kurt_val,
+        "skew_chartlabel": skew_col,
+        "kurt_chartlabel": kurt_col,
     }
     return JsonResponse(data)
 
@@ -947,8 +958,8 @@ def ChangeDtype(request, fName):
         if customDataType == 'datetime':
             for col in selectedColumns:
                 df[col] = df[col].astype('datetime64[ns]')
-            df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                   'processed/'+fName+'.csv'), index=False)
+            status = 'Success'
+            message = 'Datatype Changed Succesfully.'
         elif customDataType == 'int':
             pass
         elif customDataType == 'float':
@@ -956,17 +967,20 @@ def ChangeDtype(request, fName):
         elif customDataType == 'category':
             pass
         else:
-            pass
+            status = 'Error'
+            message = '*Please Choose Datatype.'
 
         clm_list = list(df)
         dtype_list = df.dtypes
         changeDt_list = zip(clm_list, dtype_list)
 
         context = Overview(fName)
-        context['status'] = 'Success'
-        context['message'] = 'Datatype Changed Succesfully.'
+        context['status'] = status
+        context['message'] = message
 
         return render(request, 'index.html', context)
 
+    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                           'processed/'+fName+'.csv'), index=False)
     context = Overview(fName)
     return render(request, 'index.html', context)

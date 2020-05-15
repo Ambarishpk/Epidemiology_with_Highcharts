@@ -290,8 +290,8 @@
       })
 
       function drawSkewChart(data, id) { 
-        var labels = data.labels; 
-        var chartLabel = data.chartLabel; 
+        var labels = data.skew_chartlabel; 
+        var chartLabel = data.label; 
         var chartdata = data.skew_chartdata; 
 
         var ctx = document.getElementById(id).getContext('2d'); 
@@ -326,8 +326,8 @@
       } 
 
       function drawKurtChart(data, id) { 
-        var labels = data.labels; 
-        var chartLabel = data.chartLabel; 
+        var labels = data.kurt_chartlabel; 
+        var chartLabel = data.label; 
         var chartdata = data.kurt_chartdata; 
 
         var ctx = document.getElementById(id).getContext('2d'); 
