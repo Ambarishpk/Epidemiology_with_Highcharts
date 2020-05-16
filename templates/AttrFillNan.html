@@ -135,8 +135,8 @@
         {% endif %}
         {% endif %}
 
+        <a data-toggle="modal" data-target="#fillnaHelpModal" class="btn btn-info btn-sm ml-5 text-white">Help</a>
         <div class="container p-3">
-          
           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
              <span 
                     data-toggle="tooltip"
@@ -174,9 +174,10 @@
               <div class="form-group">
                 <select class="form-control form-control-lg" name="fillType"  onchange="myFunction()" id="mySelect">
                   <option selected disabled>Choose</option>
-                  <option value="ffill">forword fill</option>
-                  <option value="bfill">backword fill</option>
-                  <option value="pad">pad</option>
+                  <option value="ffill">Forward Fill</option>
+                  <option value="bfill">Backward Fill</option>
+                  <option value="mode">Mode Method</option>
+                  <option value="mean">Mean Values</option>
                 </select>
               </div>
             </div>
@@ -295,6 +296,48 @@
         </div>
       </div>
     </div>
+
+
+<!-- getting permission to change data type of the columns -->
+
+    <div
+      class="modal fade"
+      id="fillnaHelpModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModal2Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Know about filling methods
+              </h4>
+            </div>
+          </div>
+          <div class="modal-body">
+                Hints here...
+          </div>
+          <div class="modal-footer">
+            <button
+              style="margin-top: 0%;"
+              data-dismiss="modal"
+              class="btn btn-info"
+              >Got it</button
+            >
+          </div>
+        </>
+      </div>
+    </div>
+
 
     <link
       href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"

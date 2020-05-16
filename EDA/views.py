@@ -362,7 +362,21 @@ def AttrFillNanCalc(request, fName):
                     df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                            'processed/'+fName+'.csv'), index=False)
                     status = 'Success'
-                    message = 'NaN values of selected columns are filled bt Backward method.'
+                    message = 'NaN values of selected columns are filled by Backward method.'
+                elif fillType == 'mode':
+                    for col in selectedCols:
+                        df[col].fillna(df[col].mode()[0], inplace=True)
+                    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                           'processed/'+fName+'.csv'), index=False)
+                    status = 'Success'
+                    message = 'NaN values of selected columns are filled by Mode method.'
+                elif fillType == 'mean':
+                    for col in selectedCols:
+                        df[col].fillna(df[col].mean(), inplace=True)
+                    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                           'processed/'+fName+'.csv'), index=False)
+                    status = 'Success'
+                    message = 'NaN values of selected columns are filled by Mean values.'
 
                 else:
                     pass
@@ -928,6 +942,10 @@ def fetchDataset(request, fName):
     df_skewness_dict = df_skewness.to_dict()
     skew_col = list(df_skewness_dict.keys())
     skew_val = list(df_skewness_dict.values())
+
+    # print(df.corr().values)
+    # print((df.corr().to_dict()).keys())
+    print(df['Class'].mode()[0])
 
     # kurtosis
     df_kurtosis = df.kurt().round(2)
