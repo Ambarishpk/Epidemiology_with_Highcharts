@@ -41,12 +41,18 @@ def Overview(fName):
     numerical_clms_lst = []
 
     for i in clm_list:
-        if df[i].dtypes == 'datetime64[ns]':
+        if 'date' in i:
+            df[i] = pd.to_datetime(df[i], dayfirst=True)
             date_time_clms_lst.append(i)
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
         elif df[i].dtypes == 'int64' or df[i].dtypes == 'float64':
             numerical_clms_lst.append(i)
         else:
             categorical_clms_lst.append(i)
+
+    for date_time_col in date_time_clms_lst:
+        df[date_time_col] = pd.to_datetime(df[date_time_col], dayfirst=True)
 
     categorical_clms = len(categorical_clms_lst)
     date_time_clms = len(date_time_clms_lst)
@@ -151,9 +157,15 @@ def Home(request, fName):
 
 
 def Visualize(request, fName):
+    df = get_df(fName)
+    clm_list = []
+    for i in list(df):
+        if df[i].dtype == 'int64' or df[i].dtype == 'float64':
+            clm_list.append(i)
     nan_percent = get_NaN_percent(fName)
     context = {
         'fName': fName,
+        'clm_list': clm_list,
         'NaN_percent': nan_percent,
         'data': [10, 20, 30, 40, 50, 60],
     }
@@ -831,6 +843,8 @@ def get_df(fName):
     data_frame = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                           'processed/'+fName+'.csv'), encoding='mbcs')
 
+    data_frame.info()
+
     return data_frame
 
 
@@ -945,7 +959,6 @@ def fetchDataset(request, fName):
 
     # print(df.corr().values)
     # print((df.corr().to_dict()).keys())
-    print(df['Class'].mode()[0])
 
     # kurtosis
     df_kurtosis = df.kurt().round(2)
@@ -975,7 +988,9 @@ def ChangeDtype(request, fName):
 
         if customDataType == 'datetime':
             for col in selectedColumns:
-                df[col] = df[col].astype('datetime64[ns]')
+                df[col] = df[col].add_suffix('_date')
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
             status = 'Success'
             message = 'Datatype Changed Succesfully.'
         elif customDataType == 'int':

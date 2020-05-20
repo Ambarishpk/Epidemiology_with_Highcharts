@@ -1,6 +1,15 @@
 .visual_card {
     margin: 5px;
-    width: 60rem;
+    width: 35rem;
+    height: 30rem;
+    border: none;
+    overflow: auto;
+}
+
+.customChart_card {
+    margin: 5px;
+    width: 80rem;
     height: 50rem;
+    border: none;
     overflow: auto;
 }

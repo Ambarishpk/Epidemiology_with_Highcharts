@@ -164,21 +164,51 @@
             <button>Go</button>
           </form> -->
 
-          <div class="container">
+          <div class="container-fluid">
             <div class="row">
-              <div class="col-6">
-                <div class="card">
+              <div class="col-4">
+                <div  class="card visual_card shadow-lg">
                   <div class="p-5">Skewness</div>  
-                  <canvas id="skewnessChart" class="visual_card"></canvas>
+                  <canvas id="skewnessChart"></canvas>
                 </div>
               </div>
-              <div class="col-6">
-                <div class="card">
+              <div class="col-4 pl-4">
+                <div class="card visual_card shadow-lg">
                   <div class="p-5">Kurtosis</div>  
-                  <canvas id="kurtosisChart" class="visual_card"></canvas>
+                  <canvas id="kurtosisChart"></canvas>
+                </div>
+              </div>
+              <div class="col-4 pl-4">
+                <div class="card visual_card shadow-lg">
+                  <div class="p-5">Correlation</div>  
+                  <canvas id="correlationChart"></canvas>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid mt-5 p-5 ">
+            <div class="form">
+              <div class="form-inline">
+              <select class="form-control-lg rounded">
+                <option>X-Axis</option>
+                {% for clm in clm_list %}
+                <option>{{clm}}</option>
+                {% endfor %}
+              </select>
+              <select class="ml-3 form-control-lg rounded">
+                <option>Y-Axis</option>
+                {% for clm in clm_list %}
+                <option>{{clm}}</option>
+                {% endfor %}
+              </select>
+              <button class="ml-3 btn btn-primary">Plot</button>
+            </div>
+            <div class="card text-center mt-5 customChart_card bg-light shadow-lg">
+              <div class="p-5">Custom Chart</div>
+              <canvas id="customChart"></canvas> 
+            </div>
+            </div>
+
           </div>
 
 
@@ -359,6 +389,29 @@
           //}
         }); 
       }
+
+      var ctx = document.getElementById('customChart').getContext('2d'); 
+        var chart = new Chart(ctx, { 
+          type: 'line', 
+          data: { 
+            labels: [1,2,3,4,5,6,7], 
+            datasets: [{ 
+              label: "Male", 
+              data: [3,2,6,8,9,3,4],
+              backgroundColor : '#636EFA',
+              borderColor: '#636EFA',
+            }],
+          }, options: {
+              scales: {
+                  xAxes: [{
+                      stacked: true
+                  }],
+                  yAxes: [{
+                      stacked: true
+                  }]
+              }
+            }
+        });
 
     </script>
 
