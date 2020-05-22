@@ -11,6 +11,7 @@ import pandas as pd
 from pandas import DataFrame
 import numpy as np
 import sklearn
+from sklearn.impute import KNNImputer
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 
@@ -34,14 +35,25 @@ def Overview(fName):
     clm_list = list(df)
 
     # datatype
+    # ========
     dataType_list = df.dtypes
 
     categorical_clms_lst = []
     date_time_clms_lst = []
     numerical_clms_lst = []
 
+    cols = list(df)
+
+    # nan values imputation using KNNImputer
+    # =====================================
+
+    # imputer = KNNImputer(n_neighbors=2)
+    # df = pd.DataFrame(imputer.fit_transform(df), columns=cols)
+    # df.to_csv(os.path.join(settings.MEDIA_ROOT,
+    #                        'processed/'+fName+'.csv'), index=False)
+
     for i in clm_list:
-        if 'date' in i:
+        if 'date' in i.lower():
             df[i] = pd.to_datetime(df[i], dayfirst=True)
             date_time_clms_lst.append(i)
             df.to_csv(os.path.join(settings.MEDIA_ROOT,
@@ -72,10 +84,12 @@ def Overview(fName):
         date_time_msg = ""
 
     # No of rows and columns
+    # ======================
     rows = len(df.index)
     columns = len(list(df))
 
     # NaN Values
+    # ==========
     NaN_percent = get_NaN_percent(fName)
     total_Nan = (df.isnull().sum(axis=0)).sum()
 
@@ -149,7 +163,7 @@ def Upload(request):
 
 
 # routes
-
+# ======
 
 def Home(request, fName):
     context = Overview(fName)
@@ -837,18 +851,19 @@ def NormalizationCalc(request, fName):
 
 
 # getting dataframe
-
+# =================
 
 def get_df(fName):
     data_frame = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                           'processed/'+fName+'.csv'), encoding='mbcs')
 
-    data_frame.info()
+    # data_frame.info()
 
     return data_frame
 
 
 # Kurtosis
+# ========
 def kurtosis(fName):
     df = get_df(fName)
     df_kurtosis = df.kurt(axis=None, skipna=True).round(2)
@@ -857,7 +872,9 @@ def kurtosis(fName):
     val = df_kurtosis_dict.values()
     kurtosis_list = zip(col, val)
     return kurtosis_list
+
 # Skewness
+# ========
 
 
 def skewness(fName):
@@ -872,6 +889,8 @@ def skewness(fName):
 
 
 # Correlation
+# ===========
+
 # def correlation(fName):
 #     df = get_df(fName)
 #     correla = df.corr()
@@ -890,6 +909,8 @@ def skewness(fName):
 
 
 # NaN Percentage
+# ==============
+
 def get_NaN(fName):
     df = get_df(fName)
     NaN_list = (df.isnull().sum() * 100 / len(df)).round(2)
@@ -897,6 +918,8 @@ def get_NaN(fName):
 
 
 # Mean
+# =====
+
 def get_mean(fName):
     df = get_df(fName)
     df_mean = df.mean().round(2)
@@ -907,6 +930,8 @@ def get_mean(fName):
 
 
 # Median
+# ======
+
 def get_median(fName):
     df = get_df(fName)
     df_median = df.median().round(2)
@@ -917,6 +942,8 @@ def get_median(fName):
 
 
 # Download Processed Dataset
+# ==========================
+
 def DownloadProcessed(request, fName):
     file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     if os.path.exists(file_path):
@@ -929,7 +956,7 @@ def DownloadProcessed(request, fName):
     raise Http404
 
 # Remove Dataset
-
+# ==============
 
 def RemoveDataset(request, fName):
     original_file_path = os.path.join(
@@ -1016,4 +1043,4 @@ def ChangeDtype(request, fName):
     df.to_csv(os.path.join(settings.MEDIA_ROOT,
                            'processed/'+fName+'.csv'), index=False)
     context = Overview(fName)
-    return render(request, 'index.html', context)
+    return redirect('index.html')

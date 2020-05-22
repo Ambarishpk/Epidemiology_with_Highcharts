@@ -1,0 +1,1461 @@
+permalink,company,numEmps,category,city,raisedCurrency,round
+lifelock,LifeLock,,web,Tempe,USD,b
+lifelock,LifeLock,,web,Tempe,USD,a
+lifelock,LifeLock,,web,Tempe,USD,c
+mycityfaces,MyCityFaces,7,web,Scottsdale,USD,seed
+flypaper,Flypaper,,web,Phoenix,USD,a
+infusionsoft,Infusionsoft,105,software,Gilbert,USD,a
+gauto,gAuto,4,web,Scottsdale,USD,seed
+chosenlist-com,ChosenList.com,5,web,Scottsdale,USD,seed
+chosenlist-com,ChosenList.com,5,web,Scottsdale,USD,angel
+digg,Digg,60,web,San Francisco,USD,b
+digg,Digg,60,web,San Francisco,USD,a
+facebook,Facebook,450,web,Palo Alto,USD,angel
+facebook,Facebook,450,web,Palo Alto,USD,a
+facebook,Facebook,450,web,Palo Alto,USD,b
+facebook,Facebook,450,web,Palo Alto,USD,c
+facebook,Facebook,450,web,Palo Alto,USD,c
+facebook,Facebook,450,web,Palo Alto,USD,c
+facebook,Facebook,450,web,Palo Alto,USD,debt_round
+photobucket,Photobucket,60,web,Palo Alto,USD,b
+photobucket,Photobucket,60,web,Palo Alto,USD,a
+omnidrive,Omnidrive,,web,Palo Alto,USD,angel
+geni,Geni,18,web,West Hollywood,USD,a
+geni,Geni,18,web,West Hollywood,USD,b
+twitter,Twitter,17,web,San Francisco,USD,b
+twitter,Twitter,17,web,San Francisco,USD,c
+stumbleupon,StumbleUpon,,web,San Francisco,USD,seed
+gizmoz,Gizmoz,,web,Menlo Park,USD,a
+gizmoz,Gizmoz,,web,Menlo Park,USD,b
+scribd,Scribd,14,web,San Francisco,USD,seed
+scribd,Scribd,14,web,San Francisco,USD,angel
+scribd,Scribd,14,web,San Francisco,USD,a
+slacker,Slacker,,web,San Diego,USD,b
+slacker,Slacker,,web,San Diego,USD,a
+lala,Lala,,web,Palo Alto,USD,a
+plaxo,Plaxo,50,web,Mountain View,USD,a
+plaxo,Plaxo,50,web,Mountain View,USD,b
+plaxo,Plaxo,50,web,Mountain View,USD,c
+plaxo,Plaxo,50,web,Mountain View,USD,d
+powerset,Powerset,60,web,San Francisco,USD,a
+technorati,Technorati,25,web,San Francisco,USD,c
+technorati,Technorati,25,web,San Francisco,USD,b
+technorati,Technorati,25,web,San Francisco,USD,d
+technorati,Technorati,25,web,San Francisco,USD,c
+mahalo,Mahalo,40,web,Santa Monica,USD,a
+mahalo,Mahalo,40,web,Santa Monica,USD,b
+kyte,Kyte,40,web,San Francisco,USD,a
+kyte,Kyte,40,web,San Francisco,USD,b
+kyte,Kyte,40,web,San Francisco,USD,b
+veoh,Veoh,,web,San Diego,USD,b
+veoh,Veoh,,web,San Diego,USD,c
+veoh,Veoh,,web,San Diego,USD,a
+veoh,Veoh,,web,San Diego,USD,d
+jingle-networks,Jingle Networks,,web,Menlo Park,USD,c
+jingle-networks,Jingle Networks,,web,Menlo Park,USD,a
+jingle-networks,Jingle Networks,,web,Menlo Park,USD,b
+jingle-networks,Jingle Networks,,web,Menlo Park,USD,angel
+jingle-networks,Jingle Networks,,web,Menlo Park,USD,c
+ning,Ning,41,web,Palo Alto,USD,c
+ning,Ning,41,web,Palo Alto,USD,d
+jotspot,JotSpot,,web,Palo Alto,USD,a
+mercora,Mercora,,web,Sunnyvale,USD,a
+wesabe,Wesabe,,web,San Francisco,USD,seed
+wesabe,Wesabe,,web,San Francisco,USD,a
+jangl,Jangl,22,web,Pleasanton,USD,b
+hyphen8,Hyphen 8,4,web,San Francisco,USD,angel
+prosper,Prosper,,web,San Francisco,USD,c
+prosper,Prosper,,web,San Francisco,USD,a
+prosper,Prosper,,web,San Francisco,USD,b
+google,Google,20000,web,Mountain View,USD,a
+jajah,Jajah,80,web,Mountain View,USD,c
+jajah,Jajah,80,web,Mountain View,USD,a
+jajah,Jajah,80,web,Mountain View,USD,b
+youtube,YouTube,,web,San Bruno,USD,a
+youtube,YouTube,,web,San Bruno,USD,b
+ustream,Ustream,,web,Mountain View,USD,angel
+ustream,Ustream,,web,Mountain View,USD,a
+gizmoproject,GizmoProject,,web,San Diego,USD,a
+adap-tv,Adap.tv,15,web,San Mateo,USD,a
+topix,Topix,,web,Palo Alto,USD,b
+revision3,Revision3,,web,San Francisco,USD,a
+revision3,Revision3,,web,San Francisco,USD,b
+aggregateknowledge,Aggregate Knowledge,,web,San Mateo,USD,a
+aggregateknowledge,Aggregate Knowledge,,web,San Mateo,USD,b
+sugarinc,Sugar Inc,,web,San Francisco,USD,a
+sugarinc,Sugar Inc,,web,San Francisco,USD,b
+zing,Zing,,web,Mountain View,USD,a
+criticalmetrics,CriticalMetrics,4,web,,USD,angel
+spock,Spock,30,web,Redwood City,USD,a
+wize,Wize,,web,,USD,a
+sodahead,SodaHead,,web,,USD,a
+sodahead,SodaHead,,web,,USD,b
+casttv,CastTV,0,web,San Francisco,USD,a
+buzznet,BuzzNet,,web,Hollywood,USD,a
+buzznet,BuzzNet,,web,Hollywood,USD,b
+funny-or-die,Funny Or Die,,web,Palo Alto,USD,b
+sphere,Sphere,11,web,San Francisco,USD,b
+sphere,Sphere,11,web,San Francisco,USD,a
+meevee,MeeVee,,web,Burlingame,USD,b
+meevee,MeeVee,,web,Burlingame,USD,c
+meevee,MeeVee,,web,Burlingame,USD,a
+meevee,MeeVee,,web,Burlingame,USD,d
+mashery,Mashery,0,web,San Francisco,USD,c
+yelp,Yelp,,web,San Francisco,USD,c
+yelp,Yelp,,web,San Francisco,USD,b
+yelp,Yelp,,web,San Francisco,USD,a
+yelp,Yelp,,web,San Francisco,USD,d
+spotplex,Spotplex,3,web,Santa Clara,USD,angel
+coghead,Coghead,21,web,Redwood City,USD,a
+coghead,Coghead,21,web,Redwood City,USD,b
+zooomr,Zooomr,,web,San Francisco,USD,angel
+sidestep,SideStep,75,web,Santa Clara,USD,c
+sidestep,SideStep,75,web,Santa Clara,USD,b
+sidestep,SideStep,75,web,Santa Clara,USD,a
+sidestep,SideStep,75,web,Santa Clara,USD,a
+rockyou,RockYou,,web,San Mateo,USD,a
+rockyou,RockYou,,web,San Mateo,USD,b
+rockyou,RockYou,,web,San Mateo,USD,c
+rockyou,RockYou,,web,San Mateo,USD,unattributed
+pageflakes,Pageflakes,20,web,San Francisco,USD,a
+swivel,Swivel,,web,San Francisco,USD,a
+swivel,Swivel,,web,San Francisco,USD,a
+slide,Slide,64,web,San Francisco,USD,b
+slide,Slide,64,web,San Francisco,USD,d
+bebo,Bebo,,web,San Francisco,USD,a
+freebase,freebase,,web,San Francisco,USD,a
+freebase,freebase,,web,San Francisco,USD,b
+metawebtechnologies,Metaweb Technologies,,web,San Francisco,USD,b
+glammedia,Glam Media,,web,Brisbane,USD,a
+glammedia,Glam Media,,web,Brisbane,USD,b
+glammedia,Glam Media,,web,Brisbane,USD,c
+glammedia,Glam Media,,web,Brisbane,USD,d
+glammedia,Glam Media,,web,Brisbane,USD,d
+thefind,TheFind,,web,Mountain View,USD,a
+thefind,TheFind,,web,Mountain View,USD,b
+thefind,TheFind,,web,Mountain View,USD,c
+zazzle,Zazzle,,web,Redwood City,USD,a
+zazzle,Zazzle,,web,Redwood City,USD,b
+dogster,Dogster,,web,San Francisco,USD,angel
+pandora,Pandora,80,web,Oakland,USD,b
+pandora,Pandora,80,web,Oakland,USD,c
+pandora,Pandora,80,web,Oakland,USD,a
+cafepress,Cafepress,300,web,Foster City,USD,a
+cafepress,Cafepress,300,web,Foster City,USD,a
+cafepress,Cafepress,300,web,Foster City,USD,b
+pbwiki,pbwiki,15,web,,USD,a
+pbwiki,pbwiki,15,web,,USD,b
+adbrite,AdBrite,,web,San Francisco,USD,a
+adbrite,AdBrite,,web,San Francisco,USD,b
+adbrite,AdBrite,,web,San Francisco,USD,c
+loomia,Loomia,,web,San Francisco,USD,seed
+loomia,Loomia,,web,San Francisco,USD,a
+meebo,Meebo,40,web,Mountain View,USD,a
+meebo,Meebo,40,web,Mountain View,USD,b
+meebo,Meebo,40,web,Mountain View,USD,c
+eventbrite,Eventbrite,13,web,San Francisco,USD,angel
+linkedin,LinkedIn,,web,Mountain View,USD,a
+linkedin,LinkedIn,,web,Mountain View,USD,b
+linkedin,LinkedIn,,web,Mountain View,USD,c
+linkedin,LinkedIn,,web,Mountain View,USD,d
+flickim,FlickIM,,web,Berkeley,USD,a
+terabitz,Terabitz,12,web,Palo Alto,USD,a
+healthline,Healthline,,web,San Francisco,USD,a
+healthline,Healthline,,web,San Francisco,USD,b
+box-net,Box.net,19,web,Palo Alto,USD,a
+box-net,Box.net,19,web,Palo Alto,USD,b
+conduit,Conduit,,web,Redwood Shores,USD,a
+conduit,Conduit,,web,Redwood Shores,USD,b
+edgeio,Edgeio,,web,Palo Alto,USD,a
+spotrunner,Spot Runner,,web,Los Angeles,USD,a
+spotrunner,Spot Runner,,web,Los Angeles,USD,b
+spotrunner,Spot Runner,,web,Los Angeles,USD,c
+kaboodle,Kaboodle,,web,Santa Clara,USD,a
+kaboodle,Kaboodle,,web,Santa Clara,USD,b
+kaboodle,Kaboodle,,web,Santa Clara,USD,c
+giga-omni-media,Giga Omni Media,18,web,San Francisco,USD,a
+visiblepath,Visible Path,,web,Foster City,USD,b
+visiblepath,Visible Path,,web,Foster City,USD,a
+wink,Wink,,web,Mountain View,USD,a
+seesmic,seesmic,,web,San Francisco,USD,a
+seesmic,seesmic,,web,San Francisco,USD,b
+zvents,Zvents,,web,San Mateo,USD,a
+zvents,Zvents,,web,San Mateo,USD,seed
+eventful,Eventful,35,web,San Diego,USD,b
+eventful,Eventful,35,web,San Diego,USD,a
+oodle,Oodle,,web,San Mateo,USD,a
+oodle,Oodle,,web,San Mateo,USD,b
+odesk,oDesk,,web,Menlo Park,USD,a
+odesk,oDesk,,web,Menlo Park,USD,b
+odesk,oDesk,,web,Menlo Park,USD,c
+simplyhired,SimplyHired,,web,Mountain View,USD,b
+simplyhired,SimplyHired,,web,Mountain View,USD,a
+ooma,ooma,47,web,Palo Alto,USD,a
+ooma,ooma,47,web,Palo Alto,USD,b
+goingon,GoingOn,3,web,Woodside,USD,seed
+flixster,Flixster,17,web,San Francisco,USD,a
+flixster,Flixster,17,web,San Francisco,USD,b
+piczo,Piczo,,web,San Francisco,USD,c
+socialtext,Socialtext,,web,Palo Alto,USD,angel
+socialtext,Socialtext,,web,Palo Alto,USD,b
+socialtext,Socialtext,,web,Palo Alto,USD,c
+powerreviews,PowerReview,,web,Millbrae,USD,a
+powerreviews,PowerReview,,web,Millbrae,USD,b
+hi5,hi5,100,web,San Francisco,USD,a
+hi5,hi5,100,web,San Francisco,USD,debt_round
+tagged,Tagged,,web,San Francisco,USD,angel
+tagged,Tagged,,web,San Francisco,USD,a
+tagged,Tagged,,web,San Francisco,USD,b
+jaxtr,Jaxtr,,web,Menlo Park,USD,angel
+jaxtr,Jaxtr,,web,Menlo Park,USD,a
+jaxtr,Jaxtr,,web,Menlo Park,USD,b
+m,Me,,web,San Jose,USD,seed
+intronetworks,introNetworks,9,web,Santa Barbara,USD,a
+leveragesoftware,Leverage Software,21,web,San Francisco,USD,a
+lithiumtechnologies,Lithium Technologies,42,web,Emeryville,USD,a
+lithiumtechnologies,Lithium Technologies,42,web,Emeryville,USD,b
+genius,Genius,,web,San Mateo,USD,a
+genius,Genius,,web,San Mateo,USD,b
+genius,Genius,,web,San Mateo,USD,c
+respectance,Respectance,,web,San Francisco,USD,seed
+respectance,Respectance,,web,San Francisco,USD,a
+curse,Curse,,web,San Francisco,USD,a
+licketyship,LicketyShip,,web,San Francisco,USD,angel
+grockit,Grockit,8,web,San Francisco,USD,a
+grockit,Grockit,8,web,San Francisco,USD,b
+peerme,PeerMe,,web,Mountain View,USD,a
+kiptronic,Kiptronic,20,web,San Francisco,USD,a
+kiptronic,Kiptronic,20,web,San Francisco,USD,angel
+kiptronic,Kiptronic,20,web,San Francisco,USD,b
+vuze,Vuze,,web,Palo Alto,USD,b
+vuze,Vuze,,web,Palo Alto,USD,c
+phonezoo,Phonezoo,,web,Sunnyvale,USD,a
+phonezoo,Phonezoo,,web,Sunnyvale,USD,a
+droplettechnology,Droplet Technology,,web,Menlo Park,USD,a
+podtech,PodTech,,web,Palo Alto,USD,a
+podtech,PodTech,,web,Palo Alto,USD,a
+crackle,Crackle,,web,Mill Valley,USD,a
+reddit,Reddit,,web,San Francisco,USD,seed
+wikia,Wikia,,web,San Mateo,USD,a
+wikia,Wikia,,web,San Mateo,USD,b
+retrevo,Retrevo,,web,Sunnyvale,USD,a
+retrevo,Retrevo,,web,Sunnyvale,USD,seed
+retrevo,Retrevo,,web,Sunnyvale,USD,b
+buxfer,Buxfer,2,web,Mountain View,USD,seed
+buxfer,Buxfer,2,web,Mountain View,USD,angel
+yousendit,YouSendIt,0,web,Campbell,USD,b
+yousendit,YouSendIt,0,web,Campbell,USD,a
+yousendit,YouSendIt,0,web,Campbell,USD,c
+tangler,Tangler,,web,Mountain View,USD,angel
+obopay,obopay,,web,Redwood City,USD,a
+obopay,obopay,,web,Redwood City,USD,b
+obopay,obopay,,web,Redwood City,USD,c
+obopay,obopay,,web,Redwood City,USD,d
+paypal,PayPal,,web,San Jose,USD,c
+paypal,PayPal,,web,San Jose,USD,d
+paypal,PayPal,,web,San Jose,USD,b
+talkplus,TalkPlus,,web,San Mateo,USD,a
+vudu,Vudu,50,hardware,Santa Clara,USD,a
+insiderpages,Insider Pages,,web,Redwood City,USD,a
+snapfish,Snapfish,,web,San Francisco,USD,a
+snapfish,Snapfish,,web,San Francisco,USD,b
+affinitycircles,Affinity Circles,22,web,Mountain View,USD,c
+affinitycircles,Affinity Circles,22,web,Mountain View,USD,b
+affinitycircles,Affinity Circles,22,web,Mountain View,USD,a
+imvu,IMVU,,web,Palo Alto,USD,angel
+nirvanix,Nirvanix,,web,San Diego,USD,a
+fuzzwich,Habit Industries,4,web,Palo Alto,USD,seed
+gaia,Gaia,,web,San Jose,USD,a
+gaia,Gaia,,web,San Jose,USD,b
+gaia,Gaia,,web,San Jose,USD,c
+greatcall,GreatCall,,web,Del Mar,USD,a
+revver,Revver,,web,Los Angeles,USD,a
+revver,Revver,,web,Los Angeles,USD,b
+metacafe,Metacafe,,web,Palo Alto,USD,b
+metacafe,Metacafe,,web,Palo Alto,USD,c
+flock,Flock,40,web,Redwood City,USD,b
+flock,Flock,40,web,Redwood City,USD,c
+flock,Flock,40,web,Redwood City,USD,d
+vmixmedia,VMIX Media,42,web,San Diego,USD,a
+vmixmedia,VMIX Media,42,web,San Diego,USD,b
+kontera,Kontera,,web,San Francisco,USD,b
+kontera,Kontera,,web,San Francisco,USD,a
+tokbox,Tokbox,,web,San Francisco,USD,a
+tokbox,Tokbox,,web,San Francisco,USD,b
+six-apart,Six Apart,150,web,San Francisco,USD,b
+six-apart,Six Apart,150,web,San Francisco,USD,c
+six-apart,Six Apart,150,web,San Francisco,USD,a
+weebly,Weebly,,web,San Francisco,USD,seed
+synthasite,Synthasite,26,web,San Francisco,USD,a
+bittorrent,BitTorrent,29,web,San Francisco,USD,a
+bittorrent,BitTorrent,29,web,San Francisco,USD,b
+kongregate,Kongregate,16,web,San Francisco,USD,a
+kongregate,Kongregate,16,web,San Francisco,USD,b
+kongregate,Kongregate,16,web,San Francisco,USD,b
+dancejam,DanceJam,0,web,San Francisco,USD,angel
+dancejam,DanceJam,0,web,San Francisco,USD,a
+fathomonline,Fathom Online,,web,San Francisco,USD,a
+zivity,Zivity,16,web,San Francisco,USD,seed
+zivity,Zivity,16,web,San Francisco,USD,b
+bluelithium,BlueLithium,135,web,San Jose,USD,a
+expresso,eXpresso,,web,Menlo Park,USD,a
+doostang,Doostang,,web,Palo Alto,USD,a
+docstoc,Docstoc,,web,Beverly Hills,USD,a
+docstoc,Docstoc,,web,Beverly Hills,USD,b
+mevio,Mevio,,web,San Francisco,USD,a
+mevio,Mevio,,web,San Francisco,USD,b
+mevio,Mevio,,web,San Francisco,USD,c
+purevideo,PureVideo Networks,,web,Los Angeles,USD,a
+purevideo,PureVideo Networks,,web,Los Angeles,USD,b
+filmloop,FilmLoop,,web,Menlo Park,USD,a
+bitpass,BitPass,,web,Mountain View,USD,a
+bitpass,BitPass,,web,Mountain View,USD,b
+art-com,Art.com,500,web,Emeryville,USD,a
+atomshockwave,Atom Shockwave,,web,San Francisco,USD,a
+cinemanow,CinemaNow,,web,Marina Del Rey,USD,a
+digitalchocolate,Digital Chocolate,,web,San Mateo,USD,a
+digitalchocolate,Digital Chocolate,,web,San Mateo,USD,b
+eharmony,eHarmony,,web,Pasadena,USD,a
+eharmony,eHarmony,,web,Pasadena,USD,b
+friendster,Friendster,465,web,San Francisco,USD,a
+friendster,Friendster,465,web,San Francisco,USD,b
+friendster,Friendster,465,web,San Francisco,USD,c
+friendster,Friendster,465,web,San Francisco,USD,d
+greystripe,Greystripe,,web,San Francisco,USD,b
+slingmedia,Sling Media,,web,Foster City,USD,a
+slingmedia,Sling Media,,web,Foster City,USD,a
+trulia,Trulia,,web,San Francisco,USD,b
+trulia,Trulia,,web,San Francisco,USD,c
+trulia,Trulia,,web,San Francisco,USD,a
+trulia,Trulia,,web,San Francisco,USD,d
+lendingclub,Lending Club,,web,Sunnyvale,USD,angel
+lendingclub,Lending Club,,web,Sunnyvale,USD,a
+tubemogul,tubemogul,15,web,Emeryville,USD,a
+gemini,Gemini,,web,San Mateo,USD,a
+gemini,Gemini,,web,San Mateo,USD,b
+multiverse,Multiverse,,web,Mountain View,USD,a
+multiverse,Multiverse,,web,Mountain View,USD,angel
+limelife,LimeLife,,mobile,Menlo Park,USD,b
+limelife,LimeLife,,mobile,Menlo Park,USD,a
+limelife,LimeLife,,mobile,Menlo Park,USD,b
+opentable,OpenTable,,web,San Francisco,USD,a
+opentable,OpenTable,,web,San Francisco,USD,b
+opentable,OpenTable,,web,San Francisco,USD,c
+rooftopcomedy,RooftopComedy,20,web,San Francisco,USD,a
+federatedmedia,Federated Media,,web,Sausalito,USD,b
+federatedmedia,Federated Media,,web,Sausalito,USD,c
+deliveryagent,Delivery Agent,,web,San Francisco,USD,c
+deliveryagent,Delivery Agent,,web,San Francisco,USD,b
+deliveryagent,Delivery Agent,,web,San Francisco,USD,a
+reunion,Reunion,100,web,Los Angeles,USD,a
+mixercast,Mixercast,,web,San Mateo,USD,a
+mixercast,Mixercast,,web,San Mateo,USD,b
+mtraks,mTraks,,web,San Diego,USD,angel
+xora,Xora,,web,Mountain View,USD,a
+xora,Xora,,web,Mountain View,USD,b
+xora,Xora,,web,Mountain View,USD,debt_round
+ooyala,Ooyala,,web,Mountain View,USD,b
+saynow,SayNow,14,web,Palo Alto,USD,a
+crunchyroll,Crunchyroll,,web,San Francsico,USD,a
+circleup,CircleUp,19,web,Newport Beach,USD,a
+pixsense,PixSense,,web,Santa Clara,USD,a
+pixsense,PixSense,,web,Santa Clara,USD,b
+danal,Danal,,web,San Jose,USD,a
+hulu,hulu,,web,Los Angeles,USD,a
+ourstory,OurStory,,web,Mountain View,USD,a
+specificmedia,Specificmedia,,web,Ir vine,USD,a
+specificmedia,Specificmedia,,web,Ir vine,USD,b
+admob,AdMob,,web,San Mateo,USD,b
+mysql,MySQL,,web,Cupertino,USD,c
+mysql,MySQL,,web,Cupertino,USD,b
+attributor,Attributor,0,web,Redwood City,USD,a
+attributor,Attributor,0,web,Redwood City,USD,c
+attributor,Attributor,0,web,Redwood City,USD,b
+socialmedia,Social Media,15,web,Palo Alto,USD,a
+socialmedia,Social Media,15,web,Palo Alto,USD,b
+demandmedia,Demand Media,,web,Santa Monica,USD,a
+demandmedia,Demand Media,,web,Santa Monica,USD,b
+demandmedia,Demand Media,,web,Santa Monica,USD,c
+demandmedia,Demand Media,,web,Santa Monica,USD,d
+tripit,TripIt,8,web,San Francisco,USD,seed
+pubmatic,PubMatic,35,web,Palo Alto,USD,a
+mint,Mint,22,web,Mountain View,USD,a
+mint,Mint,22,web,Mountain View,USD,seed
+mint,Mint,22,web,Mountain View,USD,b
+app2you,app2you,4,web,La Jolla,USD,angel
+app2you,app2you,4,web,La Jolla,USD,angel
+yourstreet,YourStreet,6,web,San Francisco,USD,angel
+tagworld,Tagworld,,web,Santa Monica,USD,a
+tagworld,Tagworld,,web,Santa Monica,USD,b
+rotohog,RotoHog,,web,Inglewood,USD,a
+thisnext,ThisNext,0,web,Santa Monica,USD,b
+thisnext,ThisNext,0,web,Santa Monica,USD,a
+chesspark,ChessPark,,web,West Palm Beach,USD,angel
+break,Break,,web,Beverly Hills,USD,a
+musestorm,MuseStorm,,web,Sunnyvale,USD,a
+mediamachines,Media Machines,,web,San Francisco,USD,a
+mig33,Ciihui,,web,Burlingame,USD,a
+mig33,Ciihui,,web,Burlingame,USD,b
+aliph,Aliph,,web,San Francisco,USD,a
+mego,mEgo,15,web,Los Angeles,USD,angel
+mego,mEgo,15,web,Los Angeles,USD,angel
+realius,Realius,3,web,Berkeley,USD,angel
+xobni,Xobni,0,software,San Francisco,USD,seed
+xobni,Xobni,0,software,San Francisco,USD,angel
+xobni,Xobni,0,software,San Francisco,USD,a
+spoke,Spoke,0,web,San Mateo,USD,c
+spoke,Spoke,0,web,San Mateo,USD,b
+fixya,FixYa,30,web,San Mateo,USD,a
+fixya,FixYa,30,web,San Mateo,USD,b
+mozilla,Mozilla,150,web,Mountain View,USD,unattributed
+brightqube,BrightQube,0,web,Carlsbad,USD,angel
+buzzdash,BuzzDash,0,web,Marina del Rey,USD,angel
+urbanmapping,Urban Mapping,9,web,San Francisco,USD,seed
+consortemedia,Consorte Media,0,web,San Francisco,USD,b
+ffwd,ffwd,,web,San Francisco,USD,a
+satisfaction,Get Satisfaction,,web,San Francisco,USD,a
+ringcentral,RingCentral,,web,Redwood City,USD,a
+ringcentral,RingCentral,,web,Redwood City,USD,b
+3jam,3Jam,,web,Menlo Park,USD,a
+playspan,PlaySpan,,web,Santa Clara,USD,a
+grouply,Grouply,6,web,Redwood City,USD,angel
+grouply,Grouply,6,web,Redwood City,USD,angel
+grouply,Grouply,6,web,Redwood City,USD,a
+graspr,Graspr,,web,Sunnyvale,USD,a
+zannel,Zannel,,web,San Francisco,USD,b
+deca-tv,deca.tv,,web,Santa Monica,USD,a
+zimbra,Zimbra,,web,San Mateo,USD,c
+friendfeed,FriendFeed,,web,Mountain View,USD,a
+rupture,Rupture,15,web,San Francisco,USD,angel
+jibjab,JibJab,,web,Santa Monica,USD,b
+rubiconproject,Rubicon Project,,web,Los Angeles,USD,a
+rubiconproject,Rubicon Project,,web,Los Angeles,USD,debt_round
+rubiconproject,Rubicon Project,,web,Los Angeles,USD,b
+snaplayout,SnapLayout,,web,San Francisco,USD,a
+confabb,Confabb,,web,,USD,angel
+uptake,UpTake,,web,Palo Alto,USD,a
+23andme,23andMe,30,web,Mountain View,USD,a
+yume,YuMe,,web,Redwood City,USD,b
+mochimedia,Mochi Media,,web,San Francisco,USD,a
+mochimedia,Mochi Media,,web,San Francisco,USD,b
+blurb,Blurb,,web,San Francisco,USD,b
+weatherbill,WeatherBill,,web,San Francisco,USD,a
+automattic,Automattic,20,web,San Francisco,USD,a
+automattic,Automattic,20,web,San Francisco,USD,b
+twine,Radar Networks,,web,San Francisco,USD,a
+twine,Radar Networks,,web,San Francisco,USD,b
+veodia,Veodia,15,web,San Mateo,USD,a
+echosign,EchoSign,,web,Palo Alto,USD,a
+rollbase,Rollbase,0,web,Mountain View,USD,angel
+predictify,Predictify,6,web,Redwood City,USD,a
+trialpay,TrialPay,50,web,San Francisco,USD,b
+socializr,Socializr,,web,San Francisco,USD,a
+eurekster,Eurekster,0,web,,USD,a
+eurekster,Eurekster,0,web,,USD,b
+gydget,Gydget,,web,San Francisco,USD,a
+pickspal,PicksPal,,web,Mountain View,USD,c
+gigya,Gigya,,web,Palo Alto,USD,a
+gigya,Gigya,,web,Palo Alto,USD,b
+songbird,Songbird,,web,San Francisco,USD,seed
+guardiananalytics,Guardian Analytics,,web,Los Altos,USD,b
+fora-tv,Fora.TV,,web,San Francisco,USD,a
+disqus,Disqus,3,web,San Francisco,USD,a
+sezwho,SezWho,9,web,Los Altos,USD,a
+yieldbuild,YieldBuild,,web,San Francisco,USD,b
+akimbo,Akimbo,,web,San Mateo,USD,c
+akimbo,Akimbo,,web,San Mateo,USD,b
+akimbo,Akimbo,,web,San Mateo,USD,seed
+akimbo,Akimbo,,web,San Mateo,USD,d
+laszlosystems,Laszlo Systems,60,software,San Mateo,USD,c
+laszlosystems,Laszlo Systems,60,software,San Mateo,USD,b
+brightroll,BrightRoll,,web,San Francisco,USD,b
+merchantcircle,MerchantCircle,10,web,Los Altos,USD,b
+minekey,Minekey,,web,Sunnyvale,USD,a
+bookingangel,Booking Angel,,web,Hollywood,USD,angel
+loopt,Loopt,,web,Mountain View,USD,seed
+loopt,Loopt,,web,Mountain View,USD,b
+fix8,Fix8,,web,Sherman Oaks,USD,a
+fix8,Fix8,,web,Sherman Oaks,USD,b
+mybuys,MyBuys,,web,Redwood Shores,USD,a
+mybuys,MyBuys,,web,Redwood Shores,USD,b
+blackarrow,BlackArrow,35,web,San Mateo,USD,b
+blackarrow,BlackArrow,35,web,San Mateo,USD,a
+peerflix,Peerflix,,web,Palo Alto,USD,b
+peerflix,Peerflix,,web,Palo Alto,USD,a
+fatdoor,fatdoor,,web,Palo Alto,USD,a
+fatdoor,fatdoor,,web,Palo Alto,USD,angel
+fatdoor,fatdoor,,web,Palo Alto,USD,debt_round
+verimatrix,Verimatrix,100,web,San Diego,USD,b
+verimatrix,Verimatrix,100,web,San Diego,USD,c
+billeo,Billeo,,web,Santa Clara,USD,b
+billeo,Billeo,,web,Santa Clara,USD,a
+caring-com,Caring.com,,web,San Mateo,USD,a
+ask-com,Ask.com,475,web,Oakland,USD,a
+projectplaylist,Project Playlist,,web,Palo Alto,USD,a
+blowtorch,Blowtorch,,web,Sausalito,USD,a
+gamelayers,GameLayers,,web,San Francisco,USD,seed
+mogreet,MoGreet,,web,Venice,USD,a
+mogreet,MoGreet,,web,Venice,USD,b
+yourtrumanshow,YourTrumanShow,,web,San Francisco,USD,angel
+apprema,Apprema,,web,Sunnyvale,USD,debt_round
+trustedid,TrustedID,100,web,Redwood City,USD,a
+trustedid,TrustedID,100,web,Redwood City,USD,b
+seeqpod,Seeqpod,25,web,Emeryville,USD,angel
+quantenna,Quantenna,,web,Sunnyvale,USD,b
+qwaq,Qwaq,,web,Palo Alto,USD,b
+uber,uber,24,web,Beverly Hills,USD,b
+cashview,CashView,,web,Palo Alto,USD,b
+crossloop,CrossLoop,8,web,Monterey,USD,a
+dapper,Dapper,20,web,San Francisco,USD,a
+anchorintelligence,Anchor Intelligence,,web,Mountain View,USD,a
+anchorintelligence,Anchor Intelligence,,web,Mountain View,USD,b
+edgecast,EdgeCast,30,web,Los Angeles,USD,b
+edgecast,EdgeCast,30,web,Los Angeles,USD,a
+kosmix,Kosmix,,web,Mountain View,USD,c
+goodreads,GoodReads,,web,Santa Monica,USD,angel
+ribbit,Ribbit,28,web,Mountain View,USD,b
+ribbit,Ribbit,28,web,Mountain View,USD,a
+jobvite,Jobvite,,web,San Francisco,USD,a
+juicewireless,Juice Wireless,,web,Los Angeles,USD,a
+juicewireless,Juice Wireless,,web,Los Angeles,USD,a
+juicewireless,Juice Wireless,,web,Los Angeles,USD,a
+juicewireless,Juice Wireless,,web,Los Angeles,USD,b
+juicewireless,Juice Wireless,,web,Los Angeles,USD,c
+qik,Qik,22,web,Foster City,USD,b
+playfirst,PlayFirst,,web,San Francisco,USD,c
+playfirst,PlayFirst,,web,San Francisco,USD,b
+mobissimo,Mobissimo,15,web,San Francisco,USD,seed
+chumby,Chumby,20,hardware,San Diego,USD,a
+chumby,Chumby,20,hardware,San Diego,USD,b
+ugobe,UGOBE,,web,Emeryville,USD,b
+ausra,Ausra,4,web,Palo Alto,USD,a
+causes,Causes,,web,Berkeley,USD,a
+causes,Causes,,web,Berkeley,USD,b
+nanosolar,Nanosolar,,web,San Jose,USD,b
+nanosolar,Nanosolar,,web,San Jose,USD,c
+shozu,Shozu,,web,San Francisco,USD,b
+shozu,Shozu,,web,San Francisco,USD,c
+tesla-motors,Tesla Motors,270,hardware,San Carlos,USD,c
+tesla-motors,Tesla Motors,270,hardware,San Carlos,USD,d
+tesla-motors,Tesla Motors,270,hardware,San Carlos,USD,a
+tesla-motors,Tesla Motors,270,hardware,San Carlos,USD,b
+tesla-motors,Tesla Motors,270,hardware,San Carlos,USD,e
+bunchball,Bunchball,,web,Redwood City,USD,a
+bunchball,Bunchball,,web,Redwood City,USD,b
+pinger,Pinger,,web,San Jose,USD,b
+hooja,Hooja,,web,Palo Alto,USD,seed
+travelmuse,TravelMuse,11,web,Los Altos,USD,a
+cooking-com,Cooking.com,,web,Santa Monica,USD,debt_round
+cooking-com,Cooking.com,,web,Santa Monica,USD,e
+cooking-com,Cooking.com,,web,Santa Monica,USD,b
+cooking-com,Cooking.com,,web,Santa Monica,USD,c
+meraki,Meraki,,web,Mountain View,USD,a
+meraki,Meraki,,web,Mountain View,USD,b
+sugarcrm,SugarCRM,,web,Cupertino,USD,d
+sugarcrm,SugarCRM,,web,Cupertino,USD,c
+sugarcrm,SugarCRM,,web,Cupertino,USD,a
+sugarcrm,SugarCRM,,web,Cupertino,USD,b
+puddingmedia,Pudding Media,11,software,San Jose,USD,a
+4homemedia,4HomeMedia,10,web,Sunnyvale,USD,a
+pageonce,Pageonce,,web,Palo Alto,USD,a
+bluepulse,bluepulse,0,web,San Mateo,USD,a
+mogad,Mogad,2,web,San Francisco,USD,a
+devicevm,DeviceVM,,web,San Jose,USD,a
+devicevm,DeviceVM,,web,San Jose,USD,b
+outspark,Outspark,,web,San Francisco,USD,a
+outspark,Outspark,,web,San Francisco,USD,b
+engineyard,Engine Yard,60,web,San Francisco,USD,a
+engineyard,Engine Yard,60,web,San Francisco,USD,b
+plymedia,PLYmedia,,web,Palo Alto,USD,a
+plymedia,PLYmedia,,web,Palo Alto,USD,b
+fabrik,fabrik,175,web,San Mateo,USD,a
+fabrik,fabrik,175,web,San Mateo,USD,b
+fabrik,fabrik,175,web,San Mateo,USD,c
+fabrik,fabrik,175,web,San Mateo,USD,d
+widgetbox,Widgetbox,,web,San Francisco,USD,angel
+widgetbox,Widgetbox,,web,San Francisco,USD,b
+widgetbox,Widgetbox,,web,San Francisco,USD,a
+razorgator,RazorGator,,web,Los Angeles,USD,a
+razorgator,RazorGator,,web,Los Angeles,USD,b
+oversee,OverSee,150,web,Los Angeles,USD,debt_round
+oversee,OverSee,150,web,Los Angeles,USD,a
+zynga,Zynga,90,other,San Francisco,USD,a
+zynga,Zynga,90,other,San Francisco,USD,b
+smaato,Smaato,,web,San Mateo,USD,a
+credit-karma,Credit Karma,4,web,San Francisco,USD,angel
+greenplum,Greenplum,,web,San Mateo,USD,c
+greenplum,Greenplum,,web,San Mateo,USD,b
+greenplum,Greenplum,,web,San Mateo,USD,a
+greenplum,Greenplum,,web,San Mateo,USD,debt_round
+amobee,Amobee,,web,Redwood City,USD,a
+amobee,Amobee,,web,Redwood City,USD,b
+webmynd,WebMynd,,web,San Francisco,USD,angel
+currenttv,Current Media,,web,San Francisco,USD,a
+heroku,Heroku,3,web,San Francisco,USD,seed
+heroku,Heroku,3,web,San Francisco,USD,a
+lookery,Lookery,9,web,San Francisco,USD,seed
+mill-river-labs,Mill River Labs,5,web,Mountain View,USD,angel
+grouptivity,Grouptivity,10,web,San Mateo,USD,angel
+aductions,Aductions,5,web,San Jose,USD,seed
+venturebeat,VentureBeat,,web,,USD,seed
+collarity,Collarity,30,web,Palo Alto,USD,b
+rocketon,RocketOn,,web,South San Francisco,USD,b
+what-they-like,What They Like,10,web,San Francisco,USD,a
+gumgum,GumGum,5,web,Los Angeles,USD,seed
+gumgum,GumGum,5,web,Los Angeles,USD,a
+snap-technologies,Snap Technologies,32,web,Pasadena,USD,a
+twofish,TwoFish,,web,Redwood City,USD,a
+three-rings,Three Rings,30,web,San Francisco,USD,a
+smalltown,Smalltown,8,web,San Mateo,USD,a
+sparkplay-media,Sparkplay Media,,web,Mill Valley,USD,a
+mog,MOG,,web,Berkeley,USD,angel
+mog,MOG,,web,Berkeley,USD,a
+social-gaming-network,Social Gaming Network,,web,Palo Alto,USD,a
+danger,Danger,,software,Palo Alto,USD,b
+danger,Danger,,software,Palo Alto,USD,d
+danger,Danger,,software,Palo Alto,USD,d
+coverity,Coverity,,software,San Francisco,USD,a
+genietown,GenieTown,8,web,Palo Alto,USD,a
+redux,Redux,11,web,Berkeley,USD,seed
+redux,Redux,11,web,Berkeley,USD,a
+evernote,Evernote,,software,Sunnyvale,USD,angel
+evernote,Evernote,,software,Sunnyvale,USD,angel
+numobiq,Numobiq,,mobile,Pleasanton,USD,a
+goldspot-media,GoldSpot Media,,mobile,Sunnyvale,USD,a
+mobixell,Mobixell,,mobile,Cupertino,USD,a
+ad-infuse,Ad Infuse,,mobile,San Francisco,USD,b
+ad-infuse,Ad Infuse,,mobile,San Francisco,USD,a
+sendme,SendMe,,mobile,San Francisco,USD,b
+sendme,SendMe,,mobile,San Francisco,USD,c
+tiny-pictures,Tiny Pictures,15,mobile,San Francisco,USD,a
+tiny-pictures,Tiny Pictures,15,mobile,San Francisco,USD,b
+flurry,flurry,,mobile,San Francisco,USD,a
+sharpcast,Sharpcast,,,Palo Alto,USD,a
+sharpcast,Sharpcast,,,Palo Alto,USD,b
+teneros,Teneros,,software,Mountain View,USD,a
+teneros,Teneros,,software,Mountain View,USD,b
+teneros,Teneros,,software,Mountain View,USD,c
+teneros,Teneros,,software,Mountain View,USD,d
+photocrank,PhotoCrank,3,web,Palo Alto,USD,seed
+yodlee,Yodlee,,web,Redwood City,USD,unattributed
+sliderocket,SlideRocket,5,web,San Francisco,USD,a
+surf-canyon,Surf Canyon,3,software,Oakland,USD,seed
+surf-canyon,Surf Canyon,3,software,Oakland,USD,seed
+central-desktop,Central Desktop,,web,Pasadena,USD,a
+opendns,OpenDNS,15,web,San Francisco,USD,a
+coveo,Coveo,,web,Palo Alto,USD,a
+vizu,Vizu,,web,San Francisco,USD,a
+vizu,Vizu,,web,San Francisco,USD,b
+taltopia,Taltopia,,web,Los Angeles,USD,angel
+kapow-technologies,Kapow Technologies,,web,Palo Alto,USD,c
+kapow-technologies,Kapow Technologies,,web,Palo Alto,EUR,b
+programmermeetdesigner-com,ProgrammerMeetDesigner.com,4,web,Los Angeles,USD,seed
+liveops,LiveOps,,web,Santa Clara,USD,b
+liveops,LiveOps,,web,Santa Clara,USD,c
+clickpass,Clickpass,,web,San Francisco,USD,seed
+searchme,SearchMe,52,web,Mountain View,USD,a
+searchme,SearchMe,52,web,Mountain View,USD,b
+searchme,SearchMe,52,web,Mountain View,USD,c
+searchme,SearchMe,52,web,Mountain View,USD,d
+searchme,SearchMe,52,web,Mountain View,USD,e
+accountnow,AccountNow,,web,San Ramon,USD,c
+dailystrength,DailyStrength,14,web,Los Angeles,USD,a
+popularmedia,PopularMedia,,web,San Francisco,USD,unattributed
+popularmedia,PopularMedia,,web,San Francisco,USD,c
+clarizen,Clarizen,5,web,San Mateo,USD,b
+sellpoint,SellPoint,,web,San Ramon,USD,a
+livedeal,LiveDeal,,web,Santa Clara,USD,a
+neoedge-networks,NeoEdge Networks,,web,Mountain View,USD,b
+zuora,Zuora,30,web,Redwood City,USD,a
+jivox,Jivox,,web,San Mateo,USD,seed
+jivox,Jivox,,web,San Mateo,USD,a
+elastra,Elastra,,,San Francisco,USD,a
+kwiry,kwiry,3,mobile,San Francisco,USD,a
+supplyframe,SupplyFrame,25,web,Pasadena,USD,b
+inmage-systems,InMage Systems,,software,Santa Clara,USD,b
+authenticlick,Authenticlick,20,web,Los Angeles,USD,a
+interneer,Interneer,6,web,Agoura Hills,USD,angel
+interneer,Interneer,6,web,Agoura Hills,USD,a
+handipoints,Handipoints,,web,Oakland,USD,seed
+handipoints,Handipoints,,web,Oakland,USD,angel
+adconion-media-group,Adconion Media Group,150,web,Santa Monica,USD,c
+zend-technologies,Zend Technologies,,,Cupertino,USD,d
+zend-technologies,Zend Technologies,,,Cupertino,USD,c
+slideshare,SlideShare,10,web,San Francisco,USD,a
+intent,Intent,6,web,Santa Monica,USD,angel
+wikimedia-foundation,Wikimedia Foundation,,web,San Francisco,USD,unattributed
+clearwell-systems,Clearwell Systems,75,software,Mountain View,USD,c
+become,Become,,web,Mountain View,USD,c
+become,Become,,web,Mountain View,USD,d
+bubble-motion,Bubble Motion,,mobile,Mountain View,USD,b
+bubble-motion,Bubble Motion,,mobile,Mountain View,USD,a
+perfect-market,Perfect Market,,web,Pasadena,USD,a
+glassdoor,Glassdoor,12,web,Sausalito,USD,b
+support-space,Support Space,,web,Redwood City,USD,a
+xoopit,Xoopit,,web,San Francisco,USD,angel
+xoopit,Xoopit,,web,San Francisco,USD,a
+reality-digital,Reality Digital,,software,San Francisco,USD,a
+reality-digital,Reality Digital,,software,San Francisco,USD,b
+cloud9-analytics,Cloud9 Analytics,,web,San Mateo,USD,a
+netcipia,Netcipia,3,web,Palo Alto,USD,angel
+icontrol,iControl,,web,Palo Alto,USD,b
+icontrol,iControl,,web,Palo Alto,USD,a
+frengo,Frengo,,web,San Mateo,USD,a
+frengo,Frengo,,web,San Mateo,USD,b
+mblox,mBlox,,mobile,Sunnyvale,USD,d
+mblox,mBlox,,mobile,Sunnyvale,USD,c
+mblox,mBlox,,mobile,Sunnyvale,USD,b
+mblox,mBlox,,mobile,Sunnyvale,USD,e
+esolar,eSolar,10,hardware,Pasadena,USD,a
+esolar,eSolar,10,hardware,Pasadena,USD,b
+marin-software,Marin Software,,software,San Francisco,USD,a
+marin-software,Marin Software,,software,San Francisco,USD,b
+sibeam,SiBEAM,,hardware,Sunnyvale,USD,seed
+sibeam,SiBEAM,,hardware,Sunnyvale,USD,a
+sibeam,SiBEAM,,hardware,Sunnyvale,USD,b
+sibeam,SiBEAM,,hardware,Sunnyvale,USD,c
+lumosity,Lumos Labs,,web,San Francisco,USD,angel
+lumosity,Lumos Labs,,web,San Francisco,USD,a
+irise,iRise,150,software,El Segundo,USD,unattributed
+richrelevance,richrelevance,,web,San Francisco,USD,b
+labmeeting,Labmeeting,,web,,USD,seed
+shopflick,Shopflick,10,web,Los Angeles,USD,angel
+shopflick,Shopflick,10,web,Los Angeles,USD,a
+turnhere,TurnHere,35,web,Emeryville,USD,a
+turnhere,TurnHere,35,web,Emeryville,USD,seed
+coupa,Coupa,,web,Foster City,USD,a
+coupa,Coupa,,web,Foster City,USD,b
+squaretrade,SquareTrade,,hardware,San Francisco,USD,seed
+squaretrade,SquareTrade,,hardware,San Francisco,USD,b
+v-enable,V-Enable,,mobile,San Diego,USD,c
+v-enable,V-Enable,,mobile,San Diego,USD,b
+aeria,Aeria,,web,Santa Clara,USD,seed
+heysan,Heysan,6,mobile,San Francisco,USD,seed
+memeo,Memeo,,software,Aliso Viejo,USD,b
+imageshack,imageshack,,web,Los Gatos,USD,a
+pluggedin,PluggedIn,,,Santa Monica,USD,unattributed
+cellspin,CellSpin,12,mobile,San Jose,USD,angel
+remixation,Remixation,5,web,San Francisco,USD,a
+the-auteurs,The Auteurs,9,web,Palo Alto,USD,a
+modern-feed,Modern Feed,,web,Los Angeles,USD,seed
+grou-ps,GROU.PS,,web,San Francisco,USD,a
+triggit,Triggit,5,web,San Francisco,USD,seed
+triggit,Triggit,5,web,San Francisco,USD,angel
+serious-business,Serious Business,6,web,San Francisco,USD,unattributed
+presdo,Presdo,1,web,Mountain View,USD,seed
+nile-guide,Nile Guide,,web,San Francisco,USD,b
+adify,Adify,10,web,San Bruno,USD,a
+adify,Adify,10,web,San Bruno,USD,b
+invensense,Invensense,,hardware,Sunnyvale,USD,c
+centerd,Center'd,,web,Menlo Park,USD,angel
+centerd,Center'd,,web,Menlo Park,USD,a
+centerd,Center'd,,web,Menlo Park,USD,debt_round
+new-relic,New Relic,,web,,USD,a
+gridstone-research,Gridstone Research,,software,San Mateo,USD,b
+fusionops,FusionOps,10,software,Sunnyvale,USD,a
+marketlive,MarketLive,,software,Foster City,USD,e
+snaplogic,SnapLogic,,software,San Mateo,USD,a
+boardwalktech,Boardwalktech,20,software,Palo Alto,USD,angel
+rosum,Rosum,,hardware,Mountain View,USD,b
+citizenhawk,CitizenHawk,,,Aliso Viejo,USD,unattributed
+dilithium-networks,Dilithium Networks,,web,Petaluma,USD,b
+dilithium-networks,Dilithium Networks,,web,Petaluma,USD,c
+dilithium-networks,Dilithium Networks,,web,Petaluma,USD,d
+passenger,Passenger,,,Los Angeles,USD,b
+passenger,Passenger,,,Los Angeles,USD,c
+experience-project,Experience Project,,web,San Francisco,USD,a
+mozes,Mozes,,web,Palo Alto,USD,a
+mozes,Mozes,,web,Palo Alto,USD,b
+rvita,rVita,6,software,Santa Clara,USD,angel
+mefeedia,Mefeedia,6,web,Burbank,USD,angel
+wavemaker-software,Wavemaker Software,,software,San Francisco,USD,a
+virtuallogix,VirtualLogix,,software,Sunnyvale,USD,b
+fonemesh,Fonemesh,7,software,San Francisco,USD,angel
+fonemesh,Fonemesh,7,software,San Francisco,USD,seed
+cognition-technologies,Cognition Technologies,20,software,Culver City,USD,unattributed
+sometrics,Sometrics,,web,Los Angeles,USD,a
+socialvibe,SocialVibe,,web,Los Angeles,USD,a
+deviantart,deviantART,,web,Hollywood,USD,a
+mythings,MyThings,,web,Menlo Park,USD,a
+mywaves,mywaves,35,mobile,Sunnyvale,USD,a
+litescape,litescape,,web,Redwood Shores,USD,b
+nextbio,nextbio,,,Cupertino,USD,b
+parascale,Parascale,,software,Cupertino,USD,a
+row44,Row44,,hardware,Westlake Village,USD,a
+jellycloud,JellyCloud,,web,Redwood City,USD,a
+aster-data-systems,Aster Data Systems,50,software,Redwood City,USD,angel
+aster-data-systems,Aster Data Systems,50,software,Redwood City,USD,a
+pixim,Pixim,,hardware,Mountain View,USD,b
+pixim,Pixim,,hardware,Mountain View,USD,a
+pixim,Pixim,,hardware,Mountain View,USD,b
+funambol,Funambol,,mobile,Redwood City,USD,a
+funambol,Funambol,,mobile,Redwood City,USD,a
+funambol,Funambol,,mobile,Redwood City,USD,b
+funambol,Funambol,,mobile,Redwood City,USD,debt_round
+moblyng,Moblyng,,web,Menlo Park,USD,b
+moblyng,Moblyng,,web,Menlo Park,USD,a
+zecter,Zecter,3,web,Mountain View,USD,seed
+votigo,Votigo,,web,Emeryville,USD,a
+zinio,Zinio,,web,San Francisco,USD,a
+dreamfactory,Dreamfactory,,web,Mountain View,USD,a
+greennote,GreenNote,15,web,Redwood City,USD,a
+skyfire,Skyfire,,software,Mountain View,USD,a
+skyfire,Skyfire,,software,Mountain View,USD,b
+edufire,eduFire,,web,Santa Monica,USD,angel
+b-hive-networks,B-hive Networks,,software,San Mateo,USD,a
+vmware,VMware,5000,,Palo Alto,USD,unattributed
+katalyst-media,Katalyst Media,11,,Los Angeles,USD,a
+neurovigil,NeuroVigil,5,biotech,La Jolla,USD,seed
+sylantro,Sylantro,,web,Campbell,USD,e
+sylantro,Sylantro,,web,Campbell,USD,d
+sylantro,Sylantro,,web,Campbell,USD,c
+teleflip,TeleFlip,,mobile,Santa Monica,USD,b
+vidshadow,Vidshadow,16,web,Placentia,USD,a
+jigsaw,Jigsaw,,web,San Mateo,USD,a
+jigsaw,Jigsaw,,web,San Mateo,USD,b
+jigsaw,Jigsaw,,web,San Mateo,USD,c
+ozmo-devices,Ozmo Devices,,hardware,Palo Alto,USD,a
+cooliris,Cooliris,,web,Menlo Park,USD,a
+gamook,Gamook,,web,Menlo Park,USD,a
+vindicia,Vindicia,,web,Redwood City,USD,c
+dizzywood,Dizzywood,,web,,USD,a
+limbo,Limbo,37,web,Burlingame,USD,b
+startforce,StartForce,21,web,San Francisco,USD,a
+coolearth,coolearth,9,cleantech,Livermore,USD,a
+coolearth,coolearth,9,cleantech,Livermore,USD,angel
+yield-software,Yield Software,,web,San Mateo,USD,b
+tapulous,Tapulous,9,web,Palo Alto,USD,angel
+codefast,Codefast,,software,San Jose,USD,a
+hyperic,Hyperic,,web,San Francisco,USD,a
+ipling-2,iPling :)),7,mobile,San Francisco,USD,angel
+intacct,Intacct,100,software,San Jose,USD,unattributed
+intacct,Intacct,100,software,San Jose,USD,unattributed
+vivaty,Vivaty,25,web,Menlo Park,USD,a
+aurora-biofuels,Aurora Biofuels,,cleantech,Alameda,USD,b
+eeye,eEye,,,Irvine,USD,d
+eeye,eEye,,,Irvine,USD,c
+allbusiness-com,AllBusiness.com,50,other,San Francisco,USD,b
+allbusiness-com,AllBusiness.com,50,other,San Francisco,USD,c
+insideview,InsideView,40,software,San Francisco,USD,a
+clickability,Clickability,,software,San Francisco,USD,debt_round
+keibi-technologies,Keibi Technologies,30,software,San Francisco,USD,b
+robodynamics,RoboDynamics,5,hardware,Santa Monica,USD,seed
+robodynamics,RoboDynamics,5,hardware,Santa Monica,USD,angel
+imagespan,ImageSpan,,web,Sausalito,USD,b
+solarflare,Solarflare,,hardware,Irvine,USD,unattributed
+clupedia,Clupedia,,web,Santa Ana,USD,a
+zigabid,Zigabid,10,other,La Canada,USD,seed
+zigabid,Zigabid,10,other,La Canada,USD,angel
+inthrma,InThrMa,3,software,Oakland,USD,seed
+webaroo,Webaroo,,,Santa Clara,USD,b
+webaroo,Webaroo,,,Santa Clara,USD,c
+fluid-entertainment,Fluid Entertainment,,other,Mill Valley,USD,a
+unisfair,Unisfair,,other,Menlo Park,USD,b
+on24,ON24,,web,San Francisco,USD,unattributed
+trueanthem,trueAnthem,10,other,Newport Beach,USD,angel
+colizer,Colizer,,web,San Diego,USD,a
+coremetrics,Coremetrics,,software,San Mateo,USD,d
+coremetrics,Coremetrics,,software,San Mateo,USD,e
+minted,Minted,,,San Francisco,USD,seed
+appirio,Appirio,,software,San Mateo,USD,a
+appirio,Appirio,,software,San Mateo,USD,b
+samfind,samfind,3,web,Los Angeles,USD,seed
+eye-fi,Eye-Fi,,hardware,Mountain View,USD,a
+responselogix,ResponseLogix,,web,Sunnyvale,USD,a
+qumu,Qumu,,software,Emeryville,USD,c
+carbonflow,CarbonFlow,,cleantech,San Francsico,USD,a
+allvoices,Allvoices,8,web,San Francisco,USD,a
+moxsie,Moxsie,,web,Palo Alto,USD,a
+service-now-com,Service-now.com,80,web,Solana Beach,USD,a
+service-now-com,Service-now.com,80,web,Solana Beach,USD,b
+anvato,Anvato,,web,Mountain View,USD,seed
+vantage-media,Vantage Media,150,web,El Segundo,USD,a
+entone-technologies,Entone Technologies,80,hardware,San Mateo,USD,b
+entone-technologies,Entone Technologies,80,hardware,San Mateo,USD,a
+750-industries,750 Industries,7,web,San Francisco,USD,a
+plastic-logic,Plastic Logic,,hardware,Mountain View,USD,a
+plastic-logic,Plastic Logic,,hardware,Mountain View,USD,b
+plastic-logic,Plastic Logic,,hardware,Mountain View,USD,c
+plastic-logic,Plastic Logic,,hardware,Mountain View,USD,d
+plastic-logic,Plastic Logic,,hardware,Mountain View,USD,e
+paymo,Paymo,,mobile,San Francisco,USD,seed
+brilliant-telecom,Brilliant Telecom,,,Campbell,USD,a
+skygrid,SkyGrid,,web,Sunnyvale,USD,b
+intensedebate,Intense Debate,4,web,Boulder,USD,seed
+associatedcontent,Associated Content,,web,Denver,USD,a
+associatedcontent,Associated Content,,web,Denver,USD,b
+madkast,madKast,,web,Boulder,USD,seed
+madkast,madKast,,web,Boulder,USD,a
+eventvue,EventVue,,web,Boulder,USD,seed
+eventvue,EventVue,,web,Boulder,USD,a
+socialthing,Socialthing!,6,web,Boulder,USD,seed
+socialthing,Socialthing!,6,web,Boulder,USD,debt_round
+jsquaredmedia,J Squared Media,,web,Boulder,USD,seed
+searchtophone,Search to Phone,,web,Boulder,USD,seed
+filtrbox,Filtrbox,,web,Boulder,USD,seed
+filtrbox,Filtrbox,,web,Boulder,USD,seed
+brightkite,Brightkite,,web,Denver,USD,seed
+brightkite,Brightkite,,web,Denver,USD,angel
+newsgator,NewsGator,,web,Denver,USD,a
+newsgator,NewsGator,,web,Denver,USD,c
+newsgator,NewsGator,,web,Denver,USD,b
+me-dium,Me.dium,,web,Boulder,USD,b
+buzzwire,Buzzwire,,web,Denver,USD,b
+hivelive,HiveLive,,web,Boulder,USD,angel
+hivelive,HiveLive,,web,Boulder,USD,a
+xaware,XAware,,web,Colorado Springs,USD,b
+xaware,XAware,,web,Colorado Springs,USD,a
+lijit,Lijit,,web,Boulder,USD,a
+lijit,Lijit,,web,Boulder,USD,b
+hubbuzz,hubbuzz,8,web,Centennial,USD,angel
+gnip,Gnip,6,web,Boulder,USD,a
+collective-intellect,Collective Intellect,,,Boulder,USD,a
+collective-intellect,Collective Intellect,,,Boulder,USD,b
+rally-software,Rally Software,,software,Boulder,USD,c
+rally-software,Rally Software,,software,Boulder,USD,b
+symplified,Symplified,,software,Boulder,USD,a
+indeed,Indeed,,web,Stamford,USD,a
+geezeo,Geezeo,,web,Hartford,USD,unattributed
+entrecard,Entrecard,1,web,Hamden,USD,seed
+entrecard,Entrecard,1,web,Hamden,USD,seed
+americantowns-com,AmericanTowns.com,10,web,Fairfield,USD,a
+americantowns-com,AmericanTowns.com,10,web,Fairfield,USD,b
+kayak,Kayak,58,web,Norwalk,USD,c
+kayak,Kayak,58,web,Norwalk,USD,b
+kayak,Kayak,58,web,Norwalk,USD,d
+gocrosscampus,GoCrossCampus,25,web,New Haven,USD,seed
+health-plan-one,Health Plan One,,web,Shelton,USD,a
+your-survival,Your Survival,10,web,Westport,USD,angel
+media-lantern,Media Lantern,9,web,New London,USD,seed
+gridpoint,GridPoint,,cleantech,Washington,USD,d
+gridpoint,GridPoint,,cleantech,Washington,USD,b
+gridpoint,GridPoint,,cleantech,Washington,USD,c
+gridpoint,GridPoint,,cleantech,Washington,USD,d
+hotpads-com,HotPads,11,web,Washington,USD,a
+launchbox,LaunchBox,,web,Washinton,USD,a
+cogent,Cogent,,web,Washington,USD,seed
+swapdrive,SwapDrive,,web,Washington,USD,a
+swapdrive,SwapDrive,,web,Washington,USD,a
+searchles,Searchles,,web,Washington,USD,angel
+payperpost,PayPerPost,,web,Orlando,USD,b
+payperpost,PayPerPost,,web,Orlando,USD,a
+affinityinternet,Affinity Internet,,web,Fort Lauderdale,USD,a
+affinityinternet,Affinity Internet,,web,Fort Lauderdale,USD,a
+multiply,Multiply,,web,Boca Raton,USD,a
+multiply,Multiply,,web,Boca Raton,USD,a
+multiply,Multiply,,web,Boca Raton,USD,b
+revolutionmoney,Revolution Money,,web,Largo,USD,b
+batanga,Batanga,,web,Miami,USD,c
+batanga,Batanga,,web,Miami,USD,b
+divorce360,divorce360,6,web,North Palm Beach,USD,a
+infinitybox,Infinity Box,3,web,Tampa,USD,seed
+infinitybox,Infinity Box,3,web,Tampa,USD,angel
+moli,MOLI,,web,West Palm Beach,USD,b
+global-roaming,Global Roaming,29,mobile,Miami,USD,a
+global-roaming,Global Roaming,29,mobile,Miami,USD,b
+slingpage,Slingpage,8,software,Estero,USD,angel
+wrapmail,WrapMail,10,web,Fort Lauderdale,USD,seed
+ejamming,eJamming,,web,Boca Raton,USD,unattributed
+lehigh-technologies,Lehigh Technologies,,cleantech,Naples,USD,unattributed
+tournease,TournEase,10,web,Lakeland,USD,angel
+tournease,TournEase,10,web,Lakeland,USD,angel
+vitrue,Vitrue,,web,Atlanta,USD,b
+vitrue,Vitrue,,web,Atlanta,USD,seed
+screamingsports,Screaming Sports,,web,Atlanta,USD,a
+berecruited,beRecruited,,web,Atlanta,USD,a
+mfg,MFG,,web,Atlanta,USD,a
+mfg,MFG,,web,Atlanta,USD,c
+mfg,MFG,,web,Atlanta,USD,d
+scintella-solutions,Scintella Solutions,2,consulting,Atlanta,USD,seed
+scribestorm,ScribeStorm,12,web,Fairfield,USD,angel
+balihoo,Balihoo,,mobile,Boise,USD,a
+balihoo,Balihoo,,mobile,Boise,USD,b
+info,Info,,web,Chicago,USD,a
+feedburner,FeedBurner,,web,Chicago,USD,a
+feedburner,FeedBurner,,web,Chicago,USD,b
+viewpoints,Viewpoints,,web,Chicago,USD,a
+grubhub,GrubHub,,web,Chicago,USD,a
+ticketsnow,TicketsNow,,web,Rolling Meadows,USD,a
+the-point,The Point,,web,Chicago,USD,angel
+the-point,The Point,,web,Chicago,USD,a
+inkling,Inkling,2,web,Chicago,USD,seed
+crowdspring,crowdSPRING,6,web,Chicago,USD,angel
+ifbyphone,Ifbyphone,16,web,Skokie,USD,a
+fave-media,Fave Media,18,web,Chicago,USD,a
+accertify,Accertify,,web,Schaumburg,USD,a
+firefly-energy,Firefly Energy,,cleantech,Peoria,USD,a
+firefly-energy,Firefly Energy,,cleantech,Peoria,USD,c
+firefly-energy,Firefly Energy,,cleantech,Peoria,USD,b
+savo,SAVO,68,software,Chicago,USD,a
+chacha,ChaCha,75,web,Carmel,USD,a
+chacha,ChaCha,75,web,Carmel,USD,b
+betterworld,Better World Books,,web,Mishawaka,USD,a
+compendium-blogware,Compendium Blogware,25,software,Indianapolis,USD,angel
+compendium-blogware,Compendium Blogware,25,software,Indianapolis,USD,angel
+instagarage,Instagarage,4,web,New Orleans,USD,seed
+iskoot,iSkoot,,web,Cambridge,USD,b
+iskoot,iSkoot,,web,Cambridge,USD,a
+gotuitmedia,Gotuit Media,,web,Woburn,USD,b
+gotuitmedia,Gotuit Media,,web,Woburn,USD,a
+carbonite,Carbonite,68,web,Boston,USD,a
+carbonite,Carbonite,68,web,Boston,USD,a
+carbonite,Carbonite,68,web,Boston,USD,b
+carbonite,Carbonite,68,web,Boston,USD,b
+scanscout,ScanScout,40,web,Boston,USD,a
+scanscout,ScanScout,40,web,Boston,USD,angel
+going,Going,,web,Boston,USD,a
+brightcove,Brightcove,,web,Cambridge,USD,a
+brightcove,Brightcove,,web,Cambridge,USD,b
+brightcove,Brightcove,,web,Cambridge,USD,c
+brightcove,Brightcove,,web,Cambridge,USD,b
+brightcove,Brightcove,,web,Cambridge,USD,d
+permissiontv,PermissionTV,,web,Waltham,USD,c
+bountii,Bountii,,web,Boston,USD,seed
+conduitlabs,Conduit Labs,,web,Cambridge,USD,a
+zoominfo,ZoomInfo,80,web,Waltham,USD,a
+zoominfo,ZoomInfo,80,web,Waltham,USD,a
+vlingo,Vlingo,,web,Cambridge,USD,b
+vtap,Vtap,,web,Andover,USD,b
+mocospace,MocoSpace,25,mobile,Boston,USD,a
+quattro-wireless,Quattro Wireless,,web,Waltham,USD,a
+quattro-wireless,Quattro Wireless,,web,Waltham,USD,b
+care-com,Care.com,,web,Waltham,USD,a
+onforce,OnForce,,web,Lexington,USD,a
+onforce,OnForce,,web,Lexington,USD,a
+ratepoint,RatePoint,,web,Needham,USD,a
+updown,UpDown,5,web,Cambridge,USD,angel
+eons,Eons,,web,Boston,USD,b
+eons,Eons,,web,Boston,USD,a
+gamerdna,GamerDNA,,web,Cambridge,USD,a
+mixandmeet,Mix & Meet,2,web,Cambridge,USD,angel
+sermo,Sermo,,web,Cambridge,USD,c
+sermo,Sermo,,web,Cambridge,USD,b
+sermo,Sermo,,web,Cambridge,USD,a
+worklight,WorkLight,30,web,Newton,USD,a
+worklight,WorkLight,30,web,Newton,USD,b
+matchmine,MatchMine,,web,Needham,USD,a
+condodomain,CondoDomain,4,other,Boston,USD,angel
+utest,uTest,10,web,Ashland,USD,a
+compete,Compete,,web,Boston,USD,c
+compete,Compete,,web,Boston,USD,b
+azuki,Azuki Systems,30,web,Acton,USD,a
+acinion,Acinion,,web,Acton,USD,a
+acinion,Acinion,,web,Acton,USD,b
+xkoto,xkoto,45,software,Waltham,USD,b
+hubspot,HubSpot,30,web,Cambridge,USD,a
+hubspot,HubSpot,30,web,Cambridge,USD,b
+hubspot,HubSpot,30,web,Cambridge,USD,seed
+utterz,Utterz,3,mobile,Maynard,USD,a
+intronis,Intronis,,web,Boston,USD,a
+acquia,Acquia,11,web,Andover,USD,a
+a123systems,A123Systems,,web,Watertown,USD,d
+a123systems,A123Systems,,web,Watertown,USD,c
+a123systems,A123Systems,,web,Watertown,USD,b
+bostonpower,Boston Power,55,web,Westborough,USD,a
+bostonpower,Boston Power,55,web,Westborough,USD,c
+bostonpower,Boston Power,55,web,Westborough,USD,b
+visiblemeasures,Visible Measures,,web,Boston,USD,a
+visiblemeasures,Visible Measures,,web,Boston,USD,b
+visiblemeasures,Visible Measures,,web,Boston,USD,seed
+endeca,Endeca,500,web,Cambridge,USD,c
+endeca,Endeca,500,web,Cambridge,USD,d
+endeca,Endeca,500,web,Cambridge,USD,b
+endeca,Endeca,500,web,Cambridge,USD,a
+choicestream,ChoiceStream,70,software,Cambridge,USD,seed
+choicestream,ChoiceStream,70,software,Cambridge,USD,a
+choicestream,ChoiceStream,70,software,Cambridge,USD,b
+choicestream,ChoiceStream,70,software,Cambridge,USD,c
+youcastr,YouCastr,5,web,Cambridge,USD,angel
+jackpot-rewards,JackPot Rewards,,web,Newton,USD,a
+mzinga,Mzinga,,web,Burlington,USD,d
+dimdim,Dimdim,,web,Burlington,USD,a
+dimdim,Dimdim,,web,Burlington,USD,b
+utoopia,utoopia,2,web,Boston,USD,seed
+retail-convergence,Retail Convergence,,web,Boston,USD,a
+frame-media,Frame Media,,web,Wellesley,USD,a
+frame-media,Frame Media,,web,Wellesley,USD,unattributed
+turbine,Turbine,200,web,Westwood,USD,c
+turbine,Turbine,200,web,Westwood,USD,b
+zeer,Zeer,5,web,Boston,USD,angel
+simpletuition,SimpleTuition,,web,Newton,USD,a
+simpletuition,SimpleTuition,,web,Newton,USD,b
+sirtris-pharmaceuticals,Sirtris Pharmaceuticals,,biotech,Cambridge,USD,a
+sirtris-pharmaceuticals,Sirtris Pharmaceuticals,,biotech,Cambridge,USD,b
+sirtris-pharmaceuticals,Sirtris Pharmaceuticals,,biotech,Cambridge,USD,c
+good-data,Good Data,30,web,Cambridge,USD,seed
+navic-networks,Navic Networks,,web,Waltham,USD,a
+navic-networks,Navic Networks,,web,Waltham,USD,c
+navic-networks,Navic Networks,,web,Waltham,USD,b
+pivot,Pivot,40,software,Cambridge,USD,a
+pivot,Pivot,40,software,Cambridge,USD,b
+optaros,Optaros,200,consulting,Boston,USD,c
+optaros,Optaros,200,consulting,Boston,USD,b
+optaros,Optaros,200,consulting,Boston,USD,a
+astaro,Astaro,,hardware,Burlington,USD,a
+astaro,Astaro,,hardware,Burlington,USD,b
+pangea-media,Pangea Media,25,web,Watertown,USD,angel
+posterous,Posterous,,web,Boston,USD,seed
+spire,Spire,,web,Boston,USD,a
+neosaej,neoSaej,,web,Burlington,USD,unattributed
+genarts,GenArts,,software,Cambridge,USD,unattributed
+ordermotion,OrderMotion,,web,Boston,USD,unattributed
+ham-it,HAM-IT,7,web,North Andover,USD,seed
+freewebs,Freewebs,35,web,Silver Spring,USD,a
+mptrax,MPTrax,4,web,Baltimore,USD,angel
+jackbe,JackBe,0,web,Chevy Chase,USD,c
+zenimax,ZeniMax,,web,Rockville,USD,a
+zenimax,ZeniMax,,web,Rockville,USD,a
+intelliworks,Intelliworks,24,software,Rockville,USD,a
+intelliworks,Intelliworks,24,software,Rockville,USD,b
+intelliworks,Intelliworks,24,software,Rockville,USD,c
+hexio,HEXIO,1,web,Kennebunk,USD,seed
+foneshow,Foneshow,8,web,Portland,USD,a
+foneshow,Foneshow,8,web,Portland,USD,seed
+zattoo,Zattoo,45,web,Ann Arbor,USD,b
+loudclick,LoudClick,9,web,Richfield,USD,angel
+agilis-systems,Agilis Systems,,mobile,St. Louis,USD,b
+international-liars-poker-association,International Liars Poker Association,24,other,St. Louis,USD,seed
+channeladvisor,ChannelAdvisor,300,web,Morrisville,USD,c
+channeladvisor,ChannelAdvisor,300,web,Morrisville,USD,a
+channeladvisor,ChannelAdvisor,300,web,Morrisville,USD,b
+yap,Yap,,mobile,Charlotte,USD,angel
+yap,Yap,,mobile,Charlotte,USD,a
+prepchamps,PrepChamps,10,web,Durham,USD,a
+silkroad-technology,SilkRoad technology,,,Winston-Salem,USD,b
+silkroad-technology,SilkRoad technology,,,Winston-Salem,USD,c
+brightdoor-systems,BrightDoor Systems,26,web,Cary,USD,a
+drifttoit,DriftToIt,4,web,Raleigh,USD,angel
+rpath,rPath,45,other,Raleigh,USD,a
+rpath,rPath,45,other,Raleigh,USD,b
+rpath,rPath,45,other,Raleigh,USD,c
+ntractive,Ntractive,6,web,Grand Forks,USD,a
+billmelater,Bill Me Later,,web,Omaha,USD,a
+adaptiveblue,AdaptiveBlue,6,web,Livingston,USD,a
+phanfare,Phanfare,,web,Metuchen,USD,c
+phanfare,Phanfare,,web,Metuchen,USD,b
+enterprisedb,EnterpriseDB,,software,Edison,USD,a
+enterprisedb,EnterpriseDB,,software,Edison,USD,b
+enterprisedb,EnterpriseDB,,software,Edison,USD,c
+neocleus,Neocleus,,web,Jersey City,USD,b
+datapipe,Datapipe,,web,Jersey City,USD,unattributed
+switch2health,Switch2Health,,web,North Brunswick,USD,unattributed
+voltaix,Voltaix,,hardware,N. Branch,USD,unattributed
+spaboom,SpaBoom,9,web,Albuquerque,USD,a
+spaboom,SpaBoom,9,web,Albuquerque,USD,b
+novint,Novint,,other,Albuquerque,USD,unattributed
+meetmoi,MeetMoi,7,web,New York City,USD,a
+meetup,Meetup,1,mobile,New York,USD,a
+meetup,Meetup,1,mobile,New York,USD,b
+meetup,Meetup,1,mobile,New York,USD,d
+mogulus,Mogulus,20,web,New York,USD,angel
+mogulus,Mogulus,20,web,New York,USD,angel
+mogulus,Mogulus,20,web,New York,USD,a
+pando,Pando,23,software,New York,USD,b
+pando,Pando,23,software,New York,USD,c
+outside-in,Outside.in,17,web,Brooklyn,USD,angel
+outside-in,Outside.in,17,web,Brooklyn,USD,angel
+outside-in,Outside.in,17,web,Brooklyn,USD,a
+selectminds,SelectMinds,55,web,New York,USD,a
+veotag,Veotag,,web,New York,USD,angel
+roo,KIT digital,100,web,New York,USD,b
+roo,KIT digital,100,web,New York,USD,a
+contextweb,ContextWeb,,web,New York,USD,a
+contextweb,ContextWeb,,web,New York,USD,b
+contextweb,ContextWeb,,web,New York,USD,d
+datranmedia,Datran Media,,web,New York,USD,a
+eyeblaster,Eyeblaster,,web,New York,USD,a
+eyeblaster,Eyeblaster,,web,New York,USD,b
+covestor,Covestor,,web,New York,USD,angel
+covestor,Covestor,,web,New York,USD,a
+globalgrind,Global Grind,20,web,New York,USD,b
+heavy-com,Heavy.com,,web,New York,USD,a
+spiralfrog,SpiralFrog,15,web,New York,USD,debt_round
+broadbandenterprises,Broadband Enterprises,,web,New York,USD,a
+thumbplay,Thumbplay,,mobile,New York,USD,e
+waterfrontmedia,Waterfront Media,,web,"Brooklyn, New York",USD,d
+waterfrontmedia,Waterfront Media,,web,"Brooklyn, New York",USD,a
+waterfrontmedia,Waterfront Media,,web,"Brooklyn, New York",USD,b
+waterfrontmedia,Waterfront Media,,web,"Brooklyn, New York",USD,c
+tutor,Tutor,55,web,New Yorl,USD,b
+daylife,Daylife,,web,New York,USD,b
+teachthepeople,Teach The People,1,web,Astoria,USD,angel
+healthcare-health-human-powered-search,OrganizedWisdom,18,web,New York,USD,a
+snooth,Snooth,,web,New  York,USD,angel
+snooth,Snooth,,web,New  York,USD,a
+5min,5min,8,web,New York,USD,angel
+5min,5min,8,web,New York,USD,a
+kaltura,Kaltura,20,web,Brooklyn,USD,a
+mimeo,Mimeo,,web,New York,USD,a
+rayv,RayV,,web,New York,USD,b
+tumblr,Tumblr,,web,New York,USD,a
+payoneer,Payoneer,50,web,New York,USD,b
+exelate,eXelate,,web,New York,USD,a
+quigo,Quigo,,web,New York,USD,a
+peer39,Peer39,50,web,New York,USD,a
+peer39,Peer39,50,web,New York,USD,b
+peer39,Peer39,50,web,New York,USD,seed
+rebelmonkey,Rebel Monkey,15,web,New York,USD,a
+answers,Answers Corporation,,web,New York,USD,a
+answers,Answers Corporation,,web,New York,USD,b
+answers,Answers Corporation,,web,New York,USD,c
+answers,Answers Corporation,,web,New York,USD,d
+answers,Answers Corporation,,web,New York,USD,debt_round
+seetoo,SeeToo,,web,New York,USD,angel
+drop-io-2,drop.io,,web,Brooklyn,USD,a
+drop-io-2,drop.io,,web,Brooklyn,USD,b
+motionbox,Motionbox,,web,New York,USD,a
+motionbox,Motionbox,,web,New York,USD,b
+dgplabs,DGP Labs,,web,New York,USD,a
+ideeli,Ideeli,,web,New York,USD,a
+livegamer,Live Gamer,,web,New York,USD,a
+weshow,WeShow,0,web,New York,USD,a
+etsy,Etsy,45,web,Brooklyn,USD,angel
+etsy,Etsy,45,web,Brooklyn,USD,a
+etsy,Etsy,45,web,Brooklyn,USD,b
+etsy,Etsy,45,web,Brooklyn,USD,c
+phonetag,PhoneTag,10,web,New York,USD,angel
+phonetag,PhoneTag,10,web,New York,USD,seed
+phonetag,PhoneTag,10,web,New York,USD,angel
+tremormedia,Tremor Media,,web,New York,USD,a
+tremormedia,Tremor Media,,web,New York,USD,b
+yoonew,YooNew,,web,New York,USD,angel
+fifthgenerationsystems,Fifth Generation Systems,,web,Roslyn Heights,USD,b
+fifthgenerationsystems,Fifth Generation Systems,,web,Roslyn Heights,USD,a
+igaworldwide,IGA Worldwide,,web,New York,USD,a
+igaworldwide,IGA Worldwide,,web,New York,USD,b
+igaworldwide,IGA Worldwide,,web,New York,USD,b
+theladders,TheLadders,200,web,New York,USD,a
+adotube,Adotube,30,web,New York,USD,seed
+adotube,Adotube,30,web,New York,USD,seed
+kluster,Kluster,,web,New York,USD,seed
+blog-talk-radio,Blog Talk Radio,,web,New York,USD,a
+pingg,Pingg,7,web,New York,USD,seed
+pingg,Pingg,7,web,New York,USD,angel
+outbrain,Outbrain,,web,New York City,USD,seed
+outbrain,Outbrain,,web,New York City,USD,a
+mochila,Mochila,52,web,New York,USD,b
+olx,OLX,85,web,New York City,USD,a
+olx,OLX,85,web,New York City,USD,b
+boonty,Boonty,150,web,New York,USD,b
+tripology,Tripology,,web,New York,USD,a
+the-feedroom,The Feedroom,,web,New York,USD,unattributed
+next-new-networks,Next New Networks,15,web,New York,USD,a
+next-new-networks,Next New Networks,15,web,New York,USD,b
+riverwired,RiverWired,,web,New York,USD,seed
+fynanz,Fynanz,10,web,New York,USD,angel
+digital-railroad,Digital Railroad,,web,New York,USD,a
+digital-railroad,Digital Railroad,,web,New York,USD,b
+silicon-alley-insider,Silicon Alley Insider,,,New York,USD,seed
+undertone-networks,Undertone Networks,,web,New York,USD,a
+someecards,Someecards,,web,New York,USD,seed
+trunkt,Trunkt,2,web,New York,USD,seed
+cutcaster-2,Cutcaster,6,web,New York City,USD,seed
+visible-world,Visible World,,software,New York,USD,c
+visible-world,Visible World,,software,New York,USD,b
+mad-mimi,Mad Mimi,3,web,,USD,angel
+social-median,Social Median,,web,New York,USD,seed
+scanbuy,Scanbuy,,software,New York,USD,b
+scanbuy,Scanbuy,,software,New York,USD,b
+pontiflex,Pontiflex,,web,Brooklyn,USD,a
+chic-tv,CHIC.TV,12,web,New York,USD,angel
+expertflyer,ExpertFlyer,3,web,Patchogue,USD,seed
+x-1,x+1,,web,New York,USD,a
+media6,Media6¡,,web,New York,USD,debt_round
+knewton,Knewton,,web,New York,USD,a
+sense-networks,Sense Networks,,mobile,New York City,USD,a
+targetspot,TargetSpot,20,web,New York,USD,b
+bountyjobs,BountyJobs,31,web,New York,USD,b
+vbs-tv,vbs tv,40,other,Brooklyn,USD,seed
+instinctiv,Instinctiv,,mobile,Ithaca,USD,seed
+visualplant,VISUALPLANT,6,web,New York,USD,seed
+xunlight,XunLight,,hardware,Toledo,USD,b
+strands,Strands,150,web,Corvallis,USD,a
+strands,Strands,150,web,Corvallis,USD,b
+strands,Strands,150,web,Corvallis,USD,b
+jivesoftware,Jive Software,,web,Portland,USD,a
+platial,Platial,,web,Portland,USD,angel
+platial,Platial,,web,Portland,USD,a
+garagegames,GarageGames,,web,Eugene,USD,a
+iovation,iovation,50,web,Portland,USD,a
+ingrid,InGrid,,web,Berwyn,USD,c
+ingrid,InGrid,,web,Berwyn,USD,a
+ingrid,InGrid,,web,Berwyn,USD,b
+ingrid,InGrid,,web,Berwyn,USD,debt_round
+sleep-fm,Sleep.FM,4,web,Philadelphia,USD,seed
+boomi,Boomi,0,web,Berwyn,USD,a
+styky,Styky,3,web,Philadelphia,USD,seed
+totaltakeout,TotalTakeout,25,web,Allentown,USD,seed
+redlasso,RedLasso,,web,King of Prussia,CAD,a
+qpondirect,QponDirect,10,web,Pittsburgh,USD,angel
+energyweb-solutions,EnergyWeb Solutions,3,web,Allentown,USD,seed
+aria-systems,Aria Systems,,software,Media,USD,a
+vivsimo,Viv’simo,,software,Pittsburgh,USD,a
+vivsimo,Viv’simo,,software,Pittsburgh,USD,seed
+vivsimo,Viv’simo,,software,Pittsburgh,USD,seed
+vivsimo,Viv’simo,,software,Pittsburgh,USD,seed
+vivsimo,Viv’simo,,software,Pittsburgh,USD,seed
+showclix,ShowClix,,web,Oakmont,USD,seed
+showclix,ShowClix,,web,Oakmont,USD,seed
+biowizard,BioWizard,8,web,Wayne,USD,a
+ticketleap,TicketLeap,4,web,Philadelphia,USD,a
+tizra,Tizra,,web,Providence,USD,seed
+quickoffice,Quickoffice,,software,Plano,USD,b
+quickoffice,Quickoffice,,software,Plano,USD,a
+quickoffice,Quickoffice,,software,Plano,USD,c
+thoof,Thoof,,web,Austin,USD,seed
+bazaarvoice,Bazaarvoice,,web,Austin,USD,a
+bazaarvoice,Bazaarvoice,,web,Austin,USD,b
+bazaarvoice,Bazaarvoice,,web,Austin,USD,c
+smallworldlabs,Small World Labs,25,web,Austin,USD,a
+pluck,Pluck,,web,Austin,USD,b
+pluck,Pluck,,web,Austin,USD,c
+spiceworks,Spiceworks,,web,Austin,USD,b
+spendview,SpendView,3,web,Houston,USD,a
+shangby,Shangby,,web,Austin,USD,a
+onnetworks,On Networks,20,web,Austin,USD,a
+onnetworks,On Networks,20,web,Austin,USD,b
+careflash,CareFlash,0,web,Houston,USD,seed
+heliovolt,HelioVolt,,web,Austin,USD,b
+challenge-games,Challenge Games,,web,Austin,USD,a
+woot,Woot,100,web,Carrollton,USD,a
+mumboe,Mumboe,17,software,Austin,USD,seed
+breakingpoint-systems,BreakingPoint Systems,54,hardware,Austin,USD,c
+famecast,FameCast,,web,Austin,USD,a
+click-forensics,Click Forensics,,web,Austin,USD,a
+click-forensics,Click Forensics,,web,Austin,USD,b
+godtube,GodTube,,web,Plano,USD,b
+ibiz-software,iBiz Software,50,software,Dallas,USD,angel
+cosential,Cosential,10,web,Austin,USD,b
+jad-tech-consulting,JAD Tech Consulting,6,consulting,Richardson,USD,seed
+mozy,Mozy,26,web,American Fork,USD,a
+mozy,Mozy,26,web,American Fork,USD,a
+ancestry-com,Ancestry.com,,web,Provo,USD,b
+movenetworks,Move Networks,,web,American Fork,USD,a
+movenetworks,Move Networks,,web,American Fork,USD,b
+movenetworks,Move Networks,,web,American Fork,USD,c
+worldvitalrecords,World Vital Records,,web,Provo,USD,a
+bungee-labs,Bungee Labs,38,web,Orem,USD,c
+footnote,Footnote,31,web,Lindon,USD,a
+mediaforge,mediaFORGE,,web,Salt Lake City,USD,a
+teamstreamz,TeamStreamz,5,web,Lehi,USD,seed
+exinda,Exinda,,software,Sandy,USD,a
+clearspring,Clearspring,,web,McLean,USD,a
+clearspring,Clearspring,,web,McLean,USD,b
+clearspring,Clearspring,,web,McLean,USD,c
+clearspring,Clearspring,,web,McLean,USD,b
+availmedia,Avail Media,,web,Reston,USD,b
+availmedia,Avail Media,,web,Reston,USD,c
+fortiusone,FortiusOne,,web,Arlington,USD,b
+mixx,Mixx,,web,,USD,a
+mixx,Mixx,,web,,USD,b
+jobfox,Jobfox,,web,McLean,USD,c
+jobfox,Jobfox,,web,McLean,USD,b
+jobfox,Jobfox,,web,McLean,USD,a
+healthcentral,HealthCentral,,web,Arlington,USD,a
+comscore,comScore,,web,Reston,USD,d
+comscore,comScore,,web,Reston,USD,c
+visualcv,VisualCV,20,web,Reston,USD,a
+paxfire,Paxfire,,,Sterling,USD,a
+shoutwire,ShoutWire,9,web,,USD,a
+parature,Parature,100,software,Vienna,USD,a
+parature,Parature,100,software,Vienna,USD,b
+loladex,Loladex,2,web,Leesburg,USD,seed
+appian,Appian,120,software,Vienna,USD,a
+fortisphere,Fortisphere,50,software,Chantilly,USD,a
+wetpaint,Wetpaint,35,web,Seattle,USD,a
+wetpaint,Wetpaint,35,web,Seattle,USD,b
+wetpaint,Wetpaint,35,web,Seattle,USD,c
+jobster,Jobster,,web,Seattle,USD,b
+jobster,Jobster,,web,Seattle,USD,c
+jobster,Jobster,,web,Seattle,USD,a
+jobster,Jobster,,web,Seattle,USD,d
+yapta,Yapta,,web,Seattle,USD,a
+yapta,Yapta,,web,Seattle,USD,seed
+farecast,Farecast,26,web,Seattle,USD,a
+farecast,Farecast,26,web,Seattle,USD,b
+farecast,Farecast,26,web,Seattle,USD,c
+hautesecure,Haute Secure,,web,Seattle,USD,a
+newsvine,Newsvine,6,web,Seattle,USD,a
+ilike,iLike,28,web,Seattle,USD,a
+ilike,iLike,28,web,Seattle,USD,b
+redfin,Redfin,100,web,Seattle,USD,c
+redfin,Redfin,100,web,Seattle,USD,b
+redfin,Redfin,100,web,Seattle,USD,a
+actionengine,Action Engine,,web,Bellevue,USD,a
+actionengine,Action Engine,,web,Bellevue,USD,b
+actionengine,Action Engine,,web,Bellevue,USD,d
+actionengine,Action Engine,,web,Bellevue,USD,c
+actionengine,Action Engine,,web,Bellevue,USD,e
+wishpot,Wishpot,,web,Seattle,USD,a
+payscale,PayScale,,web,Seattle,USD,a
+payscale,PayScale,,web,Seattle,USD,b
+payscale,PayScale,,web,Seattle,USD,c
+buddytv,BuddyTV,,web,Seattle,USD,a
+buddytv,BuddyTV,,web,Seattle,USD,angel
+buddytv,BuddyTV,,web,Seattle,USD,b
+judysbook,Judys Book,,web,Seattle,USD,a
+judysbook,Judys Book,,web,Seattle,USD,b
+sampa,Sampa,4,web,Redmond,USD,angel
+sampa,Sampa,4,web,Redmond,USD,angel
+zango,Zango,225,web,Bellevue,USD,a
+cdigix,Cdigix,,web,Seattle,USD,a
+ripl,Ripl,,web,Seattle,USD,b
+eyejot,EyeJot,5,web,Seattle,USD,seed
+eyejot,EyeJot,5,web,Seattle,USD,angel
+flowplay,FlowPlay,6,web,Seattle,USD,angel
+flowplay,FlowPlay,6,web,Seattle,USD,a
+smartsheet,SmartSheet,,web,Bellevue,USD,a
+visibletechnologies,Visible Technologies,60,web,Seattle,USD,a
+visibletechnologies,Visible Technologies,60,web,Seattle,USD,b
+zillow,Zillow,155,web,Seattle,USD,a
+zillow,Zillow,155,web,Seattle,USD,b
+zillow,Zillow,155,web,Seattle,USD,c
+seomoz,SEOMoz,,web,Seattle,USD,a
+docusign,DocuSign,,web,Seattle,USD,b
+docusign,DocuSign,,web,Seattle,USD,c
+adready,AdReady,33,web,Seattle,USD,b
+treemo,Treemo,,web,Seattle,USD,a
+gridnetworks,GridNetworks,,web,Seattle,USD,a
+pelago,Pelago,,web,Seattle,USD,a
+pelago,Pelago,,web,Seattle,USD,b
+blist,Blist,,web,Seattle,USD,a
+realself,RealSelf,,web,Seattle,USD,angel
+rescuetime,RescueTime,,web,Seattle,USD,seed
+zoji,Zoji,,web,Seattle,USD,angel
+snapvine,Snapvine,20,web,Seattle,USD,a
+snapvine,Snapvine,20,web,Seattle,USD,b
+jott,Jott,,web,Seattle,USD,b
+earthclassmail,Earth Class Mail,,web,Seattle,USD,a
+earthclassmail,Earth Class Mail,,web,Seattle,USD,a
+smilebox,Smilebox,,web,Redmond,USD,a
+smilebox,Smilebox,,web,Redmond,USD,b
+fyreball,Fyreball,,web,Bellevue,USD,angel
+delve-networks,Delve Networks,,web,Seattle,USD,seed
+delve-networks,Delve Networks,,web,Seattle,USD,a
+livemocha,LiveMocha,,web,Bellevue,USD,a
+mercentcorporation,Mercent Corporation,50,web,Seattle,USD,b
+cleverset,CleverSet,,web,Seattle,USD,angel
+cleverset,CleverSet,,web,Seattle,USD,a
+cleverset,CleverSet,,web,Seattle,USD,angel
+liquidplanner,LiquidPlanner,11,web,Bellevue,USD,angel
+limeade,Limeade,10,web,Bellevue,USD,angel
+yodio,Yodio,4,web,Bellevue,USD,a
+tastemakers,Tastemakers,11,web,Seattle,USD,a
+whitepages-com,WhitePages.com,125,web,Seattle,USD,a
+revenuescience,RevenueScience,,web,Seattle,USD,e
+gotvoice,GotVoice,15,mobile,Kirkland,USD,a
+cardomain-network,CarDomain Network,50,web,Seattle,USD,a
+mpire,mpire,,web,Seattle,USD,a
+mpire,mpire,,web,Seattle,USD,b
+teachstreet,TeachStreet,8,web,Seattle,USD,a
+estately,Estately,,web,,USD,angel
+infinia,Infinia,,cleantech,Kennewick,USD,b
+infinia,Infinia,,cleantech,Kennewick,USD,a
+m-metrics,M:Metrics,,web,Seattle,USD,b
+cozi,Cozi,26,software,Seattle,USD,a
+cozi,Cozi,26,software,Seattle,USD,c
+trusera,Trusera,15,web,Seattle,USD,angel
+alerts-com,Alerts.com,,web,Bellevue,USD,a
+myrio,Myrio,75,software,Bothell,USD,unattributed
+grid-networks,Grid Networks,,web,Seattle,USD,a
+grid-networks,Grid Networks,,web,Seattle,USD,b
