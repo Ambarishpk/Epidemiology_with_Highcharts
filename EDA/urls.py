@@ -79,6 +79,9 @@ urlpatterns = [
     url(r'^api/(?P<fName>[-\w.]+\w{0,50})/$',
         views.fetchDataset, name="fetchDataset"),
 
+    url(r'^customChart/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.customChart, name="customChart"),
+
 
 
     url(r'^ChangeDtypeColumn/(?P<fName>[-\w.]+\w{0,50})/$',

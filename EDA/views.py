@@ -891,21 +891,21 @@ def skewness(fName):
 # Correlation
 # ===========
 
-# def correlation(fName):
-#     df = get_df(fName)
-#     correla = df.corr()
-#     values = correla.values
-#     main_list = []
-#     correlation_list = []
-#     for i in range(len(values)):
-#         sub_list = []
-#         for j in values[i]:
-#             sub_list.append(round(j, 2))
-#         main_list.append(sub_list)
-#     correlation_list.append(main_list)
-#     new = correlation_list[0]
+def correlation(fName):
+    #     df = get_df(fName)
+    #     correla = df.corr()
+    #     values = correla.values
+    #     main_list = []
+    #     correlation_list = []
+    #     for i in range(len(values)):
+    #         sub_list = []
+    #         for j in values[i]:
+    #             sub_list.append(round(j, 2))
+    #         main_list.append(sub_list)
+    #     correlation_list.append(main_list)
+    #     new = correlation_list[0]
 
-#     return new
+    return True
 
 
 # NaN Percentage
@@ -958,6 +958,7 @@ def DownloadProcessed(request, fName):
 # Remove Dataset
 # ==============
 
+
 def RemoveDataset(request, fName):
     original_file_path = os.path.join(
         settings.MEDIA_ROOT, 'original/'+fName+'.csv')
@@ -1001,6 +1002,39 @@ def fetchDataset(request, fName):
         "kurt_chartlabel": kurt_col,
     }
     return JsonResponse(data)
+
+
+def customChart(request, fName):
+
+    df = get_df(fName)
+
+    param1_label = request.POST.get('param1')
+    param2_label = request.POST.get('param2')
+
+    param1_value = (df[param1_label].sum() /
+                    len(df[param1_label])).round(2)
+    param2_value = (df[param2_label].sum() /
+                    len(df[param2_label])).round(2)
+    clm_list = []
+    for i in list(df):
+        if df[i].dtype == 'int64' or df[i].dtype == 'float64':
+            clm_list.append(i)
+    nan_percent = get_NaN_percent(fName)
+
+    context = {
+        "fName": fName,
+        "clm_list": clm_list,
+        "Nan_percent": nan_percent,
+        "param1": param1_label,
+        "value1": param1_value,
+        "param2": param2_label,
+        "value2": param2_value,
+        "customChartMsg": "True",
+    }
+    print(param1_label, param1_value)
+    print(param2_label, param2_value)
+
+    return render(request, 'Visualize.html', context)
 
 
 def ChangeDtype(request, fName):
