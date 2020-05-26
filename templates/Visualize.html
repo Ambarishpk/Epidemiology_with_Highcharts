@@ -207,7 +207,6 @@
               </div>
               </form>
             <div class="card text-center mt-5 customChart_card bg-white">
-              <div class="p-5">Custom Chart</div>
               <canvas id="customChart"></canvas> 
               {% if customChartMsg %}
               <input type="text" hidden id="param1" value="{{param1}}">
@@ -343,6 +342,7 @@
               label: chartLabel, 
               data: chartdata, 
               backgroundColor : '#636EFA',
+              //backgroundColor : '#FFFFFF',
               borderColor: '#636EFA',
             }] 
           },
@@ -379,6 +379,7 @@
               label: chartLabel, 
               data: chartdata, 
               backgroundColor : '#636EFA',
+              //backgroundColor : '#FFFFFF',
               borderColor: '#636EFA',
             }] 
           },
@@ -432,7 +433,7 @@
         data: { 
           labels: [label1, label2], 
           datasets: [{ 
-            label: "Comparison", 
+            label: "percentage (%)", 
             data: [data1, data2],
             backgroundColor : '#636EFA',
             borderColor: '#636EFA',
@@ -443,7 +444,7 @@
                     stacked: true
                 }],
                 yAxes: [{
-                    stacked: true
+                    stacked: true,
                 }]
             }
           }

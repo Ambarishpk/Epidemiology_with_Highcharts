@@ -74,18 +74,15 @@ urlpatterns = [
     # Remove Processed
     url(r'^RemoveDataset/(?P<fName>[-\w.]+\w{0,50})/$',
         views.RemoveDataset, name="RemoveDataset"),
-
-
     url(r'^api/(?P<fName>[-\w.]+\w{0,50})/$',
         views.fetchDataset, name="fetchDataset"),
-
     url(r'^customChart/(?P<fName>[-\w.]+\w{0,50})/$',
         views.customChart, name="customChart"),
-
-
-
     url(r'^ChangeDtypeColumn/(?P<fName>[-\w.]+\w{0,50})/$',
         views.ChangeDtype, name="ChangeDtype"),
+
+    url(r'^KNNImputation/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.KNNImputation, name="KNNImputation"),
 
 
 

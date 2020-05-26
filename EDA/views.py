@@ -44,14 +44,6 @@ def Overview(fName):
 
     cols = list(df)
 
-    # nan values imputation using KNNImputer
-    # =====================================
-
-    # imputer = KNNImputer(n_neighbors=2)
-    # df = pd.DataFrame(imputer.fit_transform(df), columns=cols)
-    # df.to_csv(os.path.join(settings.MEDIA_ROOT,
-    #                        'processed/'+fName+'.csv'), index=False)
-
     for i in clm_list:
         if 'date' in i.lower():
             df[i] = pd.to_datetime(df[i], dayfirst=True)
@@ -223,8 +215,8 @@ def Explore(request, fName):
     # corr = correlation(fName)
     # correlation_list = zip(clm_list, corr)
 
-    # mean_list = get_mean(fName)
-    # median_list = get_median(fName)
+    mean_list = get_mean(fName)
+    median_list = get_median(fName)
 
     kurt_list = kurtosis(fName)
     skew_list = skewness(fName)
@@ -243,8 +235,8 @@ def Explore(request, fName):
         'NaN_list': NaN_list_zip,
         'NaN_percent': nan_percent,
         # 'correlation_list': correlation_list,
-        # 'mean_list': mean_list,
-        # 'median_list': median_list,
+        'mean_list': mean_list,
+        'median_list': median_list,
     }
     return render(request, 'Exploration.html', context)
 
@@ -1012,9 +1004,9 @@ def customChart(request, fName):
     param2_label = request.POST.get('param2')
 
     param1_value = (df[param1_label].sum() /
-                    len(df[param1_label])).round(2)
+                    len(df)).round(2)
     param2_value = (df[param2_label].sum() /
-                    len(df[param2_label])).round(2)
+                    len(df)).round(2)
     clm_list = []
     for i in list(df):
         if df[i].dtype == 'int64' or df[i].dtype == 'float64':
@@ -1031,8 +1023,6 @@ def customChart(request, fName):
         "value2": param2_value,
         "customChartMsg": "True",
     }
-    print(param1_label, param1_value)
-    print(param2_label, param2_value)
 
     return render(request, 'Visualize.html', context)
 
@@ -1078,3 +1068,21 @@ def ChangeDtype(request, fName):
                            'processed/'+fName+'.csv'), index=False)
     context = Overview(fName)
     return redirect('index.html')
+
+
+def KNNImputation(request, fName):
+    df = get_df(fName)
+    cols = list(df)
+
+    # nan values imputation using KNNImputer
+    # =====================================
+
+    imputer = KNNImputer(n_neighbors=2)
+    df = pd.DataFrame(imputer.fit_transform(df), columns=cols)
+    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                           'processed/'+fName+'.csv'), index=False)
+
+    context = Overview(fName)
+    context['status'] = 'Success'
+    context['message'] = 'NaN values filled by KNN method'
+    return render(request, 'Index.html', context)

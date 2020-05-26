@@ -77,6 +77,8 @@
                 </li>
                 <li><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
                 <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
+                <li> <a data-toggle="modal" data-target="#knnModal"
+                  >KNN Imputation</a></li>
               </ul>
 
               <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -121,7 +123,7 @@
       </div>
       <!-- Page Content Starts-->
       <div class="mt-5" id="page-content-wrapper">
-        <a data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-sm ml-5 text-white">Change Datatype</a>
+        <!-- <a data-toggle="modal" data-target="#myModal2" class="btn btn-info btn-sm ml-5 text-white">Change Datatype</a> -->
         <div class="container">
           <h2 class="text-danger text-center mt-10">
             Overview of Your Dataset
@@ -357,7 +359,58 @@
     </div>
 
 
+    <!-- KNN Imputation -->
 
+    <div
+      class="modal fade"
+      id="knnModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Read Carefully
+              </h4>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="drop-rules mt-1">
+              <p>
+               <li>KNN Imputor for missing values using k-Nearest Neighbors. 
+                Each sample's missing values are imputed using the mean value from n_neighbors nearest neighbors found in the training set. 
+                Two samples are close if the features that neither is missing are close.</li>
+              </p>
+             
+              <p>
+                <li>KNN-Imputation performs only on numerical datasets.</li>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+            <a
+              type="button"
+              style="margin-top: 0%;"
+              href="/KNNImputation/{{fName}}/"
+              class="btn btn-success"
+              >Proceed</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- getting permission to change data type of the columns -->
 
@@ -412,6 +465,7 @@
             <button
               style="margin-top: 0%;"
               class="btn btn-success"
+              disabled
               >Change</button
             >
           </div>
