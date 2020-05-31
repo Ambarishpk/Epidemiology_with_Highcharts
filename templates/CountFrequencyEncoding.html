@@ -43,6 +43,11 @@
         <div class="nav-side-menu">
           <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
+               <li>
+                <a href="/Dataset/{{fName}}/" target="_blank"
+                  ><i class="fa fa-table fa-sm"></i> Dataset
+                </a>
+              </li>
               <li >
                 <a href="/Home/{{fName}}/">
                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -55,11 +60,7 @@
                   ><i class="fa fa-table fa-sm"></i> Data Exploration
                 </a>
               </li>
-              <li>
-                <a href="/Dataset/{{fName}}/" target="_blank"
-                  ><i class="fa fa-table fa-sm"></i> Dataset
-                </a>
-              </li>
+             
               <li
                 data-toggle="collapse"
                 data-target="#service"
@@ -78,6 +79,8 @@
                 </li>
                 <li><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
                 <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
+                 <li> <a data-toggle="modal" data-target="#knnModal"
+                  >KNN Imputation</a></li>
               </ul>
 
               <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -107,7 +110,7 @@
 
               <li>
                 <a href="/">
-                  <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                  <i class="fa fa-home fa-sm"></i> Home
                 </a>
               </li>
             </ul>
@@ -296,6 +299,60 @@
               >Proceed</a
             >
             {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- KNN Imputation -->
+
+    <div
+      class="modal fade"
+      id="knnModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Read Carefully
+              </h4>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="drop-rules mt-1">
+              <p>
+               <li>KNN Imputor for missing values using k-Nearest Neighbors. 
+                Each sample's missing values are imputed using the mean value from n_neighbors nearest neighbors found in the training set. 
+                Two samples are close if the features that neither is missing are close.</li>
+              </p>
+             
+              <p>
+                <li>KNN-Imputation performs only on numerical datasets.</li>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+            <a
+              type="button"
+              style="margin-top: 0%;"
+              href="/KNNImputation/{{fName}}/"
+              class="btn btn-success"
+              >Proceed</a
+            >
           </div>
         </div>
       </div>

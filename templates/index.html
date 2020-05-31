@@ -36,6 +36,9 @@
   </head>
 
   <body>
+    
+
+
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <div class="border-right bg-dark text-white" id="sidebar-wrapper">
@@ -43,6 +46,11 @@
         <div class="nav-side-menu">
           <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
+              <li>
+                <a href="/Dataset/{{fName}}/" target="_blank"
+                  ><i class="fa fa-table fa-sm"></i> Dataset
+                </a>
+              </li>
               <li class="active">
                 <a href="/Home/{{fName}}/">
                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -55,11 +63,7 @@
                   ><i class="fa fa-table fa-sm"></i> Data Exploration
                 </a>
               </li>
-              <li>
-                <a href="/Dataset/{{fName}}/" target="_blank"
-                  ><i class="fa fa-table fa-sm"></i> Dataset
-                </a>
-              </li>
+              
               <li
                 data-toggle="collapse"
                 data-target="#service"
@@ -108,14 +112,14 @@
 
               <li>
                 <a href="/">
-                  <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                  <i class="fa fa-home fa-sm"></i> Home
                 </a>
               </li>
-              <li>
+              <!-- <li>
                 <a href="/RemoveDataset/{{fName}}/">
                   <i class="fa fa-trash-o" aria-hidden="true"></i> Remove Your Dataset
                 </a>
-              </li>
+              </li> -->
               
             </ul>
           </div>
@@ -258,25 +262,71 @@
               </div>
             </div>
           </div>
-          <div class="row mt-5">
-            <div class="col">
-              <div class="h4 text-danger font-weight-bold">Suggestions :</div>
+
+          <!-- Main Body Content  -->
+          <!-- ================== -->
+
+          <div class="content-1 definitions">
+            <div class="row mt-5">
+            <div class="col ">
+              <div class="h3 text-danger font-weight-bold">Dataset</div>
             </div>
           </div>
           <div class="row">
-            <ul>
-              <li class="h5">
-                If your dataset contain
-                <span class="text-success">Gender, Marital-Status</span>
-                featues >>> Do
-                <span class="text-success">Binary Encoding</span>
-              </li>
-              <li class="h5">
-                For <span class="text-success">Age, BMI, BP</span> features >>>
-                Do
-                <span class="text-success">Binning </span>
-              </li>
-            </ul>
+            <div class="col ">
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, ratione, sunt dolorem cupiditate, suscipit voluptatibus magni soluta tempore aperiam vitae aliquid autem sint temporibus earum repudiandae nulla adipisci. Dicta, cum!</p>
+            </div>
+          </div>
+          </div>
+          <div class="content-2 definitions">
+            <div class="row mt-5">
+            <div class="col ">
+              <div class="h3 text-danger font-weight-bold">Data Exploration</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col ">
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, ratione, sunt dolorem cupiditate, suscipit voluptatibus magni soluta tempore aperiam vitae aliquid autem sint temporibus earum repudiandae nulla adipisci. Dicta, cum!</p>
+            </div>
+          </div>
+          </div>
+          <div class="content-3 definitions">
+            <div class="row mt-5">
+            <div class="col ">
+              <div class="h3 text-danger font-weight-bold">Data Imputation</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque, ratione, sunt dolorem cupiditate, suscipit voluptatibus magni soluta tempore aperiam vitae aliquid autem sint temporibus earum repudiandae nulla adipisci. Dicta, cum!</p>
+            </div>
+          </div>
+          </div>
+          <div class="content-4 definitions">
+            <div class="row mt-5">
+            <div class="col ">
+              <div class="h3 text-danger font-weight-bold">Feature Engineering</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>For <span class="font-weight-bold">nominal</span> columns try <span class="font-weight-bold">
+                <a class="link text-dark" target="_blank" href="https://machinelearningmastery.com/how-to-one-hot-encode-sequence-data-in-python/"><u>OneHot</u></a>,
+                <a class="link text-dark" target="_blank" href="https://medium.com/luckspark/hashing-pandas-dataframe-column-with-nonce-763a8c23a833"><u>Hashing</u></a>,
+                <a class="link text-dark" href="#"><u>LeaveOneOut</u></a>,
+                and <a class="link text-dark" href="#"><u>Target</u></a></span> encoding. 
+                Avoid OneHot for high cordinality columns and
+                decision tree based algorithms.</p>
+              <p>For <span class="font-weight-bold">ordinal</span> columns try <span class="font-weight-bold"> <a class="link text-dark" href="#"><u>Ordinal</u></a> (Integer),
+                <a class="link text-dark" href="#"><u>Binary</u></a>,
+                <a class="link text-dark" href="#"><u>OneHot</u></a>,
+                <a class="link text-dark" href="#"><u>LeaveOneOut</u></a>, 
+                and <a class="link text-dark" href="#"><u>Target</u></a></span> encoding. 
+                Helmert, sum, backwardDifference and polynomial
+                are less likely to be helpful, but if you have time or theoretic reason you might want to try them.
+              </p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -498,5 +548,7 @@
         }
       }, 4000);
     </script>
+
+   
   </body>
 </html>

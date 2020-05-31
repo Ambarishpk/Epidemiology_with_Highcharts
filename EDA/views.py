@@ -876,12 +876,13 @@ def skewness(fName):
     col = df_skewness_dict.keys()
     val = df_skewness_dict.values()
     skewness_list = zip(col, val)
-
+    # print(list(val))
+    # print(sum(list(val)))
     return skewness_list
-
 
 # Correlation
 # ===========
+
 
 def correlation(fName):
     #     df = get_df(fName)

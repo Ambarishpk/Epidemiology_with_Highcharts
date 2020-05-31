@@ -43,6 +43,11 @@
         <div class="nav-side-menu">
           <div class="menu-list">
             <ul id="menu-content" class="menu-content collapse out">
+               <li>
+                <a href="/Dataset/{{fName}}/" target="_blank"
+                  ><i class="fa fa-table fa-sm"></i> Dataset
+                </a>
+              </li>
               <li>
                 <a href="/Home/{{fName}}/">
                   <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -55,11 +60,7 @@
                   ><i class="fa fa-table fa-sm"></i> Data Exploration
                 </a>
               </li>
-              <li>
-                <a href="/Dataset/{{fName}}/" target="_blank"
-                  ><i class="fa fa-table fa-sm"></i> Dataset
-                </a>
-              </li>
+             
               <li
                 data-toggle="collapse"
                 data-target="#service"
@@ -78,6 +79,8 @@
                 </li>
                 <li><a href="/AttrDropNan/{{fName}}/"> Attribute Wise Drop NaN</a></li>
                 <li><a href="/AttrFillNan/{{fName}}/"> Attribute Wise Fill NaN</a></li>
+                 <li> <a data-toggle="modal" data-target="#knnModal"
+                  >KNN Imputation</a></li>
               </ul>
 
               <li data-toggle="collapse" data-target="#new" class="collapsed">
@@ -107,7 +110,7 @@
 
               <li>
                 <a href="/">
-                  <i class="fa fa-upload fa-sm"></i> Upload Dataset
+                  <i class="fa fa-home fa-sm"></i> Home
                 </a>
               </li>
             </ul>
@@ -115,8 +118,71 @@
         </div>
       </div>
       <!-- Page Content -->
-      <div class="mt-5" id="page-content-wrapper">
+      <div class="mt-5 mb-5" id="page-content-wrapper">
         <div class="container">
+          <div class="row mt-4">
+            <div class="col-6">
+              <div class="card p-5 shadow-lg rounded mean_card">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Mean
+                </div>
+                <hr />
+                <div class="row pb-3">
+                  <div class="col text-capitalize text-danger font-weight-bold">
+                    FEATURE
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    MEAN
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    %
+                  </div>
+                </div>
+                <div class="row">
+                  {% for clm,mean_val,mean_percent in mean_list %}
+                  <div class="col-6 text-capitalize">{{clm}}</div>
+                  <div class="col-3 text-capitalize">{{mean_val}}</div>
+                  <div class="col-3 text-capitalize">{{mean_percent}} %</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card p-5 shadow-lg rounded median_card">
+                <div class="text-center text-primary font-weight-bold h4">
+                  Median
+                </div>
+                <hr />
+                <div class="row pb-3">
+                  <div class="col text-capitalize text-danger font-weight-bold">
+                    FEATURE
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    MEDIAN
+                  </div>
+                  <div
+                    class="col-3 text-capitalize text-danger font-weight-bold"
+                  >
+                    %
+                  </div>
+                </div>
+                <div class="row">
+                  {% for clm,median_val,median_percent in median_list %}
+                  <div class="col-6 text-capitalize">{{clm}}</div>
+                  <div class="col-3 text-capitalize">{{median_val}}</div>
+                  <div class="col-3 text-capitalize">{{median_percent}} %</div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4"></div>
           <!-- <div class="row">
             <div class="col">
               <div class="card p-5 bg-light shadow-sm rounded corr_card">
@@ -137,7 +203,7 @@
           </div> -->
           <div class="row mt-4">
             <div class="col-3">
-              <div class="card p-5 bg-light shadow-sm rounded content-box">
+              <div class="card p-5 shadow-lg rounded kurt-skew-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Kurtosis
                 </div>
@@ -163,7 +229,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="card p-5 bg-light shadow-sm rounded content-box">
+              <div class="card p-5 ml-5 shadow-lg rounded kurt-skew-box">
                 <div class="text-center text-primary font-weight-bold h4">
                   Skewness
                 </div>
@@ -189,7 +255,7 @@
               </div>
             </div>
             <div class="col-5">
-              <div class="card p-5 bg-light shadow-sm rounded NaN_card">
+              <div class="card p-5 shadow-lg rounded NaN_card">
                 <div class="text-center text-primary font-weight-bold h4">
                   NaN Percentage
                 </div>
@@ -224,71 +290,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row mt-4"></div>
-          <div class="row mt-4">
-            <div class="col-6">
-              <div class="card p-5 bg-light shadow-sm rounded mean_card">
-                <div class="text-center text-primary font-weight-bold h4">
-                  Mean
-                </div>
-                <hr />
-                <div class="row pb-3">
-                  <div class="col text-capitalize text-danger font-weight-bold">
-                    FEATURE
-                  </div>
-                  <div
-                    class="col-3 text-capitalize text-danger font-weight-bold"
-                  >
-                    MEAN
-                  </div>
-                  <div
-                    class="col-3 text-capitalize text-danger font-weight-bold"
-                  >
-                    %
-                  </div>
-                </div>
-                <div class="row">
-                  {% for clm,mean_val,mean_percent in mean_list %}
-                  <div class="col-6 text-capitalize">{{clm}}</div>
-                  <div class="col-3 text-capitalize">{{mean_val}}</div>
-                  <div class="col-3 text-capitalize">{{mean_percent}} %</div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="card p-5 bg-light shadow-sm rounded median_card">
-                <div class="text-center text-primary font-weight-bold h4">
-                  Median
-                </div>
-                <hr />
-                <div class="row pb-3">
-                  <div class="col text-capitalize text-danger font-weight-bold">
-                    FEATURE
-                  </div>
-                  <div
-                    class="col-3 text-capitalize text-danger font-weight-bold"
-                  >
-                    MEDIAN
-                  </div>
-                  <div
-                    class="col-3 text-capitalize text-danger font-weight-bold"
-                  >
-                    %
-                  </div>
-                </div>
-                <div class="row">
-                  {% for clm,median_val,median_percent in median_list %}
-                  <div class="col-6 text-capitalize">{{clm}}</div>
-                  <div class="col-3 text-capitalize">{{median_val}}</div>
-                  <div class="col-3 text-capitalize">{{median_percent}} %</div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-         
+          </div> 
         </div>
       </div>
       <!-- Page Content Ends Here... -->
@@ -364,6 +366,59 @@
               >Proceed</a
             >
             {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KNN Imputation -->
+
+    <div
+      class="modal fade"
+      id="knnModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="alert-heading">
+              <h4
+                class="modal-title text-danger font-weight-bold h5"
+                id="myModalLabel"
+              >
+                <i
+                class="fa fa-hand-o-down text-danger font-weight-bold"
+                aria-hidden="true"
+              ></i> Read Carefully
+              </h4>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="drop-rules mt-1">
+              <p>
+               <li>KNN Imputor for missing values using k-Nearest Neighbors. 
+                Each sample's missing values are imputed using the mean value from n_neighbors nearest neighbors found in the training set. 
+                Two samples are close if the features that neither is missing are close.</li>
+              </p>
+             
+              <p>
+                <li>KNN-Imputation performs only on numerical datasets.</li>
+              </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+            <a
+              type="button"
+              style="margin-top: 0%;"
+              href="/KNNImputation/{{fName}}/"
+              class="btn btn-success"
+              >Proceed</a
+            >
           </div>
         </div>
       </div>
