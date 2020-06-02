@@ -138,8 +138,10 @@
         {% endif %}
         {% endif %}
 
-        <a data-toggle="modal" data-target="#fillnaHelpModal" class="btn btn-info btn-sm ml-5 text-white">Help</a>
+        <!-- <a data-toggle="modal" data-target="#fillnaHelpModal" class="btn btn-info btn-sm ml-5 text-white">Help</a> -->
         <div class="container p-3">
+          <div class="col-12 p-2"><a href="/AttrFillNan/{{fName}}/"><i class="fa fa-refresh" aria-hidden="true"></i>
+</a></div>
           <div class="card attrDropCard pt-3 pb-3 pl-5 bg-light">
              <span 
                     data-toggle="tooltip"
@@ -303,14 +305,14 @@
     
 
 
-    <!-- Help Modal -->
+    
 
     <div
       class="modal fade"
-      id="fillnaHelpModal"
+      id="knnModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="myModal2Label"
+      aria-labelledby="myModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
@@ -324,25 +326,37 @@
                 <i
                 class="fa fa-hand-o-down text-danger font-weight-bold"
                 aria-hidden="true"
-              ></i> Know about filling methods
+              ></i> Read Carefully
               </h4>
             </div>
           </div>
           <div class="modal-body">
-                Hints here...
+            <div class="drop-rules mt-1">
+              <p>
+               <li>KNN Imputor for missing values using k-Nearest Neighbors. 
+                Each sample's missing values are imputed using the mean value from n_neighbors nearest neighbors found in the training set. 
+                Two samples are close if the features that neither is missing are close.</li>
+              </p>
+             
+              <p>
+                <li>KNN-Imputation performs only on numerical datasets.</li>
+              </p>
           </div>
           <div class="modal-footer">
-            <button
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+            <a
+              type="button"
               style="margin-top: 0%;"
-              data-dismiss="modal"
-              class="btn btn-info"
-              >Got it</button
+              href="/KNNImputation/{{fName}}/"
+              class="btn btn-success"
+              >Proceed</a
             >
           </div>
-        </>
+        </div>
       </div>
     </div>
-
     
 
     <link

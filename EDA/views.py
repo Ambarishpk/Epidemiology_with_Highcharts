@@ -283,7 +283,7 @@ def AttrDropNanCalc(request, fName):
             'attr_drop_col_list': drop_col,
             'NaN_percent': nan_percent,
             'status': 'Success',
-            'message': "NaN values are dropped."
+            'message': "NaN values are dropped. Please refresh the page and see the changes."
         }
         return render(request, 'AttrDropNan.html', context)
 
@@ -313,7 +313,7 @@ def AttrDropColCalc(request, fName):
             'attr_drop_col_list': drop_col,
             'NaN_percent': nan_percent,
             'status': 'Success',
-            'message': "Selected columns are dropped."
+            'message': "Selected columns are dropped. Please refresh the page and see the changes."
         }
         return render(request, 'AttrDropNan.html', context)
 
@@ -372,7 +372,7 @@ def AttrFillNanCalc(request, fName):
                     df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                            'processed/'+fName+'.csv'), index=False)
                     status = 'Success'
-                    message = 'NaN values of selected columns are filled by Forward method.'
+                    message = 'NaN values of selected columns are filled by Forward method. Please refresh the page and see the changes.'
                 # backward fill
                 elif fillType == 'bfill':
                     for col in selectedCols:
@@ -541,7 +541,7 @@ def BinningCalc(request, fName):
             'binned_list': binned_list,
             'NaN_percent': NaN_percent,
             'status': 'Success',
-            'message': 'Binning was done on selected features.'
+            'message': 'Binning was done on selected features. Please go to the dataset and see the changes.'
         }
 
         return render(request, 'Binning.html', context)
