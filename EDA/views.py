@@ -5,12 +5,14 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
+from sklearn.model_selection import train_test_split
 import os
 import csv
 import pandas as pd
 from pandas import DataFrame
 import numpy as np
 import sklearn
+import category_encoders as ce
 from sklearn.impute import KNNImputer
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
@@ -106,6 +108,8 @@ def Overview(fName):
         'num_msg': numerical_msg,
         'date_time_msg': date_time_msg,
     }
+
+    print("Hai")
 
     return context
 
@@ -471,6 +475,7 @@ def BinningCalc(request, fName):
 
         selectedCols = request.POST.getlist('binCol')
         binRange = request.POST.get('rangeVal')
+        binType = request.POST.get('binningType')
 
         # check bin range
         if binRange != '':
@@ -506,10 +511,13 @@ def BinningCalc(request, fName):
                 labels.append(j)
             # print(labels)
             new_col = selected_col+' bins'
-            df[new_col] = pd.cut(df[selected_col], bins=bins,
-                                 labels=labels, include_lowest=True)
-            df[new_col].fillna(method='bfill', inplace=True)
-
+            if binType == 'qcut':    
+                df[new_col] = pd.qcut(df[selected_col], q=binRange,
+                                      duplicates='drop')
+            else:
+                df[new_col] = pd.cut(df[selected_col], bins=bins,
+                                     labels=labels, include_lowest=True)
+                df[new_col].fillna(method='bfill', inplace=True)
             # binning ends
 
         df.to_csv(os.path.join(settings.MEDIA_ROOT,
@@ -697,6 +705,78 @@ def OneHotEncodingCalc(request, fName):
         return render(request, 'OneHotEncoding.html', context)
 
 
+def BinaryEncoding(request, fName):
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    binary_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            pass
+        else:
+            binary_list.append(clm)
+
+    binaryProcessed_list = []
+
+    context = {
+        'fName': fName,
+        'processing_list': binary_list,
+        'processed_list': binaryProcessed_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'BinaryEncoding.html', context)
+
+
+def BinaryEncodingCalc(request, fName):
+    df = get_df(fName)
+    X = df.drop(columns='Class')
+    y = df['Class'].copy()
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.5, random_state=42)
+    if request.method == 'POST':
+        selected_cols = request.POST.getlist('binaryCol')
+        drop_column = request.POST.get('drop-column')
+        for selected_col in selected_cols:
+            ce_bin = ce.BinaryEncoder(cols=selected_col)
+            df2 = ce_bin.transform(X, y)
+            print(df2)
+            if drop_column == 'on':
+                del df[selected_col]
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
+            else:
+                df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                       'processed/'+fName+'.csv'), index=False)
+                ans = df[selected_col].value_counts(normalize=True) * 100
+
+        df_new = get_df(fName)
+        clm_list = list(df_new)
+        NaN_percent = get_NaN_percent(fName)
+        binary_list = []
+        for clm in clm_list:
+            dt = df_new[clm].dtype
+            if dt == 'int64' or dt == 'float64':
+                pass
+            else:
+                binary_list.append(clm)
+
+        binaryProcessed_list = selected_cols
+
+        context = {
+            'fName': fName,
+            'processing_list': binary_list,
+            'processed_list': binaryProcessed_list,
+            'NaN_percent': NaN_percent,
+            'status': 'Success',
+            'message': 'One-Hot Encoding was done on selected features.'
+
+        }
+        return render(request, 'BinaryEncoding.html', context)
+
+
 def CountFrequencyEncoding(request, fName):
     df = get_df(fName)
     NaN_percent = get_NaN_percent(fName)
@@ -849,8 +929,6 @@ def get_df(fName):
     data_frame = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                           'processed/'+fName+'.csv'), encoding='mbcs')
 
-    # data_frame.info()
-
     return data_frame
 
 
@@ -972,6 +1050,32 @@ def fetchDataset(request, fName):
     df = get_df(fName)
     chartLabel = fName
 
+    # Overall columns
+    categorical_clms_lst = []
+    date_time_clms_lst = []
+    numerical_clms_lst = []
+
+    cols = list(df)
+
+    for i in cols:
+        if 'date' in i.lower():
+            df[i] = pd.to_datetime(df[i], dayfirst=True)
+            date_time_clms_lst.append(i)
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
+        elif df[i].dtypes == 'int64' or df[i].dtypes == 'float64':
+            numerical_clms_lst.append(i)
+        else:
+            categorical_clms_lst.append(i)
+
+    for date_time_col in date_time_clms_lst:
+        df[date_time_col] = pd.to_datetime(df[date_time_col], dayfirst=True)
+
+    cols_label = ['numberical-columns',
+                  'categorical-columns', 'Datetime-columns']
+    cols_data = [len(numerical_clms_lst), len(categorical_clms_lst), len(
+        date_time_clms_lst)]
+
     # skewness
     df_skewness = df.skew().round(2)
     df_skewness_dict = df_skewness.to_dict()
@@ -993,6 +1097,8 @@ def fetchDataset(request, fName):
         "kurt_chartdata": kurt_val,
         "skew_chartlabel": skew_col,
         "kurt_chartlabel": kurt_col,
+        "cols_chartlabel": cols_label,
+        "cols_chartdata": cols_data,
     }
     return JsonResponse(data)
 

@@ -29,7 +29,10 @@
       id="bootstrap-css"
     />
 
-    <!-- D3 and chart.js -->
+    <!-- heatmap -->
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-heatmap.min.js"></script>
+    
    <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
   
@@ -113,6 +116,7 @@
                 <li><a href="/Binning/{{fName}}/">Binning</a></li>
                 <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
                 <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
+                <li><a href="/BinaryEncoding/{{fName}}/">Binary Encoding</a></li>
                 <li><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
                 <li><a href="/Normalization/{{fName}}/">Normalization</a></li>
               </ul>
@@ -169,7 +173,13 @@
 
           <div class="container-fluid">
             <div class="row">
-              <div class="col-4">
+               <div class="col-4">
+                <div class="card visual_card shadow-lg">
+                  <div class="p-5">{{fName}} Overview</div>  
+                  <canvas id="overallChart"></canvas>
+                </div>
+              </div>
+              <div class="col-4 pl-4">
                 <div  class="card visual_card shadow-lg">
                   <div class="p-5">Skewness</div>  
                   <canvas id="skewnessChart"></canvas>
@@ -179,12 +189,6 @@
                 <div class="card visual_card shadow-lg">
                   <div class="p-5">Kurtosis</div>  
                   <canvas id="kurtosisChart"></canvas>
-                </div>
-              </div>
-              <div class="col-4 pl-4">
-                <div class="card visual_card shadow-lg">
-                  <div class="p-5">Correlation</div>  
-                  <canvas id="correlationChart"></canvas>
                 </div>
               </div>
             </div>
@@ -220,7 +224,10 @@
             </div>
             </div>
 
+          <div class="container-fluid mt-5 p-5">
+           
           </div>
+        </div>
 
 
 
@@ -378,6 +385,7 @@
         success: function(data) { 
           drawSkewChart(data, 'skewnessChart');
           drawKurtChart(data, 'kurtosisChart');
+          drawOverallChart(data, 'overallChart');
         }, 
         error: function(error_data) { 
           console.log("Error"); 
@@ -398,9 +406,9 @@
             datasets: [{ 
               label: chartLabel, 
               data: chartdata, 
-              backgroundColor : '#636EFA',
+              backgroundColor : '#4C72B0',
               //backgroundColor : '#FFFFFF',
-              borderColor: '#636EFA',
+              borderColor: '#4C72B0',
             }] 
           },
          options: {
@@ -435,9 +443,9 @@
             datasets: [{ 
               label: chartLabel, 
               data: chartdata, 
-              backgroundColor : '#636EFA',
+              backgroundColor : '#4C72B0',
               //backgroundColor : '#FFFFFF',
-              borderColor: '#636EFA',
+              borderColor: '#4C72B0',
             }] 
           },
           options: {
@@ -457,6 +465,48 @@
         }); 
       }
 
+      function drawOverallChart(data, id){
+        var labels = data.cols_chartlabel
+        var chartData = data.cols_chartdata
+        var chartLabel = data.label
+        var ctx = document.getElementById(id).getContext('2d'); 
+        var chart = new Chart(ctx, { 
+          type: 'pie', 
+          data: { 
+            labels: labels, 
+            datasets: [{ 
+              label: chartLabel, 
+              data: chartData, 
+              backgroundColor: [
+                '#4C72B0',
+                '#C44E52',
+                '#55A868',
+                
+              ],
+              borderColor: [
+                '#4C72B0',
+                '#C44E52',
+                '#55A868',   
+              ],
+            }] 
+          },
+         options: {
+            scales: {
+              yAxes: [{
+                  ticks: {
+                      fontSize: 0,
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontSize: 8
+                  }
+              }]
+            }
+          }
+  
+        });
+      }
       
 
     </script>
@@ -487,13 +537,13 @@
       var ctx = document.getElementById('customChart').getContext('2d'); 
       var chart = new Chart(ctx, { 
         type: 'bar', 
-        data: { 
+        data: {
           labels: [label1, label2], 
           datasets: [{ 
             label: "Percentage (%)",
             data: [data1, data2],
-            backgroundColor : ['#636EFA', '#D96D51'],
-            borderColor: ['#636EFA','#636EFA'],
+            backgroundColor : ['#4C72B0', '#55A868'],
+            borderColor: ['#4C72B0','#55A868'],
           }],
         }, options: {
             scales: {
@@ -508,6 +558,53 @@
       });
 
 
+
+
+      // Heatmap
+
+     // anychart.onDocumentReady(function () {
+//
+     //   // create the data 
+     //   var data = [
+     //    {x:"column1",y:"column1",heat:9.232},
+     //    {x:"column1",y:"column2",heat:0.232},
+     //    {x:"column1",y:"column3",heat:1.232},
+     //    {x:"column1",y:"column4",heat:3.232},
+     //    {x:"column1",y:"column5",heat:9.232},
+     //    {x:"column2",y:"column1",heat:0.232},
+     //    {x:"column2",y:"column2",heat:1.232},
+     //    {x:"column2",y:"column3",heat:2.232},
+     //    {x:"column2",y:"column4",heat:8.232},
+     //    {x:"column2",y:"column5",heat:1.232},
+     //    {x:"column3",y:"column1",heat:0.232},
+     //    {x:"column3",y:"column2",heat:6.232},
+     //    {x:"column3",y:"column3",heat:0.232},
+     //    {x:"column3",y:"column4",heat:5.232},
+     //    {x:"column3",y:"column5",heat:9.232},
+     //   ];        
+     //   
+     //   // create the chart and set the data
+     //   chart = anychart.heatMap(data);
+     //   
+     //   // set the chart title
+     //   //chart.title("{{fName}}");
+     //   
+     //   // create and configure the color scale.
+     //   var customColorScale = anychart.scales.linearColor();
+     //   customColorScale.colors(["#ACE8D4", "#00726A"]);
+     //   
+     //   // set the color scale as the color scale of the chart
+     //   chart.colorScale(customColorScale);
+     //   
+     //   // set the container id
+     //   chart.container("heat");
+     //   chart.credits(false);
+     //   
+     //   // initiate drawing the chart
+     //   chart.draw();
+     //   
+     // });
+//
     </script>
   </body>
 </html>

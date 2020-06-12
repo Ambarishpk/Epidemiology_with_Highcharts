@@ -93,6 +93,7 @@
                 <li class="active"><a href="/Binning/{{fName}}/">Binning</a></li>
                 <li><a href="/LabelEncoding/{{fName}}/">Label Encoding</a></li>
                 <li><a href="/OneHotEncoding/{{fName}}/">One Hot Encoding</a></li>
+                <li><a href="/BinaryEncoding/{{fName}}/">Binary Encoding</a></li>
                 <li><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
                 <li><a href="/Normalization/{{fName}}/">Normalization</a></li>
 
@@ -171,6 +172,14 @@
                         <label class="form-check-label text-capitalize ml-4 small">custom range per bin</>
                     </div>
                 </div>
+                <div class="col"  id="type">
+                    <div class="form-group">
+                      <select name="binningType" class="ml-3 form-control-lg rounded">
+                        <option class="form-control form-control-lg">cut</option>
+                        <option class="form-control form-control-lg">qcut</option>
+                      </select>
+                    </div>
+                </div>  
                 <div class="col" style="display:none;"  id="range">
                     <div class="form-group">
                         <input type="number" name="rangeVal"  placeholder="Enter range" class="form-control form-control-lg">
@@ -226,8 +235,53 @@
         </div>
         {% endif %}
         <div class="container p-3 mt-4">
-          <div class="row">
-            <h5 class="text-danger font-weight-bold">Suggesstions:</h5>
+          <div class="content-1 definitions">
+            <div class="row mt-5">
+              <div class="col ">
+                <div class="h3 font-weight-bold">binning</div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col" style="font-size: 18px;" >
+                <p>When dealing with continuous numeric data, it is often helpful to bin the data into multiple buckets for further analysis. 
+                  There are several different terms for binning including bucketing, discrete binning, discretization or quantization. 
+                  Pandas supports these approaches using the <code class="code">cut</code> and <code class="code">qcut</code> functions. 
+                  This article will briefly describe why you may want to bin your data and how to use the pandas functions to convert continuous data to a set of discrete buckets. 
+                  Like many pandas functions, <code class="code">cut</code> and <code class="code">qcut</code> may seem simple but there is a lot of capability packed into those functions. 
+                  Even for more experience users, I think you will learn a couple of tricks that will be useful for your own analysis.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="content-2 definitions">
+            <div class="row mt-5">
+              <div class="col ">
+                <div class="h3 font-weight-bold">qcut</div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col" style="font-size: 18px;" >
+                <p>The pandas <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.qcut.html">documentation</a> 
+                describes <code class="code">qcut</code> as a “Quantile-based discretization function.” This basically means that <code class="code">qcut</code>
+                tries to divide up the underlying data into equal sized bins. 
+                The function defines the bins using percentiles based on the distribution of the data, not the actual numeric edges of the&nbsp;bins.</p>
+              </div>
+            </div>
+          </div>
+           <div class="content-3 definitions">
+            <div class="row mt-5">
+              <div class="col ">
+                <div class="h3 font-weight-bold">cut</div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col" style="font-size: 18px;" >
+               <p>On the other hand, <code class="code">cut</code>
+                is used to specifically define the bin edges. There is no guarantee about
+                the distribution of items in each bin. In fact, you can define bins in such a way that no
+                items are included in a bin or nearly all items are in a single&nbsp;bin.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

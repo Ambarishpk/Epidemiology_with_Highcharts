@@ -52,6 +52,12 @@ urlpatterns = [
         views.OneHotEncoding, name="OneHotEncoding"),
     url(r'^OneHotEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.OneHotEncodingCalc, name="OneHotEncodingCalc"),
+    # Binary Encoding
+    # One Hot Encoding
+    url(r'^BinaryEncoding/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.BinaryEncoding, name="BinaryEncoding"),
+    url(r'^BinaryEncodingCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.BinaryEncodingCalc, name="BinaryEncodingCalc"),
     # Count Frequency Encoding
     url(r'^CountFrequencyEncoding/(?P<fName>[-\w.]+\w{0,50})/$',
         views.CountFrequencyEncoding, name="CountFrequencyEncoding"),
