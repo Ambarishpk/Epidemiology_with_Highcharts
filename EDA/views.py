@@ -109,8 +109,6 @@ def Overview(fName):
         'date_time_msg': date_time_msg,
     }
 
-    print("Hai")
-
     return context
 
 
@@ -173,6 +171,7 @@ def Visualize(request, fName):
         if df[i].dtype == 'int64' or df[i].dtype == 'float64':
             clm_list.append(i)
     nan_percent = get_NaN_percent(fName)
+
     context = {
         'fName': fName,
         'clm_list': clm_list,
@@ -204,6 +203,31 @@ def Dataset(request, fName):
     }
 
     return render(request, 'Dataset.html', context)
+
+
+def OriginalDataset(request, fName):
+    df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
+                                  'original/'+fName+'.csv'), encoding='mbcs')
+    clm_list = list(df)
+    values = df.values
+
+    paginator = Paginator(values, 200)
+    page = request.GET.get('page', 1)
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+
+    context = {
+        'fName': fName,
+        'clm_list': clm_list,
+        'for_filter': list(df),
+        'values': data,
+    }
+
+    return render(request, 'OriginalDataset.html', context)
 
 
 def Explore(request, fName):
@@ -511,7 +535,7 @@ def BinningCalc(request, fName):
                 labels.append(j)
             # print(labels)
             new_col = selected_col+' bins'
-            if binType == 'qcut':    
+            if binType == 'qcut':
                 df[new_col] = pd.qcut(df[selected_col], q=binRange,
                                       duplicates='drop')
             else:
@@ -732,26 +756,13 @@ def BinaryEncoding(request, fName):
 
 def BinaryEncodingCalc(request, fName):
     df = get_df(fName)
-    X = df.drop(columns='Class')
-    y = df['Class'].copy()
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.5, random_state=42)
     if request.method == 'POST':
         selected_cols = request.POST.getlist('binaryCol')
-        drop_column = request.POST.get('drop-column')
         for selected_col in selected_cols:
-            ce_bin = ce.BinaryEncoder(cols=selected_col)
-            df2 = ce_bin.transform(X, y)
-            print(df2)
-            if drop_column == 'on':
-                del df[selected_col]
-                df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                       'processed/'+fName+'.csv'), index=False)
-            else:
-                df.to_csv(os.path.join(settings.MEDIA_ROOT,
-                                       'processed/'+fName+'.csv'), index=False)
-                ans = df[selected_col].value_counts(normalize=True) * 100
-
+            encoder = ce.BinaryEncoder(cols=[selected_col])
+            df = encoder.fit_transform(df)
+            df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                                   'processed/'+fName+'.csv'), index=False)
         df_new = get_df(fName)
         clm_list = list(df_new)
         NaN_percent = get_NaN_percent(fName)
@@ -771,7 +782,7 @@ def BinaryEncodingCalc(request, fName):
             'processed_list': binaryProcessed_list,
             'NaN_percent': NaN_percent,
             'status': 'Success',
-            'message': 'One-Hot Encoding was done on selected features.'
+            'message': 'Binary Encoding was done on selected features.'
 
         }
         return render(request, 'BinaryEncoding.html', context)
@@ -872,7 +883,8 @@ def NormalizationCalc(request, fName):
             for featureName in selectedCols:
                 mini = min(df[featureName])
                 maxx = max(df[featureName])
-                df[featureName] = (df[featureName] - mini) / (maxx - mini)
+                df[featureName] = round(
+                    (df[featureName] - mini) / (maxx - mini), 2)
             message = 'Normalization done using Min: ' + \
                 str(mini)+' and Max: '+str(maxx)+' for range (0,1)'
             status = 'Success'
@@ -881,7 +893,7 @@ def NormalizationCalc(request, fName):
                 mean = df[featureName].mean()
                 df1 = abs(df[featureName] - mean)
                 mad = sum(df1) / len(df1)
-                df[featureName] = (df[featureName] - mean) / mad
+                df[featureName] = round((df[featureName] - mean) / mad, 2)
             message = 'Normalization done using Mean: ' + \
                 str(mean)+' and Mean Absolute deviation: '+str(mad)
             status = 'Success'
@@ -891,7 +903,7 @@ def NormalizationCalc(request, fName):
                 j = 1
                 while maxx/j > 1:
                     j = j * 10
-                df[featureName] = df[featureName] / j
+                df[featureName] = round(df[featureName] / j, 2)
             message = 'Normalization done using Decimal Scaling with value of ' + \
                 str(j)
             status = 'Success'
