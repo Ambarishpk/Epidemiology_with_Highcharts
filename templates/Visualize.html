@@ -33,6 +33,7 @@
     <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-heatmap.min.js"></script>
     
+    
    <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
   
@@ -162,18 +163,10 @@
         {% endif %}
         {% endif %}
         <div class="container p-5">
-          <!-- data exploration starts -->
-          <!-- <h1 class="text-success">Data Features..</h1>
-          <form action="/api/{{fName}}/" method="POST">
-            {%  csrf_token %}
-            <input type="text" name="myName"/>
-            <input type="number" name="myAge"/>
-            <button>Go</button>
-          </form> -->
-
+          
           <div class="container-fluid">
             <div class="row">
-               <div class="col-4">
+              <div class="col-4">
                 <div class="card visual_card shadow-lg">
                   <div class="p-5">{{fName}} Overview</div>  
                   <canvas id="overallChart"></canvas>
@@ -192,6 +185,13 @@
                 </div>
               </div>
             </div>
+             <div class="row">
+              <div class="col-4">
+                <div class="card visual_card shadow-lg">
+                  <div class="pt-5 pl-5">Correlation</div>  
+                  <div id="heatMap"><img style="width: 35rem;height:25rem;" src="{% static 'images/charts/heatmap2.png' %}" alt="heatmap"></div>
+                </div>
+              </div>
           </div>
           <div class="container-fluid mt-5 p-5 ">
             <form action="/customChart/{{fName}}/" method="POST">
@@ -386,6 +386,7 @@
           drawSkewChart(data, 'skewnessChart');
           drawKurtChart(data, 'kurtosisChart');
           drawOverallChart(data, 'overallChart');
+          drawHeatMap(data, 'heatMap');
         }, 
         error: function(error_data) { 
           console.log("Error"); 
@@ -562,49 +563,49 @@
 
       // Heatmap
 
-     // anychart.onDocumentReady(function () {
-//
-     //   // create the data 
-     //   var data = [
-     //    {x:"column1",y:"column1",heat:9.232},
-     //    {x:"column1",y:"column2",heat:0.232},
-     //    {x:"column1",y:"column3",heat:1.232},
-     //    {x:"column1",y:"column4",heat:3.232},
-     //    {x:"column1",y:"column5",heat:9.232},
-     //    {x:"column2",y:"column1",heat:0.232},
-     //    {x:"column2",y:"column2",heat:1.232},
-     //    {x:"column2",y:"column3",heat:2.232},
-     //    {x:"column2",y:"column4",heat:8.232},
-     //    {x:"column2",y:"column5",heat:1.232},
-     //    {x:"column3",y:"column1",heat:0.232},
-     //    {x:"column3",y:"column2",heat:6.232},
-     //    {x:"column3",y:"column3",heat:0.232},
-     //    {x:"column3",y:"column4",heat:5.232},
-     //    {x:"column3",y:"column5",heat:9.232},
-     //   ];        
-     //   
-     //   // create the chart and set the data
-     //   chart = anychart.heatMap(data);
-     //   
-     //   // set the chart title
-     //   //chart.title("{{fName}}");
-     //   
-     //   // create and configure the color scale.
-     //   var customColorScale = anychart.scales.linearColor();
-     //   customColorScale.colors(["#ACE8D4", "#00726A"]);
-     //   
-     //   // set the color scale as the color scale of the chart
-     //   chart.colorScale(customColorScale);
-     //   
-     //   // set the container id
-     //   chart.container("heat");
-     //   chart.credits(false);
-     //   
-     //   // initiate drawing the chart
-     //   chart.draw();
-     //   
-     // });
-//
+      anychart.onDocumentReady(function () {
+
+        // create the data 
+        var data = [
+         {x:"column1",y:"column1",heat:9.232},
+         {x:"column1",y:"column2",heat:0.232},
+         {x:"column1",y:"column3",heat:1.232},
+         {x:"column1",y:"column4",heat:3.232},
+         {x:"column1",y:"column5",heat:9.232},
+         {x:"column2",y:"column1",heat:0.232},
+         {x:"column2",y:"column2",heat:1.232},
+         {x:"column2",y:"column3",heat:2.232},
+         {x:"column2",y:"column4",heat:8.232},
+         {x:"column2",y:"column5",heat:1.232},
+         {x:"column3",y:"column1",heat:0.232},
+         {x:"column3",y:"column2",heat:6.232},
+         {x:"column3",y:"column3",heat:0.232},
+         {x:"column3",y:"column4",heat:5.232},
+         {x:"column3",y:"column5",heat:9.232},
+        ];        
+        
+        // create the chart and set the data
+        chart = anychart.heatMap(data);
+        
+        // set the chart title
+        //chart.title("{{fName}}");
+        
+        // create and configure the color scale.
+        var customColorScale = anychart.scales.linearColor();
+        customColorScale.colors(["#ACE8D4", "#00726A"]);
+        
+        // set the color scale as the color scale of the chart
+        chart.colorScale(customColorScale);
+        
+        // set the container id
+        //chart.container("heatMap");
+        chart.credits(false);
+        
+        // initiate drawing the chart
+        chart.draw();
+        
+      });
+
     </script>
   </body>
 </html>

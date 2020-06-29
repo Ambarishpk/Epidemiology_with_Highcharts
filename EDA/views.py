@@ -17,6 +17,10 @@ from sklearn.impute import KNNImputer
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+
 def get_NaN_percent(fName):
     df = get_df(fName)
     clm_list = list(df)
@@ -27,8 +31,13 @@ def get_NaN_percent(fName):
 
 
 def Overview(fName):
-
     df = get_df(fName)
+
+    uniform_data = list(df.corr().values)
+    plt.imshow(uniform_data)
+
+    plt.savefig(os.path.join(settings.MEDIA_ROOT,
+                             'static/images/charts/heatmap2.png'))
 
     file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     statInfo = os.stat(file_path)
@@ -1088,13 +1097,19 @@ def fetchDataset(request, fName):
     cols_data = [len(numerical_clms_lst), len(categorical_clms_lst), len(
         date_time_clms_lst)]
 
+    # for cat in categorical_clms_lst:
+    #     dictionary = (df[cat].value_counts()).to_dict()
+    #     print(cat)
+    #     print(dictionary.keys())
+    #     print(dictionary.values())
+
     # skewness
     df_skewness = df.skew().round(2)
     df_skewness_dict = df_skewness.to_dict()
     skew_col = list(df_skewness_dict.keys())
     skew_val = list(df_skewness_dict.values())
 
-    # print(df.corr().values)
+    print(df.corr().values)
     # print((df.corr().to_dict()).keys())
 
     # kurtosis
