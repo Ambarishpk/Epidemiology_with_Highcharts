@@ -19,6 +19,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 from matplotlib import pyplot as plt
 import seaborn as sns
+from scipy import stats
 
 
 def get_NaN_percent(fName):
@@ -33,11 +34,8 @@ def get_NaN_percent(fName):
 def Overview(fName):
     df = get_df(fName)
 
-    uniform_data = list(df.corr().values)
-    plt.imshow(uniform_data)
-
-    plt.savefig(os.path.join(settings.MEDIA_ROOT,
-                             'static/images/charts/heatmap2.png'))
+    # distributionChart(df)
+    # heatmap(df)
 
     file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     statInfo = os.stat(file_path)
@@ -69,6 +67,7 @@ def Overview(fName):
     for date_time_col in date_time_clms_lst:
         df[date_time_col] = pd.to_datetime(df[date_time_col], dayfirst=True)
 
+    countfrequencycharts(df, categorical_clms_lst)
     categorical_clms = len(categorical_clms_lst)
     date_time_clms = len(date_time_clms_lst)
     numerical_clms = len(numerical_clms_lst)
@@ -1109,9 +1108,6 @@ def fetchDataset(request, fName):
     skew_col = list(df_skewness_dict.keys())
     skew_val = list(df_skewness_dict.values())
 
-    print(df.corr().values)
-    # print((df.corr().to_dict()).keys())
-
     # kurtosis
     df_kurtosis = df.kurt().round(2)
     df_kurtosis_dict = df_kurtosis.to_dict()
@@ -1220,3 +1216,30 @@ def KNNImputation(request, fName):
     context['status'] = 'Success'
     context['message'] = 'NaN values filled by KNN method'
     return render(request, 'Index.html', context)
+
+
+def countfrequencycharts(df, catlist):
+    for feature in catlist:
+        ax1 = sns.countplot(x=feature, data=df)
+        for p in ax1.patches:
+            ax1.annotate('{:.2f}'.format(p.get_height()),
+                         (p.get_x()+0.15, p.get_height()+1))
+        ax1.figure.savefig(os.path.join(settings.MEDIA_ROOT,
+                                        'static/images/charts/'+feature+'.png'))
+        plt.clf()
+
+
+def distributionChart(df):
+    x = df.values
+    distribution_plot = sns.distplot(
+        x, bins=30, kde=True, kde_kws={'linewidth': 2})
+    distribution_plot.figure.savefig(os.path.join(settings.MEDIA_ROOT,
+                                                  'static/images/charts/distribution.png'))
+
+
+def heatmap(df):
+    f, ax = plt.subplots(figsize=(14, 14))
+    heat_map = sns.heatmap(df.corr(), annot=True,
+                           linewidths=.2, fmt='.1f', ax=ax)
+    heat_map.figure.savefig(os.path.join(settings.MEDIA_ROOT,
+                                         'static/images/charts/heatmap.png'))
