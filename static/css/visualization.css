@@ -1,3 +1,7 @@
+body {
+    background-color: bisque;
+}
+
 .visual_card {
     margin: 5px;
     width: 35rem;
@@ -8,8 +12,8 @@
 
 .customChart_card {
     margin: 5px;
-    width: 80rem;
-    height: 50rem;
+    width: auto;
+    height: auto;
     border: none;
     overflow: auto;
 }

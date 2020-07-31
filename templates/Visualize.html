@@ -167,32 +167,51 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-4">
-                <div class="card visual_card shadow-lg">
+                <div class="card visual_card shadow-lg rounded-lg">
                   <div class="p-5">{{fName}} Overview</div>  
                   <canvas id="overallChart"></canvas>
                 </div>
               </div>
-              <div class="col-4 pl-4">
-                <div  class="card visual_card shadow-lg">
+              <div class="col-4">
+                <div  class="card visual_card shadow-lg rounded-lg">
                   <div class="p-5">Skewness</div>  
                   <canvas id="skewnessChart"></canvas>
                 </div>
               </div>
-              <div class="col-4 pl-4">
-                <div class="card visual_card shadow-lg">
+              <div class="col-4 ">
+                <div class="card visual_card shadow-lg rounded-lg">
                   <div class="p-5">Kurtosis</div>  
                   <canvas id="kurtosisChart"></canvas>
                 </div>
               </div>
-            </div>
-             <div class="row">
-              <div class="col-4">
-                <div class="card visual_card shadow-lg p-5" style="width:71rem;height:auto;">
-                  <div id="heatMap"><img class="" style="width:60rem;height:50rem;" src="{% static 'images/charts/heatmap.png' %}" alt="heatmap"></div>
+              <div class="row">
+                <div class="col-4">
+                <div class="card visual_card shadow-lg rounded-lg ml-4 p-3">
+                  <div class="p-5">Missing Data</div>
+                    <canvas id="nanChart"></canvas>
+                  </div>
                 </div>
               </div>
+              <div class="row">
+                {% for image in categorical_clm_list %}
+                <div class="col-4">
+                  <div class="card visual_card shadow-lg rounded-lg">
+                  <img width="350" src="{% static 'charts/'|add:image|add:'.png' %}" alt="">
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-4 mt-5">
+                <div class="card visual_card rounded " style="width:60rem;height:52rem;">
+                  <div id="heatMap"><img class="" style="width:55rem;height:45rem;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
+                </div>
+              </div>
+              <div class="col-4"></div>
+              
           </div>
-          <div class="container-fluid mt-5 p-5 ">
+          <div class="container-fluid ">
             <form action="/customChart/{{fName}}/" method="POST">
               {% csrf_token %}
             <div class="form">
@@ -223,9 +242,9 @@
             </div>
             </div>
 
-          <div class="container-fluid mt-5 p-5">
+          <!-- <div class="container-fluid mt-5 p-5">
            
-          </div>
+          </div> -->
         </div>
 
 
@@ -385,7 +404,8 @@
           drawSkewChart(data, 'skewnessChart');
           drawKurtChart(data, 'kurtosisChart');
           drawOverallChart(data, 'overallChart');
-          drawHeatMap(data, 'heatMap');
+          drawNaNChart(data, 'nanChart');
+         
         }, 
         error: function(error_data) { 
           console.log("Error"); 
@@ -508,6 +528,42 @@
         });
       }
       
+      function drawNaNChart(data, id) { 
+        var labels = data.NaN_clms; 
+        var chartLabel = data.label; 
+        var chartdata = data.NaN_val; 
+
+        var ctx = document.getElementById(id).getContext('2d'); 
+        var chart = new Chart(ctx, { 
+          type: 'bar', 
+
+          data: { 
+            labels: labels, 
+            datasets: [{ 
+              label: chartLabel, 
+              data: chartdata, 
+              backgroundColor : '#4C72B0',
+              //backgroundColor : '#FFFFFF',
+              borderColor: '#4C72B0',
+            }] 
+          },
+          options: {
+            scales: {
+              yAxes: [{
+                  ticks: {
+                      fontSize: 10
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontSize: 8
+                  }
+              }]
+            }
+          }
+
+        }); 
+    } 
 
     </script>
 
@@ -522,7 +578,6 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
       });
-
 
 
       //customChart function
@@ -555,54 +610,6 @@
                 }]
             }
           }
-      });
-
-
-
-
-      // Heatmap
-
-      anychart.onDocumentReady(function () {
-
-        // create the data 
-        var data = [
-         {x:"column1",y:"column1",heat:9.232},
-         {x:"column1",y:"column2",heat:0.232},
-         {x:"column1",y:"column3",heat:1.232},
-         {x:"column1",y:"column4",heat:3.232},
-         {x:"column1",y:"column5",heat:9.232},
-         {x:"column2",y:"column1",heat:0.232},
-         {x:"column2",y:"column2",heat:1.232},
-         {x:"column2",y:"column3",heat:2.232},
-         {x:"column2",y:"column4",heat:8.232},
-         {x:"column2",y:"column5",heat:1.232},
-         {x:"column3",y:"column1",heat:0.232},
-         {x:"column3",y:"column2",heat:6.232},
-         {x:"column3",y:"column3",heat:0.232},
-         {x:"column3",y:"column4",heat:5.232},
-         {x:"column3",y:"column5",heat:9.232},
-        ];        
-        
-        // create the chart and set the data
-        chart = anychart.heatMap(data);
-        
-        // set the chart title
-        //chart.title("{{fName}}");
-        
-        // create and configure the color scale.
-        var customColorScale = anychart.scales.linearColor();
-        customColorScale.colors(["#ACE8D4", "#00726A"]);
-        
-        // set the color scale as the color scale of the chart
-        chart.colorScale(customColorScale);
-        
-        // set the container id
-        //chart.container("heatMap");
-        chart.credits(false);
-        
-        // initiate drawing the chart
-        chart.draw();
-        
       });
 
     </script>

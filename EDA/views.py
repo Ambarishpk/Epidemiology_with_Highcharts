@@ -5,16 +5,24 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
-from sklearn.model_selection import train_test_split
+from pandas import DataFrame
 import os
 import csv
 import pandas as pd
-from pandas import DataFrame
 import numpy as np
 import sklearn
 import category_encoders as ce
-from sklearn.impute import KNNImputer
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import KNNImputer, IterativeImputer
+from sklearn.datasets import make_friedman1
+from sklearn.feature_selection import RFE
+from sklearn.svm import SVR
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import StratifiedKFold
+from sklearn.feature_selection import RFECV
 
 
 from matplotlib import pyplot as plt
@@ -35,7 +43,6 @@ def Overview(fName):
     df = get_df(fName)
 
     # distributionChart(df)
-    # heatmap(df)
 
     file_path = os.path.join(settings.MEDIA_ROOT, 'processed/'+fName+'.csv')
     statInfo = os.stat(file_path)
@@ -67,7 +74,25 @@ def Overview(fName):
     for date_time_col in date_time_clms_lst:
         df[date_time_col] = pd.to_datetime(df[date_time_col], dayfirst=True)
 
+    # iterative Imputer
+    # imp_mean = IterativeImputer(random_state=0)
+    # imp_mean.fit(df)
+    # imp_mean.transform(df).round(2)
+    # print(imp_mean.transform(df))
+
+    X, y = make_friedman1(n_samples=50, random_state=0)
+    estimator = SVR(kernel="linear")
+    selector = RFE(estimator, step=1)
+    selector = selector.fit(X, y)
+    print(selector.support_)
+    print(selector.ranking_)
+
+    # Charts Called Here
     countfrequencycharts(df, categorical_clms_lst)
+    plt.clf()
+    heatmap(df)
+    plt.clf()
+
     categorical_clms = len(categorical_clms_lst)
     date_time_clms = len(date_time_clms_lst)
     numerical_clms = len(numerical_clms_lst)
@@ -132,6 +157,7 @@ def Upload(request):
         # Validating the uploaded file
         if extension == 'csv':
             fs = FileSystemStorage()
+
             file_path1 = os.path.join(
                 settings.MEDIA_ROOT, 'original/'+fullName)
             file_path2 = os.path.join(
@@ -143,12 +169,14 @@ def Upload(request):
 
             fs.save('processed/'+fullName, uploaded_file)
             fs.save('original/'+fullName, uploaded_file)
+
             df = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
                                           'processed/'+fName+'.csv'), encoding='mbcs')
             df = df.replace(to_replace="?",
                             value="nan")
             df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                    'processed/'+fName+'.csv'), index=False)
+
             context = Overview(fName)
             context['status'] = 'Success'
             context['message'] = 'Dataset Uploaded Successfully'
@@ -175,16 +203,20 @@ def Home(request, fName):
 def Visualize(request, fName):
     df = get_df(fName)
     clm_list = []
+    cat_clm_list = []
     for i in list(df):
         if df[i].dtype == 'int64' or df[i].dtype == 'float64':
             clm_list.append(i)
+        else:
+            cat_clm_list.append(i)
     nan_percent = get_NaN_percent(fName)
+    print(cat_clm_list)
 
     context = {
         'fName': fName,
         'clm_list': clm_list,
+        'categorical_clm_list': cat_clm_list,
         'NaN_percent': nan_percent,
-        'data': [10, 20, 30, 40, 50, 60],
     }
     return render(request, 'Visualize.html', context)
 
@@ -248,9 +280,6 @@ def Explore(request, fName):
 
     # explore
 
-    # corr = correlation(fName)
-    # correlation_list = zip(clm_list, corr)
-
     mean_list = get_mean(fName)
     median_list = get_median(fName)
 
@@ -270,7 +299,6 @@ def Explore(request, fName):
         'clm_list': clm_list,
         'NaN_list': NaN_list_zip,
         'NaN_percent': nan_percent,
-        # 'correlation_list': correlation_list,
         'mean_list': mean_list,
         'median_list': median_list,
     }
@@ -396,11 +424,9 @@ def AttrFillNanCalc(request, fName):
         selectOption = request.POST.get('fillnaMethods')
 
         selectedCols = request.POST.getlist('attrFillCols')
-        # print(selectedCols, selectOption)
         if selectedCols:
             if selectOption == "fill":
                 fillType = request.POST.get('fillType')
-                # print(fillType)
                 # forward fill
                 if fillType == 'ffill':
                     for col in selectedCols:
@@ -437,7 +463,6 @@ def AttrFillNanCalc(request, fName):
 
             elif selectOption == "replace":
                 replaceWord = request.POST.get('replaceBy')
-                # print(replaceWord)
                 for col in selectedCols:
                     df[col].fillna(replaceWord, inplace=True)
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
@@ -537,11 +562,9 @@ def BinningCalc(request, fName):
                 bins.append(i)
             if Max not in bins:
                 bins.append(Max)
-            # print(bins)
             l1 = len(bins)
             for j in range(1, l1):
                 labels.append(j)
-            # print(labels)
             new_col = selected_col+' bins'
             if binType == 'qcut':
                 df[new_col] = pd.qcut(df[selected_col], q=binRange,
@@ -554,8 +577,6 @@ def BinningCalc(request, fName):
 
         df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                'processed/'+fName+'.csv'), index=False)
-
-        # print(df[new_col].dtype)
 
         df_new = get_df(fName)
         clm_list = list(df_new)
@@ -574,7 +595,6 @@ def BinningCalc(request, fName):
                 binned_list.append(col_name)
             else:
                 binning_list.append(col_name)
-        # print(binning_list)
         context = {
             'fName': fName,
             'binning_list': binning_list,
@@ -711,7 +731,6 @@ def OneHotEncodingCalc(request, fName):
                 df.to_csv(os.path.join(settings.MEDIA_ROOT,
                                        'processed/'+fName+'.csv'), index=False)
                 ans = df[selected_col].value_counts(normalize=True) * 100
-                # print(ans.sum())
 
         df_new = get_df(fName)
         clm_list = list(df_new)
@@ -974,29 +993,7 @@ def skewness(fName):
     col = df_skewness_dict.keys()
     val = df_skewness_dict.values()
     skewness_list = zip(col, val)
-    # print(list(val))
-    # print(sum(list(val)))
     return skewness_list
-
-# Correlation
-# ===========
-
-
-def correlation(fName):
-    #     df = get_df(fName)
-    #     correla = df.corr()
-    #     values = correla.values
-    #     main_list = []
-    #     correlation_list = []
-    #     for i in range(len(values)):
-    #         sub_list = []
-    #         for j in values[i]:
-    #             sub_list.append(round(j, 2))
-    #         main_list.append(sub_list)
-    #     correlation_list.append(main_list)
-    #     new = correlation_list[0]
-
-    return True
 
 
 # NaN Percentage
@@ -1075,6 +1072,9 @@ def fetchDataset(request, fName):
     date_time_clms_lst = []
     numerical_clms_lst = []
 
+    nan_clms = list(get_NaN(fName).to_dict().keys())
+    nan_values = list(df.isnull().sum(axis=0))
+
     cols = list(df)
 
     for i in cols:
@@ -1096,12 +1096,6 @@ def fetchDataset(request, fName):
     cols_data = [len(numerical_clms_lst), len(categorical_clms_lst), len(
         date_time_clms_lst)]
 
-    # for cat in categorical_clms_lst:
-    #     dictionary = (df[cat].value_counts()).to_dict()
-    #     print(cat)
-    #     print(dictionary.keys())
-    #     print(dictionary.values())
-
     # skewness
     df_skewness = df.skew().round(2)
     df_skewness_dict = df_skewness.to_dict()
@@ -1122,6 +1116,9 @@ def fetchDataset(request, fName):
         "kurt_chartlabel": kurt_col,
         "cols_chartlabel": cols_label,
         "cols_chartdata": cols_data,
+        "NaN_clms": nan_clms,
+        "NaN_val": nan_values,
+
     }
     return JsonResponse(data)
 
@@ -1224,8 +1221,7 @@ def countfrequencycharts(df, catlist):
         for p in ax1.patches:
             ax1.annotate('{:.2f}'.format(p.get_height()),
                          (p.get_x()+0.15, p.get_height()+1))
-        ax1.figure.savefig(os.path.join(settings.MEDIA_ROOT,
-                                        'static/images/charts/'+feature+'.png'))
+        ax1.figure.savefig('charts/'+feature+'.png')
         plt.clf()
 
 
@@ -1233,13 +1229,13 @@ def distributionChart(df):
     x = df.values
     distribution_plot = sns.distplot(
         x, bins=30, kde=True, kde_kws={'linewidth': 2})
-    distribution_plot.figure.savefig(os.path.join(settings.MEDIA_ROOT,
-                                                  'static/images/charts/distribution.png'))
+    distribution_plot.figure.savefig('charts/distribution.png')
+    plt.clf()
 
 
 def heatmap(df):
     f, ax = plt.subplots(figsize=(14, 14))
     heat_map = sns.heatmap(df.corr(), annot=True,
                            linewidths=.2, fmt='.1f', ax=ax)
-    heat_map.figure.savefig(os.path.join(settings.MEDIA_ROOT,
-                                         'static/images/charts/heatmap.png'))
+    heat_map.figure.savefig('charts/heatmap.png')
+    plt.clf()

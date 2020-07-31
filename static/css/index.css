@@ -15,6 +15,11 @@ body {
   border: none;
 }
 
+.content-value {
+  color: #DC3545;
+  font-weight: bold;
+}
+
 .kurt-skew-box {
   color: black;
   width: 30rem;
