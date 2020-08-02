@@ -199,17 +199,23 @@
               </div>
             </div>
             <div class="row">
-               <h3 class="text-dark">Count Frequency of <span class="text-danger">Categorical Features</span></h3>
+              <h3 class="text-dark">Count Frequency of <span class="text-danger">Categorical Features</span></h3>
             </div>
             <div class="row p-5">
+              {% if categorical_clm_list %}
               {% for image in categorical_clm_list %}
-                <div class="col-4">
-                  <p class="text-capitalize h5 shadow-lg p-1 text-center text-white bg-dark">{{image}}</p>
-                  <div class="card visual_card rounded-lg">
+              <div class="col-4">
+                <p class="text-capitalize h5 shadow-lg p-1 text-center text-white bg-dark">{{image}}</p>
+                <div class="card visual_card rounded-lg">
                   <img width="350" src="{% static 'charts/'|add:image|add:'.png' %}" alt="">
                 </div>
               </div>
               {% endfor %}
+              {% else %}
+              <div class="col-12 text-center">
+                <p class="alert alert-danger">Categorical Features not exists</p>
+              </div>
+              {% endif %}
             </div>
              <div class="row">
                <h3 class="text-dark">Correlation <span class="text-danger">(Heatmap)</span></h3>
@@ -217,7 +223,7 @@
             <div class="row">
               <div class="col-4 mt-5 text-left">
                 <div class="card visual_card rounded " style="width:60rem;height:45rem;">
-                  <div id="heatMap"><img class="" style="width:55rem;height:45rem; object-fit: cover;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
+                  <div id="heatMap"><img class="" style="width:60rem;height:45rem; object-fit: cover;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
                 </div>
               </div>
               <div class="col-3"></div>
@@ -229,9 +235,9 @@
 
           <div class="container-fluid">
              <div class="row">
-               <h3 class="text-dark">Correlation <span class="text-danger">(Heatmap)</span></h3>
+               <h3 class="text-dark">Custom Chart <span class="text-danger"> Feature Comparison</span></h3>
             </div>
-            <form action="/customChart/{{fName}}/" method="POST">
+            <form class="text-center m-5" action="/customChart/{{fName}}/" method="POST">
               {% csrf_token %}
             <div class="form">
                 <div class="form-inline">
@@ -249,7 +255,7 @@
                   </select>
                   <button class="ml-3 btn btn-primary">Plot</button>
               </div>
-              </form>
+            </form>
             <div class="card text-center mt-5 customChart_card bg-white">
               <canvas id="customChart"></canvas> 
               {% if customChartMsg %}

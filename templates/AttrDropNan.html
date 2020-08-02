@@ -33,14 +33,9 @@
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/preloader.css' %}" />
   </head>
 
   <body>
-    <!-- preloader -->
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <div class="border-right bg-dark text-white" id="sidebar-wrapper">
@@ -425,16 +420,6 @@
           $("#msg").remove();
         }
       }, 3000);
-    </script>
-    <script>
-      $(document).ready(function () {
-        //Preloader
-        function hidePreloader() {
-          var preloader = $(".loader-wrapper");
-          preloader.fadeOut("slow");
-        }
-        hidePreloader();
-      });
     </script>
   </body>
 </html>

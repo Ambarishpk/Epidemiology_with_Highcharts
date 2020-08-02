@@ -70,6 +70,11 @@ urlpatterns = [
         views.Normalization, name="Normalization"),
     url(r'^NormalizationCalc/(?P<fName>[-\w.]+\w{0,50})/$',
         views.NormalizationCalc, name="NormalizationCalc"),
+    # Log Transform
+    url(r'^LogTransform/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.LogTransform, name="LogTransform"),
+    url(r'^LogTransformCalc/(?P<fName>[-\w.]+\w{0,50})/$',
+        views.LogTransformCalc, name="LogTransformCalc"),
 
 
 

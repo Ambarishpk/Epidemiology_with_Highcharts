@@ -1,3 +1,6 @@
+import shutil
+import stat
+import errno
 from django.shortcuts import render
 from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse, Http404
@@ -5,6 +8,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.storage import FileSystemStorage
+from django.templatetags.static import static
 from pandas import DataFrame
 import os
 import csv
@@ -158,6 +162,8 @@ def Upload(request):
         if extension == 'csv':
             fs = FileSystemStorage()
 
+            chart_path = os.path.join(settings.MEDIA_ROOT, 'static/charts/')
+
             file_path1 = os.path.join(
                 settings.MEDIA_ROOT, 'original/'+fullName)
             file_path2 = os.path.join(
@@ -166,6 +172,13 @@ def Upload(request):
             if os.path.exists(file_path1 and file_path2):
                 os.remove(file_path1)
                 os.remove(file_path2)
+
+            if os.path.exists(chart_path):
+                shutil.rmtree(chart_path, ignore_errors=False,
+                              onerror=handleRemoveReadonly)
+                os.makedirs(chart_path)
+            else:
+                os.makedirs(chart_path)
 
             fs.save('processed/'+fullName, uploaded_file)
             fs.save('original/'+fullName, uploaded_file)
@@ -961,8 +974,61 @@ def NormalizationCalc(request, fName):
     return render(request, 'Normalization.html', context)
 
 
+def LogTransform(request, fName):
+
+    df = get_df(fName)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    log_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            log_list.append(clm)
+        else:
+            pass
+
+    context = {
+        'fName': fName,
+        'log_list': log_list,
+        'NaN_percent': NaN_percent,
+
+    }
+
+    return render(request, 'LogTransform.html', context)
+
+
+def LogTransformCalc(request, fName):
+    df = get_df(fName)
+
+    if request.method == "POST":
+        selected_cols = request.POST.getlist('logCol')
+    for col in selected_cols:
+        df[col] = ((np.log(df[col])).replace(-np.inf, 0)).round(2)
+    df.to_csv(os.path.join(settings.MEDIA_ROOT,
+                           'processed/'+fName+'.csv'), index=False)
+    clm_list = list(df)
+    NaN_percent = get_NaN_percent(fName)
+    log_list = []
+    for clm in clm_list:
+        dt = df[clm].dtype
+        if dt == 'int64' or dt == 'float64':
+            log_list.append(clm)
+        else:
+            pass
+
+    context = {
+        'fName': fName,
+        'log_list': log_list,
+        'NaN_percent': NaN_percent,
+        'status': 'Success',
+        'message': 'Log Transformation has been performed successfully'
+    }
+
+    return render(request, 'LogTransform.html', context)
+
 # getting dataframe
 # =================
+
 
 def get_df(fName):
     data_frame = pd.read_csv(os.path.join(settings.MEDIA_ROOT,
@@ -1221,7 +1287,7 @@ def countfrequencycharts(df, catlist):
         for p in ax1.patches:
             ax1.annotate('{:.2f}'.format(p.get_height()),
                          (p.get_x()+0.15, p.get_height()+1))
-        ax1.figure.savefig('charts/'+feature+'.png')
+        ax1.figure.savefig('static/charts/'+feature+'.png')
         plt.clf()
 
 
@@ -1229,7 +1295,7 @@ def distributionChart(df):
     x = df.values
     distribution_plot = sns.distplot(
         x, bins=30, kde=True, kde_kws={'linewidth': 2})
-    distribution_plot.figure.savefig('charts/distribution.png')
+    distribution_plot.figure.savefig('static/charts/distribution.png')
     plt.clf()
 
 
@@ -1237,5 +1303,15 @@ def heatmap(df):
     f, ax = plt.subplots(figsize=(14, 14))
     heat_map = sns.heatmap(df.corr(), annot=True,
                            linewidths=.2, fmt='.1f', ax=ax)
-    heat_map.figure.savefig('charts/heatmap.png')
+    heat_map.figure.savefig('static/charts/heatmap.png')
     plt.clf()
+
+
+def handleRemoveReadonly(func, path, exc):
+
+    excvalue = exc[1]
+    if func in (os.rmdir, os.remove) and excvalue.errno == errno.EACCES:
+        os.chmod(path, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # 0777
+        func(path)
+    else:
+        raise
