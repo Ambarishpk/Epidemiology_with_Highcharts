@@ -56,9 +56,14 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
     <link rel="stylesheet" href="{% static 'css/visualization.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}" />
   </head>
 
   <body>
+    <!-- preloader -->
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
     <input type="text" id="fileName" value={{fName}} hidden>
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
@@ -162,9 +167,9 @@
         </div>
         {% endif %}
         {% endif %}
-        <div class="container p-5">
-          
-          <div class="container-fluid">
+        <div class="container">
+          <h3 class="text-white text-center bg-dark p-3">Visualization of " {{fName}} " dataset</h3>
+          <div class="container-fluid p-5">
             <div class="row">
               <div class="col-4">
                 <div class="card visual_card shadow-lg rounded-lg">
@@ -184,34 +189,48 @@
                   <canvas id="kurtosisChart"></canvas>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-4">
+            </div>
+            <div class="row">
+              <div class="col-4">
                 <div class="card visual_card shadow-lg rounded-lg ml-4 p-3">
                   <div class="p-5">Missing Data</div>
                     <canvas id="nanChart"></canvas>
-                  </div>
                 </div>
-              </div>
-              <div class="row">
-                {% for image in categorical_clm_list %}
-                <div class="col-4">
-                  <div class="card visual_card shadow-lg rounded-lg">
-                  <img width="350" src="{% static 'charts/'|add:image|add:'.png' %}" alt="">
-                  </div>
-                </div>
-                {% endfor %}
               </div>
             </div>
-             <div class="row">
-              <div class="col-4 mt-5">
-                <div class="card visual_card rounded " style="width:60rem;height:52rem;">
-                  <div id="heatMap"><img class="" style="width:55rem;height:45rem;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
+            <div class="row">
+               <h3 class="text-dark">Count Frequency of <span class="text-danger">Categorical Features</span></h3>
+            </div>
+            <div class="row p-5">
+              {% for image in categorical_clm_list %}
+                <div class="col-4">
+                  <p class="text-capitalize h5 shadow-lg p-1 text-center text-white bg-dark">{{image}}</p>
+                  <div class="card visual_card rounded-lg">
+                  <img width="350" src="{% static 'charts/'|add:image|add:'.png' %}" alt="">
                 </div>
               </div>
-              <div class="col-4"></div>
-              
+              {% endfor %}
+            </div>
+             <div class="row">
+               <h3 class="text-dark">Correlation <span class="text-danger">(Heatmap)</span></h3>
+            </div> 
+            <div class="row">
+              <div class="col-4 mt-5 text-left">
+                <div class="card visual_card rounded " style="width:60rem;height:45rem;">
+                  <div id="heatMap"><img class="" style="width:55rem;height:45rem; object-fit: cover;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
+                </div>
+              </div>
+              <div class="col-3"></div>
+              <div class="col-5 mt-5 p-5 text-left h3 text-dark">
+                <p>A heatmap is a two-dimensional graphical representation of data where the individual values that are contained in a matrix are represented as colors. The seaborn python package allows the creation of annotated heatmaps which can be tweaked using Matplotlib tools as per the creator's requirement.</p>
+              </div>     
+            </div>
           </div>
-          <div class="container-fluid ">
+
+          <div class="container-fluid">
+             <div class="row">
+               <h3 class="text-dark">Correlation <span class="text-danger">(Heatmap)</span></h3>
+            </div>
             <form action="/customChart/{{fName}}/" method="POST">
               {% csrf_token %}
             <div class="form">
@@ -240,7 +259,7 @@
               <input type="text" hidden id="value2" value="{{value2}}">
               {% endif %}
             </div>
-            </div>
+          </div>
 
           <!-- <div class="container-fluid mt-5 p-5">
            
@@ -612,6 +631,16 @@
           }
       });
 
+    </script>
+    <script>
+      $(document).ready(function () {
+        //Preloader
+        function hidePreloader() {
+          var preloader = $(".loader-wrapper");
+          preloader.fadeOut("slow");
+        }
+        hidePreloader();
+      });
     </script>
   </body>
 </html>

@@ -26,8 +26,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="{% static 'css/dataset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}" />
   </head>
   <body class="p-5" style="overflow: auto; width: 100vw; height: 100vh;">
+    <!-- preloader -->
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <a
         class="navbar-brand font-weight-bold font-italic text-monospace"
@@ -140,5 +145,15 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"
     ></script>
+    <script>
+      $(document).ready(function () {
+        //Preloader
+        function hidePreloader() {
+          var preloader = $(".loader-wrapper");
+          preloader.fadeOut("slow");
+        }
+        hidePreloader();
+      });
+    </script>
   </body>
 </html>
