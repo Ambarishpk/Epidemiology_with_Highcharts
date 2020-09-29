@@ -8,6 +8,7 @@ body {
     height: 30rem;
     border: none;
     overflow: auto;
+    cursor: pointer;
 }
 
 .customChart_card {
@@ -16,6 +17,13 @@ body {
     height: auto;
     border: none;
     overflow: auto;
+}
+
+.categorical-cf-charts img:hover {
+    transform: scale(1.1);
+    overflow: hidden;
+    z-index: 999999;
+    cursor: pointer;
 }
 
 /* Heatmap */

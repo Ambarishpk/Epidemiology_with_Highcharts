@@ -78,23 +78,22 @@ def Overview(fName):
     for date_time_col in date_time_clms_lst:
         df[date_time_col] = pd.to_datetime(df[date_time_col], dayfirst=True)
 
-    # iterative Imputer
+    # # iterative Imputer
     # imp_mean = IterativeImputer(random_state=0)
     # imp_mean.fit(df)
     # imp_mean.transform(df).round(2)
     # print(imp_mean.transform(df))
 
-    X, y = make_friedman1(n_samples=50, random_state=0)
-    estimator = SVR(kernel="linear")
-    selector = RFE(estimator, step=1)
-    selector = selector.fit(X, y)
-    print(selector.support_)
-    print(selector.ranking_)
+    # Charts Called here
 
-    # Charts Called Here
-    countfrequencycharts(df, categorical_clms_lst)
-    plt.clf()
-    heatmap(df)
+    # plt.clf()
+    # ax1 = sns.countplot(hue="year", x="sex", data=df)
+    # for p in ax1.patches:
+    #     ax1.annotate('{:.2f}'.format(p.get_height()),
+    #                  (p.get_x()+0.15, p.get_height()+1))
+    # ax1.figure.savefig('static/boxplotcharts/custom.png')
+
+    heatmap(df, fName)
     plt.clf()
 
     categorical_clms = len(categorical_clms_lst)
@@ -105,10 +104,14 @@ def Overview(fName):
         categorical_msg = "Categorical Features Does Not Exits"
     else:
         categorical_msg = ""
+        countfrequencycharts(df, categorical_clms_lst)
+        plt.clf()
     if numerical_clms <= 0:
         numerical_msg = "Numerical Features Does Not Exits"
     else:
         numerical_msg = ""
+        boxplotcharts(df, numerical_clms_lst)
+        plt.clf()
     if date_time_clms <= 0:
         date_time_msg = "Date-Time Features Does Not Exits"
     else:
@@ -162,8 +165,6 @@ def Upload(request):
         if extension == 'csv':
             fs = FileSystemStorage()
 
-            chart_path = os.path.join(settings.MEDIA_ROOT, 'static/charts/')
-
             file_path1 = os.path.join(
                 settings.MEDIA_ROOT, 'original/'+fullName)
             file_path2 = os.path.join(
@@ -173,12 +174,24 @@ def Upload(request):
                 os.remove(file_path1)
                 os.remove(file_path2)
 
+            plt.clf()
+            chart_path = os.path.join(settings.MEDIA_ROOT, 'static/charts/')
+            boxplot_chart_path = os.path.join(
+                settings.MEDIA_ROOT, 'static/boxplotcharts/')
+
             if os.path.exists(chart_path):
                 shutil.rmtree(chart_path, ignore_errors=False,
                               onerror=handleRemoveReadonly)
                 os.makedirs(chart_path)
             else:
                 os.makedirs(chart_path)
+
+            if os.path.exists(boxplot_chart_path):
+                shutil.rmtree(boxplot_chart_path, ignore_errors=False,
+                              onerror=handleRemoveReadonly)
+                os.makedirs(boxplot_chart_path)
+            else:
+                os.makedirs(boxplot_chart_path)
 
             fs.save('processed/'+fullName, uploaded_file)
             fs.save('original/'+fullName, uploaded_file)
@@ -217,18 +230,19 @@ def Visualize(request, fName):
     df = get_df(fName)
     clm_list = []
     cat_clm_list = []
+    num_clm_list = []
     for i in list(df):
         if df[i].dtype == 'int64' or df[i].dtype == 'float64':
-            clm_list.append(i)
+            num_clm_list.append(i)
         else:
             cat_clm_list.append(i)
     nan_percent = get_NaN_percent(fName)
-    print(cat_clm_list)
 
     context = {
         'fName': fName,
-        'clm_list': clm_list,
+        'clm_list': num_clm_list,
         'categorical_clm_list': cat_clm_list,
+        'numerical_clm_list': num_clm_list,
         'NaN_percent': nan_percent,
     }
     return render(request, 'Visualize.html', context)
@@ -1282,33 +1296,46 @@ def KNNImputation(request, fName):
 
 
 def countfrequencycharts(df, catlist):
+    plt.clf()
     for feature in catlist:
         ax1 = sns.countplot(x=feature, data=df)
         for p in ax1.patches:
             ax1.annotate('{:.2f}'.format(p.get_height()),
                          (p.get_x()+0.15, p.get_height()+1))
+
         ax1.figure.savefig('static/charts/'+feature+'.png')
+        # df[feature].value_counts().plot(
+        #     kind='barh').figure.savefig('static/charts/'+feature+'.png')
         plt.clf()
 
 
-def distributionChart(df):
-    x = df.values
-    distribution_plot = sns.distplot(
-        x, bins=30, kde=True, kde_kws={'linewidth': 2})
-    distribution_plot.figure.savefig('static/charts/distribution.png')
+def boxplotcharts(df, numlist):
     plt.clf()
+    for feature in numlist:
+        plt.boxplot(df[feature], showmeans=True)
+        plt.savefig('static/boxplotcharts/'+feature+'.png')
+        plt.clf()
 
 
-def heatmap(df):
-    f, ax = plt.subplots(figsize=(14, 14))
+def heatmap(df, fName):
+
+    f, ax = plt.subplots(figsize=(10, 10))
     heat_map = sns.heatmap(df.corr(), annot=True,
                            linewidths=.2, fmt='.1f', ax=ax)
-    heat_map.figure.savefig('static/charts/heatmap.png')
+
+    heat_map.figure.savefig('static/charts/'+fName+'_heatmap.png')
     plt.clf()
+
+
+# def distributionChart(df):
+#     x = df.values
+#     distribution_plot = sns.distplot(
+#         x, bins=30, kde=True, kde_kws={'linewidth': 2})
+#     distribution_plot.figure.savefig('static/charts/distribution.png')
+#     plt.clf()
 
 
 def handleRemoveReadonly(func, path, exc):
-
     excvalue = exc[1]
     if func in (os.rmdir, os.remove) and excvalue.errno == errno.EACCES:
         os.chmod(path, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO)  # 0777

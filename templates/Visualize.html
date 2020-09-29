@@ -64,7 +64,7 @@
     <div class="loader-wrapper">
       <span class="loader"><span class="loader-inner"></span></span>
     </div>
-    <input type="text" id="fileName" value={{fName}} hidden>
+    <input type="text" id="fileName" value={{fName}} hidden />
     <div class="d-flex" id="wrapper">
       <!-- Sidebar -->
       <div class="border-right bg-dark text-white" id="sidebar-wrapper">
@@ -125,6 +125,8 @@
                 <li><a href="/BinaryEncoding/{{fName}}/">Binary Encoding</a></li>
                 <li><a href="/CountFrequencyEncoding/{{fName}}/">Count Frequency Encoding</a></li>
                 <li><a href="/Normalization/{{fName}}/">Normalization</a></li>
+                <li><a href="/LogTransform/{{fName}}/">Log Transform</a></li>
+
               </ul>
 
               <li class="active">
@@ -167,118 +169,131 @@
         </div>
         {% endif %}
         {% endif %}
-        <div class="container">
-          <h3 class="text-white text-center bg-dark p-3">Visualization of " {{fName}} " dataset</h3>
-          <div class="container-fluid p-5">
-            <div class="row">
-              <div class="col-4">
-                <div class="card visual_card shadow-lg rounded-lg">
+        <div class="container mt-5">
+          <div class="row border border-dark pl-3">
+            <p class="text-dark h4">Visualization of <span class="text-danger">{{fName}}</span> dataset :</p>
+          </div>
+          <div class="row">
+            <div class="col-4">
+                <div class="card visual_card shadow-sm rounded-lg">
                   <div class="p-5">{{fName}} Overview</div>  
                   <canvas id="overallChart"></canvas>
                 </div>
-              </div>
-              <div class="col-4">
-                <div  class="card visual_card shadow-lg rounded-lg">
+            </div>
+            <div class="col-4">
+                <div  class="card visual_card shadow-sm rounded-lg">
                   <div class="p-5">Skewness</div>  
                   <canvas id="skewnessChart"></canvas>
                 </div>
-              </div>
-              <div class="col-4 ">
-                <div class="card visual_card shadow-lg rounded-lg">
+            </div>
+            <div class="col-4 ">
+                <div class="card visual_card shadow-lsm rounded-lg">
                   <div class="p-5">Kurtosis</div>  
                   <canvas id="kurtosisChart"></canvas>
                 </div>
-              </div>
             </div>
-            <div class="row">
-              <div class="col-4">
-                <div class="card visual_card shadow-lg rounded-lg ml-4 p-3">
+            <div class="col-4">
+                <div class="card visual_card shadow-sm rounded-lg">
                   <div class="p-5">Missing Data</div>
                     <canvas id="nanChart"></canvas>
                 </div>
-              </div>
             </div>
+          </div>
+          <div class="row border border-dark pl-3 mb-5 mt-5">
+            <p class="text-dark h4">Count Frequency of <span class="text-danger">Categorical Features</span></p>
+          </div>
+          {% if categorical_clm_list %}
+          <div class="row">
+            {% for image in categorical_clm_list %}
+            <div class="col-6 categorical-cf-charts p-2">
+              <!-- <div class="card visual_card rounded-lg shadow-lg"> -->
+                <!-- <span class="text-center p-1 bg-dark text-white text-capitalize">{{image}}</span> -->
+                <img width="500" src="{% static 'charts/'|add:image|add:'.png' %}" alt="categorical-cf-charts">
+              <!-- </div> -->
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <div class="row p-5"><div class="col-12 text-center">
+            <p class="alert alert-danger">Categorical Features not exists</p>
+          </div>   
+          {% endif %}
+           <div class="row border border-dark pl-3 mb-5 mt-5 col-12">
+            <p class="text-dark h4">Boxplot - <span class="text-danger">Numerical Features</span></p>
+           </div>
+
+          {% if numerical_clm_list %}
             <div class="row">
-              <h3 class="text-dark">Count Frequency of <span class="text-danger">Categorical Features</span></h3>
-            </div>
-            <div class="row p-5">
-              {% if categorical_clm_list %}
-              {% for image in categorical_clm_list %}
-              <div class="col-4">
-                <p class="text-capitalize h5 shadow-lg p-1 text-center text-white bg-dark">{{image}}</p>
-                <div class="card visual_card rounded-lg">
-                  <img width="350" src="{% static 'charts/'|add:image|add:'.png' %}" alt="">
-                </div>
+              {% for boxplot in numerical_clm_list %}
+              <div class="col-6 numerical-cf-charts p-1">
+                <span class="text-center text-capitalize h5 text-primary">{{boxplot}}</span>
+                  <img width="500" src="{% static 'boxplotcharts/'|add:boxplot|add:'.png' %}" alt="numerical-cf-charts">
               </div>
               {% endfor %}
-              {% else %}
-              <div class="col-12 text-center">
-                <p class="alert alert-danger">Categorical Features not exists</p>
-              </div>
-              {% endif %}
             </div>
-             <div class="row">
-               <h3 class="text-dark">Correlation <span class="text-danger">(Heatmap)</span></h3>
-            </div> 
-            <div class="row">
-              <div class="col-4 mt-5 text-left">
-                <div class="card visual_card rounded " style="width:60rem;height:45rem;">
-                  <div id="heatMap"><img class="" style="width:60rem;height:45rem; object-fit: cover;" src="{% static 'charts/heatmap.png' %}" alt=""></div>
-                </div>
-              </div>
-              <div class="col-3"></div>
-              <div class="col-5 mt-5 p-5 text-left h3 text-dark">
-                <p>A heatmap is a two-dimensional graphical representation of data where the individual values that are contained in a matrix are represented as colors. The seaborn python package allows the creation of annotated heatmaps which can be tweaked using Matplotlib tools as per the creator's requirement.</p>
-              </div>     
-            </div>
-          </div>
+          {% else %}
+            <div class="row p-5"><div class="col-12 text-center">
+              <p class="alert alert-danger">Numerical Features not exists</p>
+            </div>   
+          {% endif %}
 
-          <div class="container-fluid">
-             <div class="row">
-               <h3 class="text-dark">Custom Chart <span class="text-danger"> Feature Comparison</span></h3>
-            </div>
-            <form class="text-center m-5" action="/customChart/{{fName}}/" method="POST">
-              {% csrf_token %}
-            <div class="form">
-                <div class="form-inline">
-                  <select  name="param1" class="form-control-lg rounded">
-                    <option>X-Axis</option>
-                    {% for clm in clm_list %}
-                    <option  value="{{clm}}">{{clm}}</option>
-                    {% endfor %}
-                  </select>
-                  <select name="param2" class="ml-3 form-control-lg rounded">
-                    <option>Y-Axis</option>
-                    {% for clm in clm_list %}
-                    <option   value="{{clm}}">{{clm}}</option>
-                    {% endfor %}
-                  </select>
-                  <button class="ml-3 btn btn-primary">Plot</button>
+          
+          
+        </div>
+        <div class="container mt-5"><div class="row border border-dark pl-3">
+            <p class="text-dark h4">Correlation <span class="text-danger">(Heatmap)</span></p>
+          </div> 
+          <div class="row">
+            <div class="col-4 mt-5 text-left">
+              <div class="card visual_card rounded " style="width:60rem;height:50rem;">
+                <div id="heatMap"><img class="" style="width:60rem;height:45rem; object-fit: cover;" src="{% static 'charts/'|add:fName|add:'_heatmap.png' %}" alt=""></div>
               </div>
-            </form>
-            <div class="card text-center mt-5 customChart_card bg-white">
-              <canvas id="customChart"></canvas> 
-              {% if customChartMsg %}
-              <input type="text" hidden id="param1" value="{{param1}}">
-              <input type="text" hidden id="value1" value="{{value1}}">
-              <input type="text" hidden id="param2" value="{{param2}}">
-              <input type="text" hidden id="value2" value="{{value2}}">
-              {% endif %}
             </div>
-          </div>
+            <div class="col-3"></div>
+            <div class="col-5 mt-5 p-5 text-left h3 text-dark">
+              <p>A heatmap is a two-dimensional graphical representation of data where the individual values that are contained in a matrix are represented as colors. The seaborn python package allows the creation of annotated heatmaps which can be tweaked using Matplotlib tools as per the creator's requirement.</p>
+            </div>     
+          </div></div>
 
-          <!-- <div class="container-fluid mt-5 p-5">
-           
-          </div> -->
+        <div class="container mt-5">
+          <div class="row border border-dark pl-3">
+            <p class="text-dark h4">Custom Chart <span class="text-danger"> Feature Comparison</span></p>
+          </div>
+          <form class="text-center m-5" action="/customChart/{{fName}}/" method="POST">
+            {% csrf_token %}
+          <div class="form">
+              <div class="form-inline">
+                <select  name="param1" class="form-control-lg rounded">
+                  <option>X-Axis</option>
+                  {% for clm in clm_list %}
+                  <option  value="{{clm}}">{{clm}}</option>
+                  {% endfor %}
+                </select>
+                <select name="param2" class="ml-3 form-control-lg rounded">
+                  <option>Y-Axis</option>
+                  {% for clm in clm_list %}
+                  <option   value="{{clm}}">{{clm}}</option>
+                  {% endfor %}
+                </select>
+                <button class="ml-3 btn btn-primary">Plot</button>
+            </div>
+          </form>
+          <div class="card text-center mt-5 customChart_card bg-white">
+            <canvas id="customChart"></canvas> 
+            {% if customChartMsg %}
+            <input type="text" hidden id="param1" value="{{param1}}">
+            <input type="text" hidden id="value1" value="{{value1}}">
+            <input type="text" hidden id="param2" value="{{param2}}">
+            <input type="text" hidden id="value2" value="{{value2}}">
+            {% endif %}
+          </div>
         </div>
 
-
-
-          <!-- data exploration ends -->
-        </div>
-      </div>
-      <!-- Page Content Ends Here... -->
     </div>
+
+
+
+        
 
     <!-- getting permission here to drop the columns -->
 
